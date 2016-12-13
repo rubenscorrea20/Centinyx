@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8" />
+      <title>Lista de Clientes:</title>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://rawgit.com/unconditional/jquery-table2excel/master/src/jquery.table2excel.js"></script>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen" />
+   </head>
+   <body>
+      <div class="container">
+         <div class="panel panel-success" style="margin: 75px; margin-top: 2cm; margin-bottom: 2cm">
+            <div class="panel panel-heading">
+               <h2 class="panel-title" style="text-align: center">Clientes Cadastrados</h2>
+            </div>
+          <form class="form-inline" style="text-align: center" th:action="@{/cliente/buscaCNPJ}" th:object="${cliente}">
+               		<div class="form-group">
+						<label for="buscaCNPJ">Pesquisar cliente por CNPJ:</label> 
+						<input class="form-control" type="text" name="cnpj" style="width: 300px"></input>
+						<button class="btn btn-success" type="submit">Buscar</button>
+					</div>
+			</form>
+			<p></p>
+		  <form class="form-inline" style="text-align: center" th:action="@{/cliente/busca}" th:object="${cliente}">
+               		<div class="form-group">
+						<label for="buscaNome">Pesquisar cliente por nome:</label> 
+						<input class="form-control" type="text" name="nomeFantasia" style="width: 300px"></input>
+						<button class="btn btn-success" type="submit">Buscar</button>
+					</div>
+			</form>
+            <div class="panel-body">
+               <div id="csv_text"></div>
+               <table class="table table-striped" id="tabela">
+                  <thead>
+                     <tr>
+                        <th>Id</th>
+                        <th>Nome Fantasia</th>
+                        <th>Razão Social</th>
+                        <th>CNPJ</th>
+                        <th>Bairro</th>
+                        <th>Nome Contato</th>
+                        <th>Email Contato</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.idCliente}"></td>
+                        <td th:text="${cliente.nomeFantasia}"></td>
+                        <td th:text="${cliente.razaoSocial}"></td>
+                        <td th:text="${cliente.cnpj}"></td>
+                        <td th:text="${cliente.bairro}"></td>
+                        <td th:text="${cliente.contatoCliente.nomeContato}"></td>
+                        <td th:text="${cliente.contatoCliente.email}"></td>
+                     </tr>
+                  </tbody>
+               </table>
+               <br></br> 
+               <a th:href="@{#}" id="exporta" style="float: right">Exportar resultados para Excel</a>
+               <a th:href="@{/cliente/cadastra}">Voltar para cadastro de clientes</a>
+            </div>
+         </div>
+      </div>
+      <script src="/javascript/exportaexcel.js"></script>
+   </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Cadastro de Motoboy</title>
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div class="container">
+            <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
+                <div class="panel panel-heading">
+                    <h2 class="panel-title" style="text-align: center">Cadastro de
+				Motoboy</h2>
+                </div>
+                <div class="panel-body">
+                    <form id="formMotoboy" th:object="${motoboy}" th:action="@{/funcionario/cadastra/motoboy}" method="POST" class="form-group">
+                        <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <!-- #Fields é objeto do Thymeleaf que permite verificar os fields -->
+                            <th:block th:each="erro : ${#fields.detailedErrors()}">
+                                <div>
+                                    <i class="fa  fa-exclamation-circle"></i> <span th:text="${erro.message}"></span>
+                                </div>
+                            </th:block>
+                        </div>
+                        <div class="container">
+                            <fieldset style="max-width: 28.5cm">
+                                <legend>Documentos do Motoboy</legend>
+                                <div class="col-sm-5">
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('cnh')} ? has-error">
+                                        <label for="cnh">Numero da CNH*:</label>
+                                        <input id="cnh" type="text" class="form-control" th:field="*{cnh}" style="width: 250px"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="categoriaCNH">Categoria da CNH*:</label>
+                                        <select class="custom-select form-control" name="categoriaCNH" style="width: 80px">
+                                            <option>A</option>
+                                            <option>AB</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('validadeCNH')} ? has-error">
+                                        <label for="validadeCNH">Data de Validade*:</label>
+                                        <input id="validadeCNH" type="text" class="form-control" th:field="*{validadeCNH}" th:classappend="${#fields.hasErrors('validadeCNH')}" style="width: 130px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('cpfProprietarioMoto')} ? has-error">
+                                        <label for="cpfMotoboy">CPF do Proprietário da Moto*:</label>
+                                        <input id="cpfMotoboy" type="text" class="form-control" th:field="*{cpfProprietarioMoto}" th:classappend="${#fields.hasErrors('cpfProprietarioMoto')}" style="width: 300px"></input>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br></br>
+                            <fieldset style="max-width: 28.5cm">
+                                <legend>Dados da Moto</legend>
+                                <div class="col-sm-5">
+                                    <div class="form-group">
+                                        <label for="renavam">Renavam*:</label>
+                                        <input id="renavam" type="text" class="form-control" th:field="*{renavam}" style="width: 300px"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="placaMoto">Placa da Moto::</label>
+                                        <input id="placaMoto" type="text" class="form-control" th:field="*{placaMoto}" style="width: 120px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('marcaMoto')} ? has-error">
+                                        <label for="marcaMoto">Marca*:</label>
+                                        <input id="marcaMoto" type="text" class="form-control" th:field="*{marcaMoto}" style="width: 220px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('modeloMoto')} ? has-error">
+                                        <label for="modeloMoto">Modelo*:</label>
+                                        <input id="modeloMoto" type="text" class="form-control" th:field="*{modeloMoto}" style="width: 200px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('cor')} ? has-error">
+                                        <label for="cor">Cor*:</label>
+                                        <input id="cor" type="text" class="form-control" th:field="*{cor}" style="width: 150px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('anoMoto')} ? has-error">
+                                        <label for="anoMoto">Ano de Fabricação*:</label>
+                                        <input id="anoMoto" type="text" class="form-control" th:field="*{anoMoto}" style="width: 85px"></input>
+                                    </div>
+                                    <input type="hidden" id="funcionario"></input>
+                                </div>
+                            </fieldset>
+                            <br></br>
+                            <div class="col-sm-3" style="left: 10cm">
+                                <div class="btn-group" role="group">
+                                    <button type="reset" class="btn btn-warning">Limpar dados
+                                    </button>
+                                    <div class="controls form-inline col-sm-1">
+                                        <button type="submit" class="btn btn-primary" id="enviar">Enviar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <th:block layout:fragment="javascript-extra">
+        <script src="/javascript/mascaras.js"></script>
+        <script src="/javascript/datapicker.js"></script>
+        <script src="/javascript/setaUpperCase.js"></script>
+    </th:block>
+</body>
+
+</html>

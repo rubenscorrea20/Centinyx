@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+   xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <meta charset="utf-8" />
+      <title>Cadastro de Perfis</title>
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <link rel="stylesheet" href="/resources/demos/style.css">
+      </link>
+      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+      </link>
+   </head>
+   <body>
+      <div class="panel panel-primary" style="margin: 150px; margin-top: 2cm; margin-bottom: 2cm">
+         <div class="panel panel-heading">
+            <h2 class="panel-title" style="text-align: center">Cadastro de Usuários</h2>
+         </div>
+         <div class="panel-body">
+            <form id="formusuario" th:object="${perfil}" th:action="@{/perfil/cadastra}" method="POST" class="form-group">
+               <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                  <th:block th:each="erro : ${#fields.detailedErrors()}">
+                     <div>
+                        <i class="fa  fa-exclamation-circle"></i> 
+                        <span th:text="${erro.message}"></span>
+                     </div>
+                  </th:block>
+               </div>
+               <div class="container">
+                  <fieldset style="max-width: 26cm">
+                     <legend>Dados de Permissão</legend>
+                     <div class="col-sm-5">
+                        <div class="form-group"
+                           th:classappend="${#fields.hasErrors('tipoAcesso')} ? has-error">
+                           <label for="tipoAcesso">Tipo de Acesso*:</label> 
+                           <input id="tipoAcesso" type="text" class="form-control"
+                              th:field="*{tipoAcesso}" style="width: 200px"></input>
+                        </div>
+                        <div class="form-group"
+                           th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+                           <label for="descricao">Descricão*:</label> 
+                           <textarea class="form-control" rows="3" id="descricao" style="width: 400px"
+                              th:field="*{descricao}"></textarea>
+                        </div>
+                     </div>
+                  </fieldset>
+               </div>
+               <br></br>
+               <div class="col-sm-3" style="left: 10cm">
+                  <div class="btn-group" role="group">
+                     <button type="reset" class="btn btn-warning">Limpar dados</button>
+                     <div class="controls form-inline col-sm-1">
+                        <button type="submit" class="btn btn-primary" id="enviar">Enviar</button>
+                     </div>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+   </body>
+</html>

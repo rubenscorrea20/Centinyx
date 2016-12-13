@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Detalhes do Funcionario</title>
+<link
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	rel="stylesheet" media="screen" />
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-danger" style="margin: 50px; margin-top: 2cm; margin-bottom: 2cm">
+			<div class="panel panel-heading">
+				<h2 class="panel-title" style="text-align: center">Dados do Funcionário</h2>
+			</div>
+			<div class="panel-body">
+				<div class="col-sm-5">
+					<h5>ID: <label th:text="${funcionario.IdFuncionario}"></label></h5>
+					
+					<h5>Data de criação: <label th:text="${funcionario.criacao}"></label></h5>
+					
+					<h5>Nome completo: <label th:text="${funcionario.nomeCompleto}"></label></h5>
+					
+					<h5>Sexo: <label th:text="${funcionario.sexo}"></label></h5>
+					
+					<h5>CPF: <label th:text="${funcionario.cpf}"></label></h5>
+					
+					<h5>Documento de identidade: <label th:text="${funcionario.documentoIdentidade}"></label></h5>
+					
+					<h5>Orgão emissor: <label th:text="${funcionario.orgaoEmissor}"></label></h5>
+					
+					<h5>UF de nascimento: <label th:text="${funcionario.ufNascimento}"></label></h5>
+					
+					<h5>Data de nascimento: <label th:text="${funcionario.dataNascimento}"></label></h5>
+					
+					<h5>Nacionalidade: <label th:text="${funcionario.nacionalidade}"></label></h5>
+					
+					<h5>Grau de escolaridade: <label th:text="${funcionario.escolaridade}"></label></h5>
+					
+					<h5>Nome do pai: <label th:text="${funcionario.nomePai}"></label></h5>
+					
+					<h5>Nome da mãe: <label th:text="${funcionario.nomeMae}"></label></h5>
+					
+					<h5>Código funcional: <label th:text="${funcionario.codigoFuncional}"></label></h5>
+					
+					<h5>Departamento: <label th:text="${funcionario.departamento}"></label></h5>
+					
+					<h5>Função: <label th:text="${funcionario.funcao}"></label></h5>
+					
+					<h5>Data de admissão: <label th:text="${funcionario.dataAdmissao}"></label></h5>
+					
+			<!--    <h5>Usuario: <label th:text="${funcionario.usuario.login}"></label></h5>  -->
+					
+					<h5>Email: <label th:text="${funcionario.email}"></label></h5>
+					
+					<h5>Telefone: <label th:text="${funcionario.telefone}"></label></h5>
+					
+					<h5>Celular: <label th:text="${funcionario.celular}"></label></h5>
+					
+					<h5>CEP: <label th:text="${funcionario.cep}"></label></h5>
+					
+					<h5>Logradouro: <label th:text="${funcionario.logradouro}"></label></h5>
+					
+					<h5>Numero: <label th:text="${funcionario.numero}"></label></h5>
+					
+					<h5>Complemento: <label th:text="${funcionario.complemento}"></label></h5>
+					
+					<h5>Bairro: <label th:text="${funcionario.bairro}"></label></h5>
+					
+					<h5>Cidade: <label th:text="${funcionario.cidade}"></label></h5>
+					
+					<h5>UF: <label th:text="${funcionario.ufEndereco}"></label></h5>
+					
+					<h5>Banco: <label th:text="${funcionario.banco}"></label></h5>
+					
+					<h5>Tipo de conta: <label th:text="${funcionario.tipoConta}"></label></h5>
+					
+					<h5>Agência: <label th:text="${funcionario.agencia}"></label></h5>
+					
+					<h5>Conta bancária: <label th:text="${funcionario.contaBancaria}"></label></h5>
+					
+					<h5>Nome do favorecido: <label th:text="${funcionario.nomeFavorecido}"></label></h5>
+					
+					<h5>CPF do favorecido: <label th:text="${funcionario.cpfFavorecido}"></label></h5>
+					
+					<h5>Carteira de trabalho: <label th:text="${funcionario.carteiraTrabalho}"></label></h5>
+					
+					<h5>Série da carteira de trabalho: <label th:text="${funcionario.serieCarteira}"></label></h5>
+					
+					<h5>Numero do PIS: <label th:text="${funcionario.pis}"></label></h5>
+					
+					<h5>CPF do favorecido: <label th:text="${funcionario.cpfFavorecido}"></label></h5>
+					
+					<h5>Titulo de eleitor: <label th:text="${funcionario.tituloEleitor}"></label></h5>
+					
+					<h5>Zona Eleitoral: <label th:text="${funcionario.zonaEleitoral}"></label></h5>
+					
+					<h5>Seção Eleitoral: <label th:text="${funcionario.secaoEleitoral}"></label></h5>
+					
+					<h5>Reservista: <label th:text="${funcionario.reservista}"></label></h5>
+				</div>
+			</div>
+			<br></br> <a th:href="@{/funcionario/lista}" style="float: right; margin-top: 1cm; margin-bottom: 1cm">Voltar para lista de funcionarios</a>
+		</div>
+	</div>
+</body>
+</html>

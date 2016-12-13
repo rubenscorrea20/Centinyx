@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+  
+  <title></title>
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen"></link>
+  <link rel="stylesheet" href="/css/index.css"></link>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/CheckBoxEffect.css}"></link>
+  
+</head>
+
+<body>
+
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="index.html" class="navbar-brand logotipo">
+          <img src="/images/logo.png" alt="Pro Attitude"></img>
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="nav navbar-nav">
+          <li><a href="">Clientes</a></li>
+          <li><a href="">Funcionários</a></li>
+          <li><a href="">Relatórios</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Login / Logout
+              <span class="caret"></span>
+            </a>
+            <div class="dropdown-menu perfil">
+              <div class="col-sm-4 hidden-xs">
+                <img class="img-responsive img-rounded" src="https://api.adorable.io/avatars/100/watchuru.png"/>
+              </div>
+              <ul class="list-unstyled col-sm-8">
+                <li>Fulano de Tal</li>
+                <li><a href="">Alterar Perfil</a></li>
+                <li><a href="">Sair</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <ol class="breadcrumb">
+      <li><a href="">Início</a></li>
+      <li><a href="">Funcionários</a></li>
+      <li class="active">Lista de Funcionários</li>
+    </ol>  
+  </div>
+   
+    <section class="content" layout:fragment="conteudo"></section> 
+
+  	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+	<script src="https://rawgit.com/unconditional/jquery-table2excel/master/src/jquery.table2excel.js"></script>
+	<th:block layout:fragment="javascript-extra"></th:block>
+</body>
+</html>

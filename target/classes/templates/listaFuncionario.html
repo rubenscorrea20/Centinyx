@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Lista de Funcionarios:</title>
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div class="container">
+            <div class="panel panel-success" style="margin-top: 0cm; margin-bottom: 2cm">
+                <div class="panel panel-heading">
+                    <h2 class="panel-title" style="text-align: center">Funcionarios Cadastrados</h2>
+                </div>
+                <form class="form-inline" style="text-align: center" th:action="@{/funcionario/busca}" th:object="${funcionario}">
+                    <div class="form-group">
+                        <label for="buscaNome">Pesquisar funcionario por nome:</label>
+                        <input class="form-control" type="text" name="nomeCompleto" style="width: 300px"></input>
+                        <button class="btn btn-success" type="submit">Buscar</button>
+                    </div>
+                </form>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered" id="tabela">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Nome</th>
+                                <th>Código Funcional</th>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Celular</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="funcionario : ${funcionarios}">
+                                <td th:text="${funcionario.idFuncionario}"></td>
+                                <td th:text="${funcionario.nomeCompleto}" id="nomeCompleto"></td>
+                                <td th:text="${funcionario.codigoFuncional}"></td>
+                                <td th:text="${funcionario.usuario != null ?  funcionario.usuario.login : ''}"></td>
+                                <td th:text="${funcionario.email}"></td>
+                                <td th:text="${funcionario.telefone}"></td>
+                                <td th:text="${funcionario.celular}"></td>
+                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br></br>
+                    <a th:href="@{#}" id="exporta" style="float: right">Exportar resultados para Excel</a>
+                    <a th:href="@{/funcionario/cadastra}" style="float: left">Voltar para cadastro de funcionarios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <th:block layout:fragment="javascript-extra">
+        <script src="/javascript/exportaExcel.js"></script>
+    </th:block>
+</body>
+
+</html>
