@@ -153,7 +153,7 @@ public class Funcionario {
 	private String complemento;
 
 	@NotBlank(message = "O campo CEP precisa ser preenchido!")
-	@Column(name = "cep", length = 9)
+	@Column(name = "cep", length = 15)
 	private String cep;
 
 	@NotBlank(message = "O campo cidade precisa ser preenchido!")
