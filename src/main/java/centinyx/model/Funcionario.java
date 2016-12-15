@@ -109,7 +109,7 @@ public class Funcionario {
 	private String nomeCompleto;
 
 	@NotBlank(message = "O campo documento de identidade precisa ser preenchido!")
-	@Column(name = "documento_identidade", length = 12)
+	@Column(name = "documento_identidade", length = 20)
 	private String documentoIdentidade;
 
 	@NotBlank(message = "O campo orgão emissor precisa ser preenchido!")
@@ -153,7 +153,7 @@ public class Funcionario {
 	private String complemento;
 
 	@NotBlank(message = "O campo CEP precisa ser preenchido!")
-	@Column(name = "cep", length = 15)
+	@Column(name = "cep", length = 20)
 	private String cep;
 
 	@NotBlank(message = "O campo cidade precisa ser preenchido!")
@@ -165,15 +165,15 @@ public class Funcionario {
 	private String ufEndereco;
 
 	@NotBlank(message = "O campo telefone precisa ser preenchido!")
-	@Column(name = "telefone", length = 14)
+	@Column(name = "telefone", length = 50)
 	private String telefone;
 
-	@Column(name = "celular", length = 15)
+	@Column(name = "celular", length = 50)
 	private String celular;
 
 	@NotBlank(message = "O campo email precisa ser preenchido!")
 	@Email(message = "Por favor, entre com um endereço de e-mail válido!")
-	@Column(name = "email", length = 60)
+	@Column(name = "email", length = 100)
 	private String email;
 
 	@Column(name = "sexo", length = 10)
@@ -226,7 +226,7 @@ public class Funcionario {
 	@Column(name = "serie_ct", length = 8)
 	private String serieCarteira;
 
-	@Column(name = "pis", length = 11)
+	@Column(name = "pis", length = 20)
 	private int pis;
 
 	@Column(name = "escolaridade", length = 35)
