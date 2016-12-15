@@ -1,139 +1,105 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-   xmlns:th="http://www.thymeleaf.org">
-   <head>
-      <meta charset="utf-8" />
-      <title>Cadastro de Clientes</title>
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"></link>
-      <link rel="stylesheet" href="/resources/demos/style.css"></link>
-      <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
-      <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen"></link>
-   </head>
-   <body>
-      <div class="panel panel-primary" style="margin: 150px; margin-top: 2cm; margin-bottom: 2cm">
-         <div class="panel panel-heading">
-            <h2 class="panel-title" style="text-align: center">Cadastro de Clientes
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Cadastro do Cliente</title>
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div class="container">
+            <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
+                <div class="panel panel-heading">
+                    <h2 class="panel-title" style="text-align: center"><strong>Cadastro do Cliente</strong>
             </h2>
-         </div>
-         <div class="panel-body">
-            <form th:object="${cliente}" th:action="@{/cliente/cadastra}" method="POST" class="form-group">
-               <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-                  <th:block th:each="erro : ${#fields.detailedErrors()}">
-                     <div>
-                        <i class="fa  fa-exclamation-circle"></i> 
-                        <span th:text="${erro.message}"></span>
-                     </div>
-                  </th:block>
-               </div>
-               <div class="container">
-                  <fieldset style="max-width: 26cm">
-                     <legend>Dados Cliente</legend>
-                     <div class="col-sm-5">
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('nomeFantasia')} ? has-error">
-                           <label for="nomeFantasia">Nome Fantasia:</label> <input
-                              id="nome" type="text" class="form-control"
-                              th:field="*{nomeFantasia}" style="width: 400px"></input>
+                </div>
+                <div class="panel-body">
+                    <form th:object="${cliente}" th:action="@{/cliente/cadastra}" method="POST" class="form-group">
+                        <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <th:block th:each="erro : ${#fields.detailedErrors()}">
+                                <div>
+                                    <i class="fa  fa-exclamation-circle"></i>
+                                    <span th:text="${erro.message}"></span>
+                                </div>
+                            </th:block>
                         </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('razaoSocial')} ? has-error">
-                           <label for="razaoSocial">Razao Social:</label> <input
-                              id="nome" type="text" class="form-control"
-                              th:field="*{razaoSocial}" style="width: 450px"></input>
+                        <div class="container">
+                            <fieldset style="max-width: 26cm">
+                                <legend>Dados do Cliente</legend>
+                                <div class="col-sm-5">
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('nomeFantasia')} ? has-error">
+                                        <label for="nomeFantasia">Nome Fantasia:</label>
+                                        <input id="nome" type="text" class="form-control" th:field="*{nomeFantasia}" style="width: 400px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('razaoSocial')} ? has-error">
+                                        <label for="razaoSocial">Razao Social:</label>
+                                        <input id="nome" type="text" class="form-control" th:field="*{razaoSocial}" style="width: 450px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('cnpj')} ? has-error">
+                                        <label for="cnpj">CNPJ:</label>
+                                        <input id="cnpj" type="text" class="form-control" th:field="*{cnpj}" style="width: 300px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
+                                        <label for="telefone">Telefone:</label>
+                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')}" style="width: 300px"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="contato">Contato:</label>
+                                        <div class="input-group">
+                                            <input id="contato" type="text" class="form-control" readonly="readonly" th:field="*{contatoCliente}" style="width: 150px"></input>
+                                            <button type="button" class="btn btn-default" id="buscaContato">Buscar Contato</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('cep')} ? has-error">
+                                        <label for="cep">CEP:</label>
+                                        <input id="cep" type="text" class="form-control" th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')}" style="width: 300px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('logradouro')} ? has-error">
+                                        <label for="logradouro">Logradouro:</label>
+                                        <input id="logradouro" type="text" class="form-control" th:field="*{logradouro}" th:classappend="${#fields.hasErrors('logradouro')}" style="width: 500px"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="numero">Numero:</label>
+                                        <input id="numero" type="text" class="form-control" th:field="*{numero}" style="width: 100px"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="complemento">Complemento:</label>
+                                        <input id="complemento" type="text" class="form-control" th:field="*{complemento}" style="width: 100px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('bairro')} ? has-error">
+                                        <label for="bairro">Bairro:</label>
+                                        <input id="bairro" type="text" class="form-control" th:field="*{bairro}" th:classappend="${#fields.hasErrors('bairro')}" style="width: 400px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('cidade')} ? has-error">
+                                        <label for="cidade">Cidade:</label>
+                                        <input id="cidade" type="text" class="form-control" th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')}" style="width: 500px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('ufEndereco')} ? has-error">
+                                        <label for="ufEndereco">UF:</label>
+                                        <input id="ufEndereco" type="text" class="form-control" th:field="*{ufEndereco}" th:classappend="${#fields.hasErrors('ufEndereco')}" style="width: 80px"></input>
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <br></br>
+                            <div  style="text-align:center;" class="col-sm-11">
+                                    <button type="reset" class="btn btn-warning">Limpar dados</button>                          
+                                    <button type="submit" class="btn btn-primary" id="enviar">Enviar dados</button>
+                            </div>
                         </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('cnpj')} ? has-error">
-                           <label for="cnpj">CNPJ:</label> <input
-                              id="cnpj" type="text" class="form-control"
-                              th:field="*{cnpj}" style="width: 300px"></input>
-                        </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('telefone')} ? has-error">
-                           <label for="telefone">Telefone:</label> <input id="telefone"
-                              type="text" class="form-control" th:field="*{telefone}"
-                              th:classappend="${#fields.hasErrors('telefone')}"
-                              style="width: 300px"></input>
-                        </div>
-                        <div class="form-group">
-                           <label for="contato">Contato:</label>
-                           <div class="input-group">
-                              <input id="contato" type="text" class="form-control"
-                                 readonly="readonly" th:field="*{contatoCliente}"
-                                 style="width: 150px"></input>
-                              <button type="button" class="btn btn-default"
-                                 id="buscaContato">Buscar Contato</button>
-                           </div>
-                        </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('cep')} ? has-error">
-                           <label for="cep">CEP:</label> <input id="cep" type="text"
-                              class="form-control" th:field="*{cep}"
-                              th:classappend="${#fields.hasErrors('cep')}"
-                              style="width: 300px"></input>
-                        </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('logradouro')} ? has-error">
-                           <label for="logradouro">Logradouro:</label> <input
-                              id="logradouro" type="text" class="form-control"
-                              th:field="*{logradouro}"
-                              th:classappend="${#fields.hasErrors('logradouro')}"
-                              style="width: 500px"></input>
-                        </div>
-                        <div class="form-group">
-                           <label for="numero">Numero:</label> <input id="numero"
-                              type="text" class="form-control" th:field="*{numero}"
-                              style="width: 100px"></input>
-                        </div>
-                        <div class="form-group">
-                           <label for="complemento">Complemento:</label> <input
-                              id="complemento" type="text" class="form-control"
-                              th:field="*{complemento}" style="width: 100px"></input>
-                        </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('bairro')} ? has-error">
-                           <label for="bairro">Bairro:</label> <input id="bairro"
-                              type="text" class="form-control" th:field="*{bairro}"
-                              th:classappend="${#fields.hasErrors('bairro')}"
-                              style="width: 400px"></input>
-                        </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('cidade')} ? has-error">
-                           <label for="cidade">Cidade:</label> <input id="cidade"
-                              type="text" class="form-control" th:field="*{cidade}"
-                              th:classappend="${#fields.hasErrors('cidade')}"
-                              style="width: 500px"></input>
-                        </div>
-                        <div class="form-group"
-                           th:classappend="${#fields.hasErrors('ufEndereco')} ? has-error">
-                           <label for="ufEndereco">UF:</label> <input id="ufEndereco"
-                              type="text" class="form-control" th:field="*{ufEndereco}"
-                              th:classappend="${#fields.hasErrors('ufEndereco')}"
-                              style="width: 80px"></input>
-                        </div>
-                     </div>
-                  </fieldset>
-                  <br></br>
-                  <div class="col-sm-3" style="left: 10cm">
-                     <div class="btn-group" role="group">
-                        <button type="reset" class="btn btn-warning">Limpar
-                        dados</button>
-                        <div class="controls form-inline col-sm-1">
-                           <button type="submit" class="btn btn-primary">Enviar</button>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </form>
-         </div>
-      </div>
-      <script src="/javascript/viacep.js"></script>
-      <script src="/javascript/redirecionabuscas.js"></script>
-      <script src="/javascript/mascaras.js"></script>
-   </body>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <th:block layout:fragment="javascript-extra">
+        <script src="/javascript/viacep.js"></script>
+        <script src="/javascript/redirecionabuscas.js"></script>
+        <script src="/javascript/mascaras.js"></script>
+    </th:block>
+</body>
+
 </html>

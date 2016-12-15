@@ -11,7 +11,7 @@
         <div class="container">
             <div class="panel panel-success" style="margin-top: 0cm; margin-bottom: 2cm">
                 <div class="panel panel-heading">
-                    <h2 class="panel-title" style="text-align: center">Funcionarios Cadastrados</h2>
+                    <h2 class="panel-title" style="text-align: center"><strong>Funcionarios Cadastrados</strong></h2>
                 </div>
                 <form class="form-inline" style="text-align: center" th:action="@{/funcionario/busca}" th:object="${funcionario}">
                     <div class="form-group">
@@ -43,7 +43,6 @@
                                 <td th:text="${funcionario.telefone}"></td>
                                 <td th:text="${funcionario.celular}"></td>
                                 <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a>
-                                	<a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a>
                                 </td>
                             </tr>
                         </tbody>

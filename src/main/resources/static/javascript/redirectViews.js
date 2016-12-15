@@ -15,11 +15,6 @@ jQuery(document).ready(function() {
 		buscaPerfil();
 	}),
 
-	/*$('#enviar').on('click', function(e) {
-		e.preventDefault();
-		redirectMotoboy();
-	});*/
-
 	function buscaContato() {
 		window.open("/cliente/buscacontato");
 	};
@@ -30,14 +25,6 @@ jQuery(document).ready(function() {
 
 	function buscaPerfil() {
 		window.open("/perfil/lista");
-	};
-
-	/*function redirectMotoboy() {
-		var func = "MOTOBOY";
-		var res = $('#funcao').val().toUpperCase();
-		if (res == func) {
-			window.location.href = "/funcionario/cadastra/motoboy";
-		};
-	};*/
+	};	
 });
 /* ]]> */

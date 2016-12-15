@@ -6,16 +6,15 @@
     <title>Cadastro de Motoboy</title>
 </head>
 
-<body>
+<body onload="setaFuncionarioMotoboy()">
     <section layout:fragment="conteudo">
         <div class="container">
             <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
                 <div class="panel panel-heading">
-                    <h2 class="panel-title" style="text-align: center">Cadastro de
-				Motoboy</h2>
+                    <h2 class="panel-title" style="text-align: center"><strong>Cadastro de Motoboy</strong></h2>
                 </div>
                 <div class="panel-body">
-                    <form id="formMotoboy" th:object="${motoboy}" th:action="@{/funcionario/cadastra/motoboy}" method="POST" class="form-group">
+                    <form id="formMotoboy" th:object="${motoboy}" th:action="@{/funcionario/motoboy/cadastra}" method="POST" class="form-group">
                         <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -80,18 +79,15 @@
                                         <label for="anoMoto">Ano de Fabricação*:</label>
                                         <input id="anoMoto" type="text" class="form-control" th:field="*{anoMoto}" style="width: 85px"></input>
                                     </div>
-                                    <input type="hidden" id="funcionario"></input>
+                                    <div class="form-group">
+                                    	<input type="text" class="form-control" id="nomeFuncionario" name="nomeFuncionario"></input>
+                                    </div>
                                 </div>
                             </fieldset>
                             <br></br>
-                            <div class="col-sm-3" style="left: 10cm">
-                                <div class="btn-group" role="group">
-                                    <button type="reset" class="btn btn-warning">Limpar dados
-                                    </button>
-                                    <div class="controls form-inline col-sm-1">
-                                        <button type="submit" class="btn btn-primary" id="enviar">Enviar</button>
-                                    </div>
-                                </div>
+                            <div  style="text-align:center;" class="col-sm-11">
+                                    <button type="reset" class="btn btn-warning">Limpar dados</button>                           
+                                    <button type="submit" class="btn btn-primary" id="enviar" th:onclick="'javascript:limpaLocalStorageFuncionario();'">Enviar dados</button>
                             </div>
                         </div>
                     </form>
@@ -101,6 +97,7 @@
     </section>
     <th:block layout:fragment="javascript-extra">
         <script src="/javascript/mascaras.js"></script>
+        <script src="/javascript/buscaDados.js"></script>
         <script src="/javascript/datapicker.js"></script>
         <script src="/javascript/setaUpperCase.js"></script>
     </th:block>

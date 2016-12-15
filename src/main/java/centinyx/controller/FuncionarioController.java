@@ -1,7 +1,9 @@
 package centinyx.controller;
 
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import centinyx.logic.DataCriacao;
 import centinyx.model.Funcionario;
-import centinyx.model.Motoboy;
 import centinyx.repository.FuncionarioRepository;
 import centinyx.repository.UsuarioRepository;
 
@@ -36,12 +38,13 @@ public class FuncionarioController {
 		return mv;
 	}
 
+	/*
 	@RequestMapping(value = "/cadastra/motoboy")
 	public ModelAndView cadastraMotoboy(Motoboy motoboy) {
 		ModelAndView mv = new ModelAndView("formMotoboy");
 		mv.addObject("motoboys", motoboy);
 		return mv;
-	}
+	}*/
 
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("login") String login, @Valid Funcionario funcionario,
@@ -53,20 +56,13 @@ public class FuncionarioController {
 			funcionario.setUsuario(usuarios.encontraLoginUsuario(login));
 			funcionario.setCriacao(DataCriacao.geraDataHorario());
 			funcionarios.save(funcionario);
-			return new ModelAndView("redirect:/funcionario/cadastra/motoboy");
+			return new ModelAndView("redirect:/funcionario/motoboy/cadastra");
 		}
 		funcionario.setUsuario(usuarios.encontraLoginUsuario(login));
 		funcionario.setCriacao(DataCriacao.geraDataHorario());
 		funcionarios.save(funcionario);
 		return new ModelAndView("redirect:/funcionario/lista");
 	}
-
-	/*
-	 * @RequestMapping(value = "/buscausuario") public ModelAndView
-	 * buscaUsuario() { List<Usuario> listaUsuario = usuarios.findAll();
-	 * ModelAndView mv = new ModelAndView("listaUsuario");
-	 * mv.addObject("usuarios", listaUsuario); return mv; }
-	 */
 
 	@RequestMapping(value = "/lista")
 	public ModelAndView listar() {
@@ -82,15 +78,6 @@ public class FuncionarioController {
 		ModelAndView mv = new ModelAndView("detalhesfuncionario");
 		Funcionario funcionario = funcionarios.findOne(idFuncionario);
 		mv.addObject("funcionario", funcionario);
-		return mv;
-	}
-	
-	// Metódo para editar os dados do Funcionário
-	@RequestMapping("{idFuncionario}")
-	public ModelAndView editar(@PathVariable int idFuncionario) {
-		ModelAndView mv = new ModelAndView(FORM);
-		Funcionario funcionario = funcionarios.findOne(idFuncionario);
-		mv.addObject(funcionario);
 		return mv;
 	}
 

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+
 <head>
     <meta charset="utf-8" />
-    <title>Cadastro de Funcionarios</title>
+    <title>Cadastro de Funcionario</title>
 </head>
 
 <body onload="setaUsuario()">
-        <section layout:fragment="conteudo">
+    <section layout:fragment="conteudo">
         <div class="container">
             <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
                 <div class="panel panel-heading">
-                    <h2 class="panel-title" style="text-align: center">Cadastro de Funcionarios</h2>
+                    <h2 class="panel-title" style="text-align: center"><strong>Cadastro do Funcionario</strong></h2>
                 </div>
                 <div class="panel-body">
                     <form id="formFuncionario" th:object="${funcionario}" th:action="@{/funcionario/cadastra}" method="POST" class="form-group">
@@ -29,9 +30,6 @@
                             <fieldset style="max-width: 28.5cm">
                                 <legend>Dados Pessoais</legend>
                                 <div class="col-sm-5">
-                                
-                                	<input type="hidden" th:field="*{idFuncionario}"/>
-                                
                                     <div class="form-group" th:classappend="${#fields.hasErrors('nomeCompleto')} ? has-error">
                                         <label for="nomeCompleto">Nome Completo*:</label>
                                         <input id="nomeCompleto" type="text" class="form-control" th:field="*{nomeCompleto}" style="width: 450px"></input>
@@ -70,7 +68,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="escolaridade">Grau de escolaridade:</label>
-                                        <select class="custom-select form-control" name="escolaridade" style="width: 250px">
+                                        <select class="custom-select form-control" name="escolaridade" style="width: 280px">
                                             <option>Ensino Fundamental Incompleto</option>
                                             <option>Ensino Fundamental Completo</option>
                                             <option>Ensino Médio Incompleto</option>
@@ -105,7 +103,7 @@
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('departamento')} ? has-error">
                                         <label for="departamento">Departamento/Setor*:</label>
-                                        <select onchange="setaMotoboy()" class="custom-select form-control" name="departamento" id="departamento" style="width: 250px">
+                                        <select onchange="setaMotoboy()" class="custom-select form-control" name="departamento" id="departamento" style="width: 280px">
                                             <option selected="selected">Operacional</option>
                                             <option>Financeiro</option>
                                             <option>Diretoria/Gerencia</option>
@@ -254,21 +252,16 @@
                                 </div>
                             </fieldset>
                             <br></br>
-                            <div class="col-sm-3" style="left: 10cm">
-                                <div class="btn-group" role="group">
-                                    <button type="reset" class="btn btn-warning">Limpar dados
-                                    </button>
-                                    <div class="controls form-inline col-sm-1">
-                                        <button type="submit" class="btn btn-primary" id="enviar" th:onclick="'javascript:criaLocalStorageFuncionario()'">Enviar</button>
-                                    </div>
-                                </div>
+                            <div style="text-align:center;" class="col-sm-11">
+                                <button type="reset" class="btn btn-warning">Limpar dados</button>
+                                <button type="submit" class="btn btn-primary" id="enviar" th:onclick="'javascript:criaLocalStorageFuncionario();'">Enviar dados</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-            </div>
-        </section>
+        </div>
+    </section>
     <th:block layout:fragment="javascript-extra">
         <script src="/javascript/mascaras.js"></script>
         <script src="/javascript/datapicker.js"></script>
@@ -280,4 +273,5 @@
         <script src="/javascript/setaUpperCase.js"></script>
     </th:block>
 </body>
+
 </html>
