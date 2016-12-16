@@ -38,14 +38,6 @@ public class FuncionarioController {
 		return mv;
 	}
 
-	/*
-	@RequestMapping(value = "/cadastra/motoboy")
-	public ModelAndView cadastraMotoboy(Motoboy motoboy) {
-		ModelAndView mv = new ModelAndView("formMotoboy");
-		mv.addObject("motoboys", motoboy);
-		return mv;
-	}*/
-
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("login") String login, @Valid Funcionario funcionario,
 			BindingResult resultado) {
@@ -78,6 +70,15 @@ public class FuncionarioController {
 		ModelAndView mv = new ModelAndView("detalhesfuncionario");
 		Funcionario funcionario = funcionarios.findOne(idFuncionario);
 		mv.addObject("funcionario", funcionario);
+		return mv;
+	}
+
+	// Metódo para editar os dados do Funcionário
+	@RequestMapping("{idFuncionario}")
+	public ModelAndView editar(@PathVariable int idFuncionario) {
+		ModelAndView mv = new ModelAndView(FORM);
+		Funcionario funcionario = funcionarios.findOne(idFuncionario);
+		mv.addObject(funcionario);
 		return mv;
 	}
 

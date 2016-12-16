@@ -14,8 +14,8 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	
 	List<Funcionario> findByIdFuncionario(int id);
 	
-	@Query("SELECT f FROM Funcionario f WHERE f.nomeCompleto = :nomeFuncionario")
-	public Funcionario encontraNomeFuncionario(@Param("nomeFuncionario") String nomeFuncionario);
+	@Query("SELECT f FROM Funcionario f WHERE f.nomeCompleto = :nomeCompleto")
+	public Funcionario encontraNomeFuncionario(@Param("nomeCompleto") String nomeCompleto);
 	
 	
 }

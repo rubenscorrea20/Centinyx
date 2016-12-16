@@ -31,6 +31,8 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Celular</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,8 +44,8 @@
                                 <td th:text="${funcionario.email}"></td>
                                 <td th:text="${funcionario.telefone}"></td>
                                 <td th:text="${funcionario.celular}"></td>
-                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a>
-                                </td>
+                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a></td>
+						  <td><a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a></td>                          
                             </tr>
                         </tbody>
                     </table>

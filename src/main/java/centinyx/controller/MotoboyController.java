@@ -35,13 +35,13 @@ public class MotoboyController {
 	}
 
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
-	public ModelAndView salva(@RequestParam("nomeFuncionario") String nomeFuncionario, @Valid Motoboy motoboy,
+	public ModelAndView salva(@RequestParam("nomeCompleto") String nomeCompleto, @Valid Motoboy motoboy,
 			BindingResult resultado) {
 		if (resultado.hasErrors()) {
 			return cadastra(motoboy);
 		}
 		motoboy.setCriacao(DataCriacao.geraDataHorario());
-		motoboy.setFuncionario(funcionarios.encontraNomeFuncionario(nomeFuncionario));
+		motoboy.setFuncionario(funcionarios.encontraNomeFuncionario(nomeCompleto));
 		motoboys.save(motoboy);
 		return new ModelAndView("redirect:/funcionario/motoboy/lista");
 	}
@@ -62,14 +62,4 @@ public class MotoboyController {
 		mv.addObject("motoboys", motoboy);
 		return mv;
 	}
-
-	/*
-	 * @RequestMapping(value = "/busca") public ModelAndView
-	 * buscaPorNome(@RequestParam("nomeCompleto") String nomeCompleto, Model
-	 * model) { if (nomeCompleto.isEmpty()) { return listar(); } else {
-	 * ModelAndView m = new ModelAndView("listaFuncionario");
-	 * model.addAttribute("funcionarios",
-	 * funcionarios.findByNomeCompleto(nomeCompleto));
-	 * model.addAttribute("nomeCompleto", nomeCompleto); return m; } }
-	 */
 }

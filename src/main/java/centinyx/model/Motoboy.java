@@ -105,7 +105,7 @@ public class Motoboy {
 	@Column(name = "regiao_alocacao", length = 100)
 	private String regiaoAlocacao;
 
-	@OneToOne(optional = false)
+	@OneToOne
 	@JoinColumn(name = "id_funcionario")
 	private Funcionario funcionario;
 
