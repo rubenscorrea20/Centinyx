@@ -72,6 +72,15 @@ public class FuncionarioController {
 		mv.addObject("funcionario", funcionario);
 		return mv;
 	}
+	
+	// Metódo para editar os dados do Funcionário		
+	 	@RequestMapping("{idFuncionario}")		
+	 	public ModelAndView editar(@PathVariable int idFuncionario) {		
+	 		ModelAndView mv = new ModelAndView(FORM);		
+	 		Funcionario funcionario = funcionarios.findOne(idFuncionario);		
+	 		mv.addObject(funcionario);		
+	 		return mv;		
+	 	}
 
 	// Metódo para editar os dados do Funcionário
 	@RequestMapping("{idFuncionario}")
