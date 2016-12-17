@@ -30,6 +30,9 @@
                             <fieldset style="max-width: 28.5cm">
                                 <legend>Dados Pessoais</legend>
                                 <div class="col-sm-5">
+                                
+                                <input type="hidden" th:field="*{idFuncionario}"/>
+                                
                                     <div class="form-group" th:classappend="${#fields.hasErrors('nomeCompleto')} ? has-error">
                                         <label for="nomeCompleto">Nome Completo*:</label>
                                         <input id="nomeCompleto" type="text" class="form-control" th:field="*{nomeCompleto}" style="width: 450px"></input>
