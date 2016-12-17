@@ -30,6 +30,9 @@
                             <fieldset style="max-width: 28.5cm">
                                 <legend>Documentos do Motoboy</legend>
                                 <div class="col-sm-5">
+                                	<div class="form-group">
+                                    	<input id="nome" type="text" class="form-control" name="nome" style="width: 150px" readonly="readonly"></input>
+                                    </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('cnh')} ? has-error">
                                         <label for="cnh">Numero da CNH*:</label>
                                         <input id="cnh" type="text" class="form-control" th:field="*{cnh}" style="width: 250px"></input>
@@ -78,9 +81,6 @@
                                     <div class="form-group" th:classappend="${#fields.hasErrors('anoMoto')} ? has-error">
                                         <label for="anoMoto">Ano de Fabricação*:</label>
                                         <input id="anoMoto" type="text" class="form-control" th:field="*{anoMoto}" style="width: 85px"></input>
-                                    </div>
-                                    <div class="form-group">
-                                    	<input type="hidden" class="form-control" id ="nomeCompleto" name="nomeCompleto" th:field="*{funcionario.nomeFuncionario}"></input>
                                     </div>
                                 </div>
                             </fieldset>

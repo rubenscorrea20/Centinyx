@@ -83,13 +83,13 @@ public class FuncionarioController {
 	}
 
 	@RequestMapping(value = "/busca")
-	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nomeCompleto, Model model) {
-		if (nomeCompleto.isEmpty()) {
+	public ModelAndView buscaPorNome(@RequestParam("nome") String nome, Model model) {
+		if (nome.isEmpty()) {
 			return listar();
 		} else {
 			ModelAndView m = new ModelAndView("listaFuncionario");
-			model.addAttribute("funcionarios", funcionarios.findByNomeCompleto(nomeCompleto));
-			model.addAttribute("nomeCompleto", nomeCompleto);
+			model.addAttribute("funcionarios", funcionarios.findByNome(nome));
+			model.addAttribute("nomeCompleto", nome);
 			return m;
 		}
 	}

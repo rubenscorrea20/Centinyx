@@ -31,14 +31,13 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Celular</th>
-                                <th></th>
-                                <th></th>
+                                <th colspan="2">Opções</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="funcionario : ${funcionarios}">
+                            <tr th:each="funcionario : ${funcionarios}" align="center">
                                 <td th:text="${funcionario.idFuncionario}"></td>
-                                <td th:text="${funcionario.nomeCompleto}" id="nomeCompleto"></td>
+                                <td th:text="${funcionario.nome}" id="nome"></td>
                                 <td th:text="${funcionario.codigoFuncional}"></td>
                                 <td th:text="${funcionario.usuario != null ?  funcionario.usuario.login : ''}"></td>
                                 <td th:text="${funcionario.email}"></td>

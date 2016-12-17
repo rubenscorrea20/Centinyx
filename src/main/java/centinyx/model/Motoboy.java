@@ -67,7 +67,6 @@ public class Motoboy {
 	@Column(name = "validade_cnh", length = 12)
 	private String validadeCNH;
 
-	@NotBlank
 	@Column(name = "data_criacao", length = 20)
 	private String criacao;
 

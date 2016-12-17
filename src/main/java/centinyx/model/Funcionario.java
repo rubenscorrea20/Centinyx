@@ -31,7 +31,7 @@ public class Funcionario {
 	}
 
 	public Funcionario(int idFuncionario, Motoboy motoboy, List<PagamentoFuncionario> idPagamentoFuncionario,
-			String criacao, long codigoFuncional, String nomeCompleto, String documentoIdentidade, String orgaoEmissor,
+			String criacao, long codigoFuncional, String nome, String documentoIdentidade, String orgaoEmissor,
 			String ufNascimento, String dataNascimento, String nacionalidade, String departamento, String cpf,
 			String bairro, String logradouro, int numero, String complemento, String cep, String cidade,
 			String ufEndereco, String telefone, String celular, String email, String sexo, String funcao, String banco,
@@ -45,7 +45,7 @@ public class Funcionario {
 		this.idPagamentoFuncionario = idPagamentoFuncionario;
 		this.criacao = criacao;
 		this.codigoFuncional = codigoFuncional;
-		this.nomeCompleto = nomeCompleto;
+		this.nome = nome;
 		this.documentoIdentidade = documentoIdentidade;
 		this.orgaoEmissor = orgaoEmissor;
 		this.ufNascimento = ufNascimento;
@@ -106,7 +106,7 @@ public class Funcionario {
 
 	@NotBlank(message = "O campo nome precisa ser preenchido!")
 	@Column(name = "nome", length = 100)
-	private String nomeCompleto;
+	private String nome;
 
 	@NotBlank(message = "O campo documento de identidade precisa ser preenchido!")
 	@Column(name = "documento_identidade", length = 12)
@@ -322,12 +322,12 @@ public class Funcionario {
 		this.codigoFuncional = codigoFuncional;
 	}
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getDepartamento() {

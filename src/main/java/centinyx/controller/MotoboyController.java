@@ -1,7 +1,9 @@
 package centinyx.controller;
 
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import centinyx.logic.DataCriacao;
 import centinyx.model.Motoboy;
 import centinyx.repository.FuncionarioRepository;
@@ -35,13 +38,14 @@ public class MotoboyController {
 	}
 
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
-	public ModelAndView salva(@RequestParam("nomeCompleto") String nomeCompleto, @Valid Motoboy motoboy,
+	public ModelAndView salva(@RequestParam("nome") String nome, @Valid Motoboy motoboy,
 			BindingResult resultado) {
 		if (resultado.hasErrors()) {
+			System.out.println(resultado.getAllErrors());
 			return cadastra(motoboy);
 		}
 		motoboy.setCriacao(DataCriacao.geraDataHorario());
-		motoboy.setFuncionario(funcionarios.encontraNomeFuncionario(nomeCompleto));
+		motoboy.setFuncionario(funcionarios.encontraNomeFuncionario(nome));
 		motoboys.save(motoboy);
 		return new ModelAndView("redirect:/funcionario/motoboy/lista");
 	}

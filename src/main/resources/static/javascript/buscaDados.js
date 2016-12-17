@@ -37,16 +37,17 @@ function criaLocalStorageTipoAcesso() {
 
 function criaLocalStorageFuncionario() {
 	if (document.getElementById("funcao").value == "Motoboy") {
-		var nome = document.getElementById("nomeF").value;
-		localStorage.nomeCompleto = nome;
+		var nome = document.getElementById("nome").value;
+		localStorage.nome = nome;
 		//setaFuncionarioMotoboy();
 	}
 };
 
 function setaFuncionarioMotoboy() {
-	if(localStorage.nomeCompleto){
-		document.getElementById("nomeCompleto").value = localStorage.nomeCompleto;
+	if(localStorage.nome){
+		document.getElementById("nome").value = localStorage.nome;
 		document.getElementById("cpfMotoboy").value = localStorage.cpf;
+		Jquery("#cpfMotoboy").mask("999.999.999-99");
 	}
 };
 
