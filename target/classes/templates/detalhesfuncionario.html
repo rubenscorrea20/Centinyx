@@ -49,7 +49,7 @@
 
                         <h5>Data de admissão: <label th:text="${funcionario.dataAdmissao}"></label></h5>
 
-                        <h5>Usuario: <label th:text="${funcionario.usuario.login}"></label></h5>
+                        <h5>Usuario: <label th:text="${funcionario.usuario != null ?  funcionario.usuario.login : ''}"></label></h5>
 
                         <h5>Email: <label th:text="${funcionario.email}"></label></h5>
 
