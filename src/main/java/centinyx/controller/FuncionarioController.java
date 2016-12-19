@@ -72,6 +72,12 @@ public class FuncionarioController {
 		mv.addObject("funcionario", funcionario);
 		return mv;
 	}
+	
+	@RequestMapping("/deleta/{idFuncionario}")
+	public ModelAndView deleta(@PathVariable int idFuncionario) {
+		funcionarios.deleteByIdFuncionario(idFuncionario);
+		return new ModelAndView("redirect:/funcionario/lista");
+	}
 
 	// Metódo para editar os dados do Funcionário
 	@RequestMapping("{idFuncionario}")
@@ -83,7 +89,7 @@ public class FuncionarioController {
 	}
 
 	@RequestMapping(value = "/busca")
-	public ModelAndView buscaPorNome(@RequestParam("nome") String nome, Model model) {
+	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model) {
 		if (nome.isEmpty()) {
 			return listar();
 		} else {

@@ -61,6 +61,11 @@ function limpaLocalStorageUsuario() {
 	delete window.localStorage["tipoAcesso"]
 }
 
+function limpaLocalStorageMotoboy() {
+	delete window.localStorage["nome"];
+	delete window.localStorage["cpf"];
+}
+
 $(document).ready(function() {
 	$("#cpf").blur(function() {
 		var cpf = document.getElementById("cpf").value;

@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
-
 <head>
-    <meta charset="utf-8" />
     <title>Lista de Funcionarios:</title>
+    <meta charset="utf-8" />
 </head>
-
 <body>
     <section layout:fragment="conteudo">
         <div class="container">
@@ -31,11 +29,11 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Celular</th>
-                                <th colspan="2">Opções</th>
+                                <th colspan="3">Opções</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr th:each="funcionario : ${funcionarios}" align="center">
+                            <tr th:each="funcionario : ${funcionarios}">
                                 <td th:text="${funcionario.idFuncionario}"></td>
                                 <td th:text="${funcionario.nome}" id="nome"></td>
                                 <td th:text="${funcionario.codigoFuncional}"></td>
@@ -43,8 +41,31 @@
                                 <td th:text="${funcionario.email}"></td>
                                 <td th:text="${funcionario.telefone}"></td>
                                 <td th:text="${funcionario.celular}"></td>
-                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a></td>
-						  <td><a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a></td>                          
+                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a>
+                                </td>
+                                <td><a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a>
+                                </td>
+                                <td><a th:href="@{/funcionario/deleta/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Deletar</a>
+                                <!--<td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>-->
+                                    <!-- Modal -->
+                                    <!--<div class="modal fade" id="myModal" role="dialog" th:id="${funcionario.idFuncionario}">
+                                        <div class="modal-dialog">-->
+                                            <!-- Modal content-->
+                                            <!--<div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Modal Header</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Some text in the modal.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -54,6 +75,7 @@
                 </div>
             </div>
         </div>
+        <script src="/javascript/exportaExcel.js"></script>
     </section>
     <th:block layout:fragment="javascript-extra">
         <script src="/javascript/exportaExcel.js"></script>
