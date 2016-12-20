@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,7 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteRepository clientes;
-	
+
 	@Autowired
 	private ContatoClienteRepository contatos;
 
@@ -34,12 +35,13 @@ public class ClienteController {
 	@RequestMapping(value = "/cadastra")
 	public ModelAndView cadastra(Cliente cliente) {
 		ModelAndView mv = new ModelAndView(FORM);
-		mv.addObject("cliente",cliente);
+		mv.addObject("cliente", cliente);
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
-	public ModelAndView salva(@RequestParam("nomeContato") String nomeContato, @Valid Cliente cliente, BindingResult resultado) {
+	public ModelAndView salva(@RequestParam("nomeContato") String nomeContato, @Valid Cliente cliente,
+			BindingResult resultado) {
 		if (resultado.hasErrors()) {
 			return cadastra(cliente);
 		}
@@ -48,7 +50,7 @@ public class ClienteController {
 		clientes.save(cliente);
 		return new ModelAndView("redirect:/cliente/lista");
 	}
-	
+
 	@RequestMapping(value = "/buscacontato")
 	public ModelAndView buscaContato() {
 		List<ContatoCliente> listaContato = contatos.findAll();
@@ -64,7 +66,16 @@ public class ClienteController {
 		mv.addObject("clientes", listaCliente);
 		return mv;
 	}
-	
+
+	// Lista os detalhes do cliente clicado
+	@RequestMapping("/lista/{idCliente}")
+	public ModelAndView visualizar(@PathVariable int idCliente) {
+		ModelAndView mv = new ModelAndView("detalhesCliente");
+		Cliente cliente = clientes.findOne(idCliente);
+		mv.addObject("cliente", cliente);
+		return mv;
+	}
+
 	@RequestMapping(value = "/busca")
 	public ModelAndView buscaPorNomeFantasia(@RequestParam("nomeFantasia") String nomeFantasia, Model model) {
 		if (nomeFantasia.isEmpty()) {
@@ -76,7 +87,7 @@ public class ClienteController {
 			return m;
 		}
 	}
-	
+
 	@RequestMapping(value = "/buscacnpj")
 	public ModelAndView buscaPorCNPJ(@RequestParam("cnpj") String cnpj, Model model) {
 		if (cnpj.isEmpty()) {

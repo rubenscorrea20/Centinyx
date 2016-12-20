@@ -29,6 +29,7 @@
                                 <th>Data Criação</th>
                                 <th>Tipo de Acesso</th>
                                 <th>Descrição</th>
+                                <th colspan="3">Opções</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,9 +38,29 @@
                                 <td th:text="${perfil.criacao}"></td>
                                 <td th:text="${perfil.tipoAcesso}" id="tipoAcesso" th:id="tipoAcesso"></td>
                                 <td th:text="${perfil.descricao}"></td>
-                                <td>
-                                    <a th:href="@{#}" id="selecionadoPerfil" th:onclick="'javascript:criaLocalStorageTipoAcesso()'">Selecionar</a>
-                                </td>
+                                <td><a th:href="@{#}" id="selecionadoPerfil" th:onclick="'javascript:criaLocalStorageTipoAcesso()'">Selecionar</a></td>
+                                <td><a th:href="@{/perfil/{idPerfil}(idPerfil=${perfil.idPerfil})}">Editar</a></td>
+                                <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Aviso!</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Confirmar exclusão do cadastro do perfil?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="deletaPerfil">Confirmar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </td>
                             </tr>
                         </tbody>
                     </table>
@@ -53,6 +74,7 @@
     <th:block layout:fragment="javascript-extra">
         <script src="/javascript/buscadados.js"></script>
         <script src="/javascript/exportaexcel.js"></script>
+        <script src="/javascript/deletaCadastros.js"></script>
     </th:block>
 </body>
 

@@ -15,9 +15,10 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Table(name = "perfil")
 public class Perfil {
-	
-	public Perfil(){}
-	
+
+	public Perfil() {
+	}
+
 	public Perfil(int idPerfil, String criacao, String descricao, List<Usuario> usuario, String tipoAcesso) {
 		super();
 		this.idPerfil = idPerfil;
@@ -26,8 +27,6 @@ public class Perfil {
 		this.usuario = usuario;
 		this.tipoAcesso = tipoAcesso;
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,7 +38,7 @@ public class Perfil {
 
 	@Column(name = "descricao", length = 150)
 	private String descricao;
-	
+
 	@OneToMany(mappedBy = "perfil")
 	private List<Usuario> usuario;
 
