@@ -13,6 +13,7 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen"></link>
   <link rel="stylesheet" type="text/css" th:href="@{/css/CheckBoxEffect.css}"></link>
   <link rel="stylesheet" type="text/css" th:href="@{/css/AlinhaTabela.css}"></link>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/AlinhaForms.css}"></link>
   
 </head>
 
@@ -35,20 +36,23 @@
           <li><a href="/cliente/cadastra">Clientes</a></li>
           <li><a href="/funcionario/cadastra">Funcionários</a></li>
           <li><a href="">Relatórios</a></li>
+          <li><a href="/funcionario/motoboy/lista">Motoboys</a></li>
+          <li><a href="">Escalas</a></li>
+          <li><a href="">Contas a Pagar/Receber</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Login / Logout
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              Opções
               <span class="caret"></span>
             </a>
             <div class="dropdown-menu perfil">
               <div class="col-sm-4 hidden-xs">
-                <img class="img-responsive img-rounded" src="https://api.adorable.io/avatars/100/watchuru.png"/>
+                <img class="img-responsive img-circle" src="/images/sem_foto.png"/>
               </div>
               <ul class="list-unstyled col-sm-8">
-                <li>Fulano de Tal</li>
-                <li><a href="">Alterar Perfil</a></li>
+                <li>Usuario Teste</li>
+                <li><a href="">Preferências do usuário</a></li>
                 <li><a href="">Sair</a></li>
               </ul>
             </div>

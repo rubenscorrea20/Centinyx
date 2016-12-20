@@ -12,11 +12,14 @@
                     <h2 class="panel-title" style="text-align: center"><strong>Funcionarios Cadastrados</strong></h2>
                 </div>
                 <form class="form-inline" style="text-align: center" th:action="@{/funcionario/busca}" th:object="${funcionario}">
-                    <div class="form-group">
-                        <label for="buscaNome">Pesquisar funcionario por nome:</label>
-                        <input class="form-control" type="text" name="nomeCompleto" style="width: 300px"></input>
-                        <button class="btn btn-success" type="submit">Buscar</button>
-                    </div>
+                    <div class="input-group">
+                        <input class="form-control" type="text" style="width: 350px" name="nomeCompleto" placeholder="Pesquisar funcionario por nome"></input>
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                     </div>
                 </form>
                 <div class="panel-body">
                     <table class="table table-striped table-bordered" id="tabela">
@@ -34,50 +37,36 @@
                         </thead>
                         <tbody>
                             <tr th:each="funcionario : ${funcionarios}">
-                                <td th:text="${funcionario.idFuncionario}"></td>
+                                <td th:text="${funcionario.idFuncionario}" id="idFuncionario"></td>
                                 <td th:text="${funcionario.nome}" id="nome"></td>
                                 <td th:text="${funcionario.codigoFuncional}"></td>
                                 <td th:text="${funcionario.usuario != null ?  funcionario.usuario.login : ''}"></td>
                                 <td th:text="${funcionario.email}"></td>
                                 <td th:text="${funcionario.telefone}"></td>
                                 <td th:text="${funcionario.celular}"></td>
-<<<<<<< HEAD
-                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a>
-                                </td>
-                                <td><a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a>
-                                </td>
-                                <td><a th:href="@{/funcionario/deleta/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Deletar</a>
-                                <!--<td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>-->
+                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a></td>
+                                <td><a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a></td>
+                                <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
                                     <!-- Modal -->
-                                    <!--<div class="modal fade" id="myModal" role="dialog" th:id="${funcionario.idFuncionario}">
-                                        <div class="modal-dialog">-->
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog">
                                             <!-- Modal content-->
-                                            <!--<div class="modal-content">
+                                            <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                    <h4 class="modal-title">Modal Header</h4>
+                                                    <h4 class="modal-title">Aviso!</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <p>Some text in the modal.</p>
+                                                    <p>Confirmar exclusão do cadastro do funcionario?</p>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="confirmaDelete">Confirmar</button>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>-->
-                                </td>
-=======
-<<<<<<< HEAD
-                                <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a></td>
-						  <td><a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a></td>                          
-=======
-                                <td>
-                                	<a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a>
-                                	<a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a>
-                                </td>
->>>>>>> ee6c9b9a933e3a113626e94b147a29109ceb3f31
->>>>>>> ade04efce0bb720dcb50631b4541f0f83284037b
+                                    </div>
+                                    </td>
                             </tr>
                         </tbody>
                     </table>
@@ -87,10 +76,12 @@
                 </div>
             </div>
         </div>
-        <script src="/javascript/exportaExcel.js"></script>
     </section>
     <th:block layout:fragment="javascript-extra">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
         <script src="/javascript/exportaExcel.js"></script>
+        <script src="/javascript/deletaCadastros.js"></script>
     </th:block>
 </body>
 

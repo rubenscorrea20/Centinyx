@@ -35,11 +35,25 @@ function criaLocalStorageTipoAcesso() {
 	}
 };
 
+function criaLocalStorageContatoCliente() {
+	var linhas = document.getElementById("tabelaContato")
+			.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+	var table = document.getElementById("tabelaContato");
+	for (i = 0; i < linhas.length; i++) {
+		linhas[i].onclick = function() {
+			var t = this.rowIndex + 1;
+			var tabela = table.rows[t - 1].cells.namedItem("nomeContato").innerHTML;
+			localStorage.contato = tabela;
+			window.close();
+			setaContatoCliente();
+		}
+	}
+};
+
 function criaLocalStorageFuncionario() {
 	if (document.getElementById("funcao").value == "Motoboy") {
 		var nome = document.getElementById("nome").value;
 		localStorage.nome = nome;
-		//setaFuncionarioMotoboy();
 	}
 };
 
@@ -47,7 +61,12 @@ function setaFuncionarioMotoboy() {
 	if(localStorage.nome){
 		document.getElementById("nome").value = localStorage.nome;
 		document.getElementById("cpfMotoboy").value = localStorage.cpf;
-		Jquery("#cpfMotoboy").mask("999.999.999-99");
+	}
+};
+
+function setaContatoCliente() {
+	if(localStorage.contato){
+		document.getElementById("nomeContato").value = localStorage.contato;
 	}
 };
 

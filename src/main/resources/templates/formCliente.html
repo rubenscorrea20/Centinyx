@@ -6,7 +6,7 @@
     <title>Cadastro do Cliente</title>
 </head>
 
-<body>
+<body onload="setaContatoCliente()">
     <section layout:fragment="conteudo">
         <div class="container">
             <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
@@ -28,55 +28,59 @@
                             </th:block>
                         </div>
                         <div class="container">
-                            <fieldset style="max-width: 26cm">
+                            <fieldset style="max-width: 28.5cm">
                                 <legend>Dados do Cliente</legend>
                                 <div class="col-sm-5">
                                     <div class="form-group" th:classappend="${#fields.hasErrors('nomeFantasia')} ? has-error">
                                         <label for="nomeFantasia">Nome Fantasia:</label>
-                                        <input id="nome" type="text" class="form-control" th:field="*{nomeFantasia}" style="width: 400px"></input>
+                                        <input id="nome" type="text" class="form-control" th:field="*{nomeFantasia}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('razaoSocial')} ? has-error">
                                         <label for="razaoSocial">Razao Social:</label>
-                                        <input id="nome" type="text" class="form-control" th:field="*{razaoSocial}" style="width: 450px"></input>
+                                        <input id="nome" type="text" class="form-control" th:field="*{razaoSocial}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('cnpj')} ? has-error">
                                         <label for="cnpj">CNPJ:</label>
-                                        <input id="cnpj" type="text" class="form-control" th:field="*{cnpj}" style="width: 300px"></input>
+                                        <input id="cnpj" type="text" class="form-control" th:field="*{cnpj}" style="width: 250px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
                                         <label for="telefone">Telefone:</label>
-                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')}" style="width: 300px"></input>
+                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')}" style="width: 250px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+                                        <label for="email">Email*:</label>
+                                        <input id="email" type="email" class="form-control" th:field="*{email}" th:classappend="${#fields.hasErrors('email')}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="contato">Contato:</label>
                                         <div class="input-group">
-                                            <input id="contato" type="text" class="form-control" readonly="readonly" th:field="*{contatoCliente}" style="width: 150px"></input>
+                                            <input id="nomeContato" name="nomeContato" type="text" class="form-control" readonly="readonly" style="width: 200px"></input>
                                             <button type="button" class="btn btn-default" id="buscaContato">Buscar Contato</button>
                                         </div>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('cep')} ? has-error">
                                         <label for="cep">CEP:</label>
-                                        <input id="cep" type="text" class="form-control" th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')}" style="width: 300px"></input>
+                                        <input id="cep" type="text" class="form-control" th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')}" style="width: 150px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('logradouro')} ? has-error">
                                         <label for="logradouro">Logradouro:</label>
-                                        <input id="logradouro" type="text" class="form-control" th:field="*{logradouro}" th:classappend="${#fields.hasErrors('logradouro')}" style="width: 500px"></input>
+                                        <input id="logradouro" type="text" class="form-control" th:field="*{logradouro}" th:classappend="${#fields.hasErrors('logradouro')}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="numero">Numero:</label>
-                                        <input id="numero" type="text" class="form-control" th:field="*{numero}" style="width: 100px"></input>
+                                        <input id="numero" type="text" class="form-control" th:field="*{numero}" style="width: 80px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="complemento">Complemento:</label>
-                                        <input id="complemento" type="text" class="form-control" th:field="*{complemento}" style="width: 100px"></input>
+                                        <input id="complemento" type="text" class="form-control" th:field="*{complemento}" style="width: 150px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('bairro')} ? has-error">
                                         <label for="bairro">Bairro:</label>
-                                        <input id="bairro" type="text" class="form-control" th:field="*{bairro}" th:classappend="${#fields.hasErrors('bairro')}" style="width: 400px"></input>
+                                        <input id="bairro" type="text" class="form-control" th:field="*{bairro}" th:classappend="${#fields.hasErrors('bairro')}" style="width: 300px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('cidade')} ? has-error">
                                         <label for="cidade">Cidade:</label>
-                                        <input id="cidade" type="text" class="form-control" th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')}" style="width: 500px"></input>
+                                        <input id="cidade" type="text" class="form-control" th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('ufEndereco')} ? has-error">
                                         <label for="ufEndereco">UF:</label>
@@ -85,9 +89,9 @@
                                 </div>
                             </fieldset>
                             <br></br>
-                            <div  style="text-align:center;" class="col-sm-11">
-                                    <button type="reset" class="btn btn-warning">Limpar dados</button>                          
-                                    <button type="submit" class="btn btn-primary" id="enviar">Enviar dados</button>
+                            <div style="text-align:center;" class="col-sm-11">
+                                <button type="reset" class="btn btn-warning">Limpar dados</button>
+                                <button type="submit" class="btn btn-primary" id="enviar">Enviar dados</button>
                             </div>
                         </div>
                     </form>
@@ -97,8 +101,9 @@
     </section>
     <th:block layout:fragment="javascript-extra">
         <script src="/javascript/viacep.js"></script>
-        <script src="/javascript/redirecionabuscas.js"></script>
+        <script src="/javascript/redirectViews.js"></script>
         <script src="/javascript/mascaras.js"></script>
+        <script src="/javascript/buscaDados.js"></script>
     </th:block>
 </body>
 

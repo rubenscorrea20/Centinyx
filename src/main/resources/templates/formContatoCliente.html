@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Cadastro de Contatos</title>
+</head>
+
+<body onload="setaContatoCliente()">
+    <section layout:fragment="conteudo">
+        <div class="container">
+            <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
+                <div class="panel panel-heading">
+                    <h2 class="panel-title" style="text-align: center"><strong>Cadastro de Contatos</strong></h2>
+                </div>
+                <div class="panel-body">
+                    <form id="formcontatocliente" th:object="${contatoCliente}" th:action="@{/contatocliente/cadastra}" method="POST" class="form-group">
+                        <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <th:block th:each="erro : ${#fields.detailedErrors()}">
+                                <div>
+                                    <i class="fa  fa-exclamation-circle"></i>
+                                    <span th:text="${erro.message}"></span>
+                                </div>
+                            </th:block>
+                        </div>
+                        <div class="container">
+                            <fieldset style="max-width: 26cm">
+                                <legend>Dados do Contato</legend>
+                                <div class="col-sm-5">
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('nomeContato')} ? has-error">
+                                        <label for="nomeContato">Nome do Contato*:</label>
+                                        <input id="nomeContato" type="text" class="form-control" th:field="*{nomeContato}" style="width: 400px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+                                        <label for="email">Email*:</label>
+                                        <input id="email" type="text" class="form-control" th:field="*{email}" style="width: 350px"></input>
+                                    </div>
+                                    <div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
+                                        <label for="telefone">Telefone*:</label>
+                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}" style="width: 250px"></input>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="sexo">Tipo de Telefone:</label>
+                                            <select class="custom-select form-control" name="tipoTelefone" th:field="*{tipoTelefone}" style="width: 210px">
+                                                <option th:each="tipoTelefone : ${T(centinyx.enums.TipoTelefone).values()}"
+                                                	th:value="${tipoTelefone}" th:text="${tipoTelefone}">
+                                                </option>
+                                            </select>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <br></br>
+                        <div style="text-align:center;" class="col-sm-11">
+                            <button type="reset" class="btn btn-warning">Limpar dados</button>
+                            <button type="submit" class="btn btn-primary" id="enviar">Enviar dados</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <th:block layout:fragment="javascript-extra">
+        <script src="/javascript/mascaras.js"></script>
+        <script src="/javascript/buscaDados.js"></script>
+    </th:block>
+</body>
+
+</html>

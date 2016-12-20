@@ -19,69 +19,66 @@
                             <span class="close" aria-hidden="true" data-dismiss="alert" aria-label="close">&times;</span>
                             <!-- #Fields é objeto do Thymeleaf que permite verificar os fields -->
                             <th:block th:each="erro : ${#fields.detailedErrors()}">
-                               <div>
+                                <div>
                                     <i class="fa  fa-exclamation-circle"></i> <span th:text="${erro.message}"></span>
-                               </div>
+                                </div>
                             </th:block>
                         </div>
                         <div class="container">
                             <fieldset style="max-width: 28.5cm">
                                 <legend>Dados Pessoais</legend>
                                 <div class="col-sm-5">
-<<<<<<< HEAD
-                                	<input type="hidden" th:field="*{idFuncionario}"/>
+                                    <input type="hidden" th:field="*{idFuncionario}" />
                                     <div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
-=======
-                                
-                                <input type="hidden" th:field="*{idFuncionario}"/>
-                                
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('nomeCompleto')} ? has-error">
->>>>>>> ee6c9b9a933e3a113626e94b147a29109ceb3f31
-                                        <label for="nomeCompleto">Nome Completo*:</label>
-                                        <input id="nome" type="text" class="form-control" th:field="*{nome}" style="width: 450px"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="sexo">Sexo:</label>
-                                        <select class="custom-select form-control" name="sexo" style="width: 150px">
-                                            <option>Masculino</option>
-                                            <option>Feminino</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('cpf')} ? has-error">
-                                        <label for="cpf">CPF*:</label>
-                                        <input id="cpf" type="text" class="form-control" th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')}" style="width: 300px"></input>
-                                    </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('documentoIdentidade')} ? has-error">
-                                        <label for="documentoIdentidade">Documento de Identidade*:
-                                        </label>
-                                        <input id="documentoIdentidade" type="text" class="form-control" th:field="*{documentoIdentidade}" th:classappend="${#fields.hasErrors('documentoIdentidade')}" style="width: 250px"></input>
-                                    </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('orgaoEmissor')} ? has-error">
-                                        <label for="orgaoEmissor">Orgão Emissor*:</label>
-                                        <input id="orgaoEmissor" type="text" class="form-control" th:field="*{orgaoEmissor}" th:classappend="${#fields.hasErrors('orgaoEmissor')}" style="width: 150px"></input>
-                                    </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('ufNascimento')} ? has-error">
-                                        <label for="ufNascimento">UF*:</label>
-                                        <input id="ufNascimento" type="text" class="form-control" th:field="*{ufNascimento}" th:classappend="${#fields.hasErrors('ufNascimento')}" style="width: 80px"></input>
-                                    </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('dataNascimento')} ? has-error">
-                                        <label for="dataNascimento">Data de Nascimento*:</label>
-                                        <input id="dataNascimento" type="datetime" placeholder="DD/MM/YYYY" class="form-control" th:classappend="${#fields.hasErrors('dataNascimento')}" th:field="*{dataNascimento}" style="width: 130px"></input>
-                                    </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('nacionalidade')} ? has-error">
-                                        <label for="nacionalidade">Nacionalidade*:</label>
-                                        <input id="nacionalidade" type="text" class="form-control" th:field="*{nacionalidade}" th:classappend="${#fields.hasErrors('nacionalidade')}" style="width: 130px"></input>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="escolaridade">Grau de escolaridade:</label>
-                                        <select class="custom-select form-control" name="escolaridade" style="width: 280px">
-                                            <option>Ensino Fundamental Incompleto</option>
-                                            <option>Ensino Fundamental Completo</option>
-                                            <option>Ensino Médio Incompleto</option>
-                                            <option>Ensino Médio Completo</option>
-                                            <option>Ensino Superior Incompleto</option>
-                                            <option>Ensino Superior Completo</option>
-                                        </select>
+                                        <input type="hidden" th:field="*{idFuncionario}" />
+
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+                                            <label for="nomeCompleto">Nome Completo*:</label>
+                                            <input id="nome" type="text" class="form-control" th:field="*{nome}" style="width: 350px"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sexo">Sexo:</label>
+                                            <select class="custom-select form-control" name="sexo" style="width: 150px">
+                                                <option>Masculino</option>
+                                                <option>Feminino</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('cpf')} ? has-error">
+                                            <label for="cpf">CPF*:</label>
+                                            <input id="cpf" type="text" class="form-control" th:field="*{cpf}" th:classappend="${#fields.hasErrors('cpf')}" style="width: 250px"></input>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('documentoIdentidade')} ? has-error">
+                                            <label for="documentoIdentidade">Documento de Identidade*:
+                                            </label>
+                                            <input id="documentoIdentidade" type="text" class="form-control" th:field="*{documentoIdentidade}" th:classappend="${#fields.hasErrors('documentoIdentidade')}" style="width: 220px"></input>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('orgaoEmissor')} ? has-error">
+                                            <label for="orgaoEmissor">Orgão Emissor*:</label>
+                                            <input id="orgaoEmissor" type="text" class="form-control" th:field="*{orgaoEmissor}" th:classappend="${#fields.hasErrors('orgaoEmissor')}" style="width: 200px"></input>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('ufNascimento')} ? has-error">
+                                            <label for="ufNascimento">UF*:</label>
+                                            <input id="ufNascimento" type="text" class="form-control" th:field="*{ufNascimento}" th:classappend="${#fields.hasErrors('ufNascimento')}" style="width: 80px"></input>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('dataNascimento')} ? has-error">
+                                            <label for="dataNascimento">Data de Nascimento*:</label>
+                                            <input id="dataNascimento" type="datetime" placeholder="DD/MM/YYYY" class="form-control" th:classappend="${#fields.hasErrors('dataNascimento')}" th:field="*{dataNascimento}" style="width: 130px"></input>
+                                        </div>
+                                        <div class="form-group" th:classappend="${#fields.hasErrors('nacionalidade')} ? has-error">
+                                            <label for="nacionalidade">Nacionalidade*:</label>
+                                            <input id="nacionalidade" type="text" class="form-control" th:field="*{nacionalidade}" th:classappend="${#fields.hasErrors('nacionalidade')}" style="width: 130px"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="escolaridade">Grau de escolaridade:</label>
+                                            <select class="custom-select form-control" name="escolaridade" style="width: 280px">
+                                                <option>Ensino Fundamental Incompleto</option>
+                                                <option>Ensino Fundamental Completo</option>
+                                                <option>Ensino Médio Incompleto</option>
+                                                <option>Ensino Médio Completo</option>
+                                                <option>Ensino Superior Incompleto</option>
+                                                <option>Ensino Superior Completo</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </fieldset>
@@ -91,11 +88,11 @@
                                 <div class="col-sm-5">
                                     <div class="form-group">
                                         <label for="celular">Nome do Pai:</label>
-                                        <input id="nomePai" type="text" class="form-control" th:field="*{nomePai}" style="width: 450px"></input>
+                                        <input id="nomePai" type="text" class="form-control" th:field="*{nomePai}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="celular">Nome da Mãe:</label>
-                                        <input id="nomeMae" type="text" class="form-control" th:field="*{nomeMae}" style="width: 450px"></input>
+                                        <input id="nomeMae" type="text" class="form-control" th:field="*{nomeMae}" style="width: 350px"></input>
                                     </div>
                                 </div>
                             </fieldset>
@@ -120,7 +117,7 @@
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('funcao')} ? has-error">
                                         <label for="funcao">Função*:</label>
-                                        <input id="funcao" type="text" class="form-control" th:field="*{funcao}" th:classappend="${#fields.hasErrors('funcao')}" style="width: 500px"></input>
+                                        <input id="funcao" type="text" class="form-control" th:field="*{funcao}" th:classappend="${#fields.hasErrors('funcao')}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('dataAdmissao')} ? has-error">
                                         <label for="dataAdmissao">Data de Admissão*:</label>
@@ -129,7 +126,7 @@
                                     <div class="form-group">
                                         <label for="usuario">Usuario:</label>
                                         <div class="input-group">
-                                            <input id="login" type="text" class="form-control" name="login" style="width: 150px" readonly="readonly"></input>
+                                            <input id="login" type="text" class="form-control" name="login" style="width: 200px" readonly="readonly"></input>
                                             <button type="button" class="btn btn-default" id="buscaUsuario">Buscar usuario
                                             </button>
                                         </div>
@@ -142,39 +139,39 @@
                                 <div class="col-sm-5">
                                     <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
                                         <label for="email">Email*:</label>
-                                        <input id="email" type="email" class="form-control" th:field="*{email}" th:classappend="${#fields.hasErrors('email')}" style="width: 400px"></input>
+                                        <input id="email" type="email" class="form-control" th:field="*{email}" th:classappend="${#fields.hasErrors('email')}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
                                         <label for="telefone">Telefone*:</label>
-                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')}" style="width: 300px"></input>
+                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}" th:classappend="${#fields.hasErrors('telefone')}" style="width: 250px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="celular">Celular:</label>
-                                        <input id="celular" type="text" class="form-control" th:field="*{celular}" style="width: 300px"></input>
+                                        <input id="celular" type="text" class="form-control" th:field="*{celular}" style="width: 250px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('cep')} ? has-error">
                                         <label for="cep">CEP*:</label>
-                                        <input id="cep" type="text" class="form-control" th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')}" style="width: 300px"></input>
+                                        <input id="cep" type="text" class="form-control" th:field="*{cep}" th:classappend="${#fields.hasErrors('cep')}" style="width: 150px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('logradouro')} ? has-error">
                                         <label for="logradouro">Logradouro*:</label>
-                                        <input id="logradouro" type="text" class="form-control" th:field="*{logradouro}" th:classappend="${#fields.hasErrors('logradouro')}" style="width: 500px"></input>
+                                        <input id="logradouro" type="text" class="form-control" th:field="*{logradouro}" th:classappend="${#fields.hasErrors('logradouro')}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="numero">Numero:</label>
-                                        <input id="numero" type="text" class="form-control" th:field="*{numero}" style="width: 100px"></input>
+                                        <input id="numero" type="text" class="form-control" th:field="*{numero}" style="width: 80px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="complemento">Complemento:</label>
-                                        <input id="complemento" type="text" class="form-control" th:field="*{complemento}" style="width: 100px"></input>
+                                        <input id="complemento" type="text" class="form-control" th:field="*{complemento}" style="width: 150px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('bairro')} ? has-error">
                                         <label for="bairro">Bairro*:</label>
-                                        <input id="bairro" type="text" class="form-control" th:field="*{bairro}" th:classappend="${#fields.hasErrors('bairro')}" style="width: 400px"></input>
+                                        <input id="bairro" type="text" class="form-control" th:field="*{bairro}" th:classappend="${#fields.hasErrors('bairro')}" style="width: 300px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('cidade')} ? has-error">
                                         <label for="cidade">Cidade*:</label>
-                                        <input id="cidade" type="text" class="form-control" th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')}" style="width: 500px"></input>
+                                        <input id="cidade" type="text" class="form-control" th:field="*{cidade}" th:classappend="${#fields.hasErrors('cidade')}" style="width: 350px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('ufEndereco')} ? has-error">
                                         <label for="ufEndereco">UF:</label>
@@ -214,11 +211,11 @@
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('cpfFavorecido')} ? has-error">
                                         <label for="cpfFavorecido">CPF do Favorecido*:</label>
-                                        <input id="cpfFavorecido" type="text" class="form-control" th:field="*{cpfFavorecido}" style="width: 300px"></input>
+                                        <input id="cpfFavorecido" type="text" class="form-control" th:field="*{cpfFavorecido}" style="width: 250px"></input>
                                     </div>
                                     <div class="form-group" th:classappend="${#fields.hasErrors('nomeFavorecido')} ? has-error">
                                         <label for="nomeFavorecido">Nome do Favorecido*:</label>
-                                        <input id="nomeFavorecido" type="text" class="form-control" th:field="*{nomeFavorecido}" th:classappend="${#fields.hasErrors('nomeFavorecido')}" style="width: 450px"></input>
+                                        <input id="nomeFavorecido" type="text" class="form-control" th:field="*{nomeFavorecido}" th:classappend="${#fields.hasErrors('nomeFavorecido')}" style="width: 350px"></input>
                                     </div>
                                 </div>
                             </fieldset>
@@ -241,7 +238,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="tituloEleitor">Título de Eleitor:</label>
-                                        <input id="tituloEleitor" type="text" class="form-control" th:field="*{tituloEleitor}" style="width: 300px"></input>
+                                        <input id="tituloEleitor" type="text" class="form-control" th:field="*{tituloEleitor}" style="width: 250px"></input>
                                     </div>
                                     <div class="form-group">
                                         <label for="celular">Zona Eleitoral:</label>
@@ -253,7 +250,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="reservista">Reservista:</label>
-                                        <input id="reservista" type="text" class="form-control" th:field="*{reservista}" style="width: 300px"></input>
+                                        <input id="reservista" type="text" class="form-control" th:field="*{reservista}" style="width: 250px"></input>
                                     </div>
                                 </div>
                             </fieldset>

@@ -73,13 +73,12 @@ public class FuncionarioController {
 		return mv;
 	}
 	
-<<<<<<< HEAD
-	@RequestMapping("/deleta/{idFuncionario}")
-	public ModelAndView deleta(@PathVariable int idFuncionario) {
+	@RequestMapping("funcionario/deleta/{idFuncionario}")
+	public ModelAndView deletar(@PathVariable int idFuncionario) {
 		funcionarios.deleteByIdFuncionario(idFuncionario);
 		return new ModelAndView("redirect:/funcionario/lista");
 	}
-=======
+
 	// Metódo para editar os dados do Funcionário		
 	 	@RequestMapping("{idFuncionario}")		
 	 	public ModelAndView editar(@PathVariable int idFuncionario) {		
@@ -88,16 +87,6 @@ public class FuncionarioController {
 	 		mv.addObject(funcionario);		
 	 		return mv;		
 	 	}
->>>>>>> ade04efce0bb720dcb50631b4541f0f83284037b
-
-	// Metódo para editar os dados do Funcionário
-	@RequestMapping("{idFuncionario}")
-	public ModelAndView editar(@PathVariable int idFuncionario) {
-		ModelAndView mv = new ModelAndView(FORM);
-		Funcionario funcionario = funcionarios.findOne(idFuncionario);
-		mv.addObject(funcionario);
-		return mv;
-	}
 
 	@RequestMapping(value = "/busca")
 	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model) {

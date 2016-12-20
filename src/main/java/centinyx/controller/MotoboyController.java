@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,8 +55,20 @@ public class MotoboyController {
 	public ModelAndView listar() {
 		List<Motoboy> listaMotoboy = motoboys.findAll();
 		ModelAndView mv = new ModelAndView("listaMotoboy");
-		mv.addObject("funcionarios", listaMotoboy);
+		mv.addObject("motoboys", listaMotoboy);
 		return mv;
+	}
+	
+	@RequestMapping(value = "/busca")
+	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model) {
+		if (nome.isEmpty()) {
+			return listar();
+		} else {
+			ModelAndView m = new ModelAndView("listaFuncionario");
+			model.addAttribute("motoboys", funcionarios.findByNome(nome));
+			model.addAttribute("nomeCompleto", nome);
+			return m;
+		}
 	}
 
 	// Lista os detalhes do Motoboy clicado

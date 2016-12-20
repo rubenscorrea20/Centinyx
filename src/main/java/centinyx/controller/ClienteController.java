@@ -39,12 +39,12 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
-	public ModelAndView salva(@Valid Cliente cliente, BindingResult resultado) {
+	public ModelAndView salva(@RequestParam("nomeContato") String nomeContato, @Valid Cliente cliente, BindingResult resultado) {
 		if (resultado.hasErrors()) {
-			//System.out.println("Deu merda! " + resultado.getAllErrors());
 			return cadastra(cliente);
 		}
 		cliente.setCriacao(DataCriacao.geraDataHorario());
+		cliente.setContatoCliente(contatos.encontraContatoCliente(nomeContato));
 		clientes.save(cliente);
 		return new ModelAndView("redirect:/cliente/lista");
 	}

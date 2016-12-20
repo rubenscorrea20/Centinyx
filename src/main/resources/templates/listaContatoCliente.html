@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Lista de Contatos</title>
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div class="container">
+            <div class="panel panel-success" style="margin-top: 0cm; margin-bottom: 1cm">
+                <div class="panel panel-heading">
+                    <h2 class="panel-title" style="text-align: center"><strong>Contatos Cadastrados</strong></h2>
+                </div>
+                <form class="form-inline" style="text-align: center" th:action="@{/contatocliente/busca}" th:object="${contatoCliente}">
+                    <div class="input-group">
+                        <input class="form-control" type="text" style="width: 350px" name="contatoCliente" placeholder="Pesquisar contato por cliente"></input>
+                        <span class="input-group-btn">
+                        <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                        </span>
+                     </div>
+                </form>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered" id="tabelaContato">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Data Criação</th>
+                                <th>Nome do Contato</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Tipo de Telefone</th>
+                                <!--<th>Cliente</th>-->
+                                <th>Opções</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="contatoCliente : ${contatoClientes}">
+                                <td th:text="${contatoCliente.idContatoCliente}" id="idContato" th:id="idContato"></td>
+                                <td th:text="${contatoCliente.criacao}"></td>
+                                <td th:text="${contatoCliente.nomeContato}" id="nomeContato" th:id="nomeContato"></td>
+                                <td th:text="${contatoCliente.email}"></td>
+                                <td th:text="${contatoCliente.telefone}"></td>
+                                <td th:text="${contatoCliente.tipoTelefone}"></td>
+                                <!--<td th:text="${contatoCliente.cliente.nomeFantasia != null ?  contatoCliente.cliente.nomeFantasia : ''}"></td>-->
+                                <td>
+                                    <a th:href="@{#}" id="selecionadoContato" th:onclick="'javascript:criaLocalStorageContatoCliente()'">Selecionar</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br></br>
+                    <a th:href="@{#}" id="exporta" style="float: right">Exportar resultados para Excel</a>
+                    <a th:href="@{/contatocliente/cadastra}" style="float: left">Ir para cadastro de contatos</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <th:block layout:fragment="javascript-extra">
+        <script src="/javascript/buscadados.js"></script>
+        <script src="/javascript/exportaexcel.js"></script>
+    </th:block>
+</body>
+
+</html>

@@ -70,7 +70,7 @@ public class Cliente {
 
 	@NotBlank(message = "O campo CNPJ precisa ser preenchido!")
 	@CNPJ(message = "CNPJ inválido!")
-	@Column(name = "cnpj", length = 30, unique = true)
+	@Column(name = "cnpj", length = 18, unique = true)
 	private String cnpj;
 
 	@NotBlank(message = "O campo bairro precisa ser preenchido!")
@@ -88,7 +88,7 @@ public class Cliente {
 	private String complemento;
 
 	@NotBlank(message = "O campo CEP precisa ser preenchido!")
-	@Column(name = "cep", length = 8)
+	@Column(name = "cep", length = 9)
 	private String cep;
 
 	@NotBlank(message = "O campo cidade precisa ser preenchido!")
@@ -100,7 +100,7 @@ public class Cliente {
 	private String ufEndereco;
 
 	@NotBlank(message = "O campo telefone precisa ser preenchido!")
-	@Column(name = "telefone", length = 11)
+	@Column(name = "telefone", length = 14)
 	private String telefone;
 
 	@NotBlank(message = "O campo email precisa ser preenchido!")

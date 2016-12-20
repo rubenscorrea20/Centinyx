@@ -74,7 +74,7 @@ public class Motoboy {
 	private String status_motoboy;
 
 	@NotBlank(message = "O campo CPF do proprietário precisa ser preenchido!")
-	@Column(name = "cpf_proprietario", length = 11)
+	@Column(name = "cpf_proprietario", length = 14)
 	private String cpfProprietarioMoto;
 
 	@NotBlank(message = "O campo marca da moto precisa ser preenchido!")

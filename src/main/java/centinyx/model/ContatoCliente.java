@@ -2,13 +2,18 @@ package centinyx.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
+
+import centinyx.enums.TipoTelefone;
 
 @Entity
 @Table(name = "contato_cliente")
@@ -17,7 +22,7 @@ public class ContatoCliente {
 	public ContatoCliente(){}
 
 	public ContatoCliente(int idContatoCliente, String criacao, String email, String nomeContato, String telefone,
-			String tipoTelefone, Cliente cliente) {
+			TipoTelefone tipoTelefone, Cliente cliente) {
 		super();
 		this.idContatoCliente = idContatoCliente;
 		this.criacao = criacao;
@@ -43,13 +48,15 @@ public class ContatoCliente {
 	@Column(name = "nome_contato", length = 50, nullable = false)
 	private String nomeContato;
 
-	@Column(name = "telefone", length = 11, nullable = false)
+	@Column(name = "telefone", length = 14, nullable = false)
 	private String telefone;
 
-	@Column(name = "tipo_telefone", length = 20, nullable = false)
-	private String tipoTelefone;
+	@Column(nullable = false, name = "tipo_telefone")
+	@Enumerated(EnumType.STRING)
+	private TipoTelefone tipoTelefone;
 
 	@OneToOne(mappedBy = "contatoCliente")
+	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
 	public int getIdContatoCliente() {
@@ -96,15 +103,15 @@ public class ContatoCliente {
 		return telefone;
 	}
 
+	public TipoTelefone getTipoTelefone() {
+		return tipoTelefone;
+	}
+
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
-	public String getTipoTelefone() {
-		return tipoTelefone;
-	}
-
-	public void setTipoTelefone(String tipoTelefone) {
+	public void setTipoTelefone(TipoTelefone tipoTelefone) {
 		this.tipoTelefone = tipoTelefone;
 	}
 }
