@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
 
-import centinyx.enums.TipoTelefone;
+import centinyx.enums.TipoTelefoneEnum;
 
 @Entity
 @Table(name = "contato_cliente")
@@ -22,7 +22,7 @@ public class ContatoCliente {
 	public ContatoCliente(){}
 
 	public ContatoCliente(int idContatoCliente, String criacao, String email, String nomeContato, String telefone,
-			TipoTelefone tipoTelefone, Cliente cliente) {
+			TipoTelefoneEnum tipoTelefone, Cliente cliente) {
 		super();
 		this.idContatoCliente = idContatoCliente;
 		this.criacao = criacao;
@@ -53,7 +53,7 @@ public class ContatoCliente {
 
 	@Column(nullable = false, name = "tipo_telefone")
 	@Enumerated(EnumType.STRING)
-	private TipoTelefone tipoTelefone;
+	private TipoTelefoneEnum tipoTelefone;
 
 	@OneToOne(mappedBy = "contatoCliente")
 	@JoinColumn(name = "id_cliente")
@@ -103,7 +103,7 @@ public class ContatoCliente {
 		return telefone;
 	}
 
-	public TipoTelefone getTipoTelefone() {
+	public TipoTelefoneEnum getTipoTelefone() {
 		return tipoTelefone;
 	}
 
@@ -111,7 +111,7 @@ public class ContatoCliente {
 		this.telefone = telefone;
 	}
 
-	public void setTipoTelefone(TipoTelefone tipoTelefone) {
+	public void setTipoTelefone(TipoTelefoneEnum tipoTelefone) {
 		this.tipoTelefone = tipoTelefone;
 	}
 }

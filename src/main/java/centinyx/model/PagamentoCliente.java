@@ -1,18 +1,15 @@
 package centinyx.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import centinyx.enums.TipoPagamento;
 
 @Entity
 @Table(name = "pagamento_cliente")
@@ -22,7 +19,7 @@ public class PagamentoCliente {
 
 	public PagamentoCliente(int idPagamentoCliente, String criacao, long codigoControle, String statusPagamento,
 			String formaPagamento, String pagamentoConfirmado, Date dataPagamento, float valorPago, float valorTotal,
-			String observacao, TipoPagamento tipoPagamento, Pedido pedido) {
+			String observacao, Pedido pedido) {
 		super();
 		this.idPagamentoCliente = idPagamentoCliente;
 		this.criacao = criacao;
@@ -34,7 +31,6 @@ public class PagamentoCliente {
 		this.valorPago = valorPago;
 		this.valorTotal = valorTotal;
 		this.observacao = observacao;
-		this.tipoPagamento = tipoPagamento;
 		this.pedido = pedido;
 	}
 
@@ -69,10 +65,6 @@ public class PagamentoCliente {
 
 	@Column(name = "observacao", length = 200)
 	private String observacao;
-
-	@Enumerated(EnumType.STRING)
-	@Column(name = "tipo_pagamento")
-	private TipoPagamento tipoPagamento;
 
 	@OneToOne(optional = false)
 	@JoinColumn(name = "id_pedido")
@@ -140,14 +132,6 @@ public class PagamentoCliente {
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
-	}
-
-	public TipoPagamento getTipoPagamento() {
-		return tipoPagamento;
-	}
-
-	public void setTipoPagamento(TipoPagamento tipoPagamento) {
-		this.tipoPagamento = tipoPagamento;
 	}
 
 	public Pedido getPedido() {

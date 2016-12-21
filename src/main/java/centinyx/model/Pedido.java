@@ -1,32 +1,34 @@
 package centinyx.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import centinyx.enums.TipoPedidoEnum;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
-	
-	public Pedido(){}
 
-	public Pedido(int idPedido, String criacao, long codigoControle, Escalas escala, List<Alocacao> alocacao,
+	public Pedido() {
+	}
+
+	public Pedido(int idPedido, String criacao, Cliente cliente, Alocacao alocacao, TipoPedidoEnum tipoPedido,
 			PagamentoCliente pagamentoCliente) {
 		super();
 		this.idPedido = idPedido;
 		this.criacao = criacao;
-		this.codigoControle = codigoControle;
-		this.escala = escala;
+		this.cliente = cliente;
 		this.alocacao = alocacao;
+		this.tipoPedido = tipoPedido;
 		this.pagamentoCliente = pagamentoCliente;
 	}
 
@@ -35,20 +37,21 @@ public class Pedido {
 	@Column(name = "id_pedido")
 	private int idPedido;
 
-	@Column(name = "data_criacao", length = 20, nullable = false)
+	@Column(name = "data_criacao", length = 20)
 	private String criacao;
-
-	@Column(name = "codigo_controle", length = 8, nullable = false)
-	private long codigoControle;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "id_escala")
-	private Escalas escala;
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
+
+	@OneToOne
+	@JoinColumn(name = "id_alocacao")
+	private Alocacao alocacao;
 	
-	@ManyToMany(mappedBy = "pedido")
-	//@JoinColumn(name = "id_alocacao")
-	private List<Alocacao> alocacao;
-	
+	@Column(nullable = false, name = "tipo_pedido")
+	@Enumerated(EnumType.STRING)
+	private TipoPedidoEnum tipoPedido;
+
 	@OneToOne(optional = false, mappedBy = "pedido")
 	//@JoinColumn(name = "id_pagamento_cliente")
 	private PagamentoCliente pagamentoCliente;
@@ -61,22 +64,6 @@ public class Pedido {
 		this.idPedido = idPedido;
 	}
 
-	public List<Alocacao> getAlocacao() {
-		return alocacao;
-	}
-
-	public void setAlocacao(List<Alocacao> alocacao) {
-		this.alocacao = alocacao;
-	}
-
-	public Escalas getEscala() {
-		return escala;
-	}
-
-	public void setEscala(Escalas id_escala) {
-		this.escala = id_escala;
-	}
-
 	public String getCriacao() {
 		return criacao;
 	}
@@ -85,12 +72,20 @@ public class Pedido {
 		this.criacao = criacao;
 	}
 
-	public long getCodigoControle() {
-		return codigoControle;
+	public Alocacao getAlocacao() {
+		return alocacao;
 	}
 
-	public void setCodigoControle(long codigoControle) {
-		this.codigoControle = codigoControle;
+	public void setAlocacao(Alocacao alocacao) {
+		this.alocacao = alocacao;
+	}
+
+	public TipoPedidoEnum getTipoPedido() {
+		return tipoPedido;
+	}
+
+	public void setTipoPedido(TipoPedidoEnum tipoPedido) {
+		this.tipoPedido = tipoPedido;
 	}
 
 	public PagamentoCliente getPagamentoCliente() {
@@ -99,6 +94,14 @@ public class Pedido {
 
 	public void setPagamentoCliente(PagamentoCliente pagamentoCliente) {
 		this.pagamentoCliente = pagamentoCliente;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import centinyx.enums.TipoPagamento;
+import centinyx.enums.TipoPagamentoEnum;
 
 @Entity
 @Table(name = "pagamento_motoboy")
@@ -24,7 +24,7 @@ public class PagamentoFuncionario {
 
 	public PagamentoFuncionario(int idPagamentoFuncionario, String criacao, long codigoControle, String statusPagamento,
 			String pagamentoConfirmado, Date dataPagamento, float valorPago, Despesa despesas,
-			TipoPagamento tipoPagamento, Holerite holerite, Funcionario funcionario) {
+			TipoPagamentoEnum tipoPagamento, Holerite holerite, Funcionario funcionario) {
 		super();
 		this.idPagamentoFuncionario = idPagamentoFuncionario;
 		this.criacao = criacao;
@@ -68,7 +68,7 @@ public class PagamentoFuncionario {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_pagamento")
-	private TipoPagamento tipoPagamento;
+	private TipoPagamentoEnum tipoPagamento;
 	
 	@OneToOne(mappedBy = "pagamentoFuncionario")
 	//@JoinColumn(name = "id_holerite")
@@ -134,11 +134,11 @@ public class PagamentoFuncionario {
 		this.dataPagamento = dataPagamento;
 	}
 
-	public TipoPagamento getTipoPagamento() {
+	public TipoPagamentoEnum getTipoPagamento() {
 		return tipoPagamento;
 	}
 
-	public void setTipoPagamento(TipoPagamento tipoPagamento) {
+	public void setTipoPagamento(TipoPagamentoEnum tipoPagamento) {
 		this.tipoPagamento = tipoPagamento;
 	}
 

@@ -1,36 +1,38 @@
 package centinyx.model;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import centinyx.enums.TipoPeriodoEnum;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "alocacao")
 public class Alocacao {
-	
-	public Alocacao(){}
 
-	public Alocacao(String criacao, List<Motoboy> motoboy, Date alocacao, TipoPeriodoEnum tipoPeriodo,
-			List<Pedido> pedido, int idAlocacao) {
+	public Alocacao() {
+	}
+
+	public Alocacao(int idAlocacao, String criacao, List<AlocacaoMotoboy> alocacaoMotoboy, String dataAlocacao,
+			int quantidadeMotoboy, Pedido pedido, List<PeriodoAlocacao> periodoAlocacao, Escala escala) {
 		super();
-		this.criacao = criacao;
-		this.motoboy = motoboy;
-		this.alocacao = alocacao;
-		TipoPeriodo = tipoPeriodo;
-		this.pedido = pedido;
 		this.idAlocacao = idAlocacao;
+		this.criacao = criacao;
+		this.alocacaoMotoboy = alocacaoMotoboy;
+		this.dataAlocacao = dataAlocacao;
+		this.quantidadeMotoboy = quantidadeMotoboy;
+		this.pedido = pedido;
+		this.periodoAlocacao = periodoAlocacao;
+		this.escala = escala;
 	}
 
 	@Id
@@ -38,24 +40,32 @@ public class Alocacao {
 	@Column(name = "id_alocacao")
 	private int idAlocacao;
 
-	@Column(name = "data_criacao", length = 20, nullable = false)
+	@Column(name = "data_criacao", length = 20)
 	private String criacao;
 
 	@ManyToMany
-	@JoinColumn(name = "id_motoboy", nullable = false)
-	private List<Motoboy> motoboy;
+	@JoinColumn(name = "id_alocacao_motoboy")
+	private List<AlocacaoMotoboy> alocacaoMotoboy;
 
-	@Column(name = "data_alocacao", length = 8, nullable = false)
-	private Date alocacao;
+	@NotBlank(message = "O campo data de alocação precisa ser preenchido!")
+	@Column(name = "data_alocacao", length = 20)
+	private String dataAlocacao;
 
-	@Column(name = "tipo_periodo", length = 10, nullable = false)
-	@Enumerated(EnumType.STRING)
-	private TipoPeriodoEnum TipoPeriodo;
+	@Column(name = "quantidade_motoboy", length = 2)
+	private int quantidadeMotoboy;
+
+	@OneToOne(optional = false, mappedBy = "alocacao")
+	//@JoinColumn(name = "id_pedido")
+	private Pedido pedido;
 
 	@ManyToMany
-	@JoinColumn(name = "id_pedido")
-	private List<Pedido> pedido;
-	
+	@JoinColumn(name = "id_periodo_alocacao")
+	private List<PeriodoAlocacao> periodoAlocacao;
+
+	@ManyToOne
+	@JoinColumn(name = "id_escala")
+	private Escala escala;
+
 	public int getIdAlocacao() {
 		return idAlocacao;
 	}
@@ -72,44 +82,52 @@ public class Alocacao {
 		this.criacao = criacao;
 	}
 
-	public Date getAlocacao() {
-		return alocacao;
+	public List<AlocacaoMotoboy> getAlocacaoMotoboy() {
+		return alocacaoMotoboy;
 	}
 
-	public void setAlocacao(Date alocacao) {
-		this.alocacao = alocacao;
+	public void setAlocacaoMotoboy(List<AlocacaoMotoboy> alocacaoMotoboy) {
+		this.alocacaoMotoboy = alocacaoMotoboy;
 	}
 
-	public TipoPeriodoEnum getTipoPeriodo() {
-		return TipoPeriodo;
+	public String getDataAlocacao() {
+		return dataAlocacao;
 	}
 
-	public void setTipoPeriodo(TipoPeriodoEnum tipoPeriodo) {
-		TipoPeriodo = tipoPeriodo;
+	public void setDataAlocacao(String dataAlocacao) {
+		this.dataAlocacao = dataAlocacao;
 	}
 
-	public List<Motoboy> getMotoboy() {
-		return motoboy;
+	public int getQuantidadeMotoboy() {
+		return quantidadeMotoboy;
 	}
 
-	public void setMotoboy(List<Motoboy> motoboy) {
-		this.motoboy = motoboy;
+	public void setQuantidadeMotoboy(int quantidadeMotoboy) {
+		this.quantidadeMotoboy = quantidadeMotoboy;
 	}
 
-	public List<Pedido> getPedido() {
+	public Pedido getPedido() {
 		return pedido;
 	}
 
-	public void setPedido(List<Pedido> id_pedido) {
-		this.pedido = id_pedido;
+	public void setPedido(Pedido pedido) {
+		this.pedido = pedido;
 	}
 
-	public String getData_criacao() {
-		return criacao;
+	public List<PeriodoAlocacao> getPeriodoAlocacao() {
+		return periodoAlocacao;
 	}
 
-	public void setData_criacao(String criacao) {
-		this.criacao = criacao;
+	public void setPeriodoAlocacao(List<PeriodoAlocacao> periodoAlocacao) {
+		this.periodoAlocacao = periodoAlocacao;
+	}
+
+	public Escala getEscala() {
+		return escala;
+	}
+
+	public void setEscala(Escala escala) {
+		this.escala = escala;
 	}
 
 }

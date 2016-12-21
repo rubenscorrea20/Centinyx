@@ -23,13 +23,12 @@ public class Motoboy {
 	public Motoboy() {
 	}
 
-	public Motoboy(int idMotoboy, List<Alocacao> alocacao, String cnh, String categoriaCNH, String validadeCNH,
-			String criacao, String status_motoboy, String cpfProprietarioMoto, String marcaMoto, String anoMoto,
-			String modeloMoto, String placaMoto, String renavam, String cor, String regiaoAlocacao,
-			Funcionario funcionario, List<Escalas> escala) {
+	public Motoboy(int idMotoboy, String cnh, String categoriaCNH, String validadeCNH, String criacao,
+			String status_motoboy, String cpfProprietarioMoto, String marcaMoto, String anoMoto, String modeloMoto,
+			String placaMoto, String renavam, String cor, String regiaoAlocacao, Funcionario funcionario,
+			List<AlocacaoMotoboy> alocacaoMotoboy) {
 		super();
 		this.idMotoboy = idMotoboy;
-		this.alocacao = alocacao;
 		this.cnh = cnh;
 		this.categoriaCNH = categoriaCNH;
 		this.validadeCNH = validadeCNH;
@@ -44,16 +43,13 @@ public class Motoboy {
 		this.cor = cor;
 		this.regiaoAlocacao = regiaoAlocacao;
 		this.funcionario = funcionario;
-		this.escala = escala;
+		this.alocacaoMotoboy = alocacaoMotoboy;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_motoboy")
 	private int idMotoboy;
-
-	@ManyToMany(mappedBy = "motoboy")
-	private List<Alocacao> alocacao;
 
 	@NotBlank(message = "O campo CNH do motoboy precisa ser preenchido!")
 	@Column(name = "cnh_motoboy", length = 11)
@@ -109,8 +105,8 @@ public class Motoboy {
 	private Funcionario funcionario;
 
 	@ManyToMany
-	@JoinColumn(name = "id_escala")
-	private List<Escalas> escala;
+	@JoinColumn(name = "id_alocacao_motoboy")
+	private List<AlocacaoMotoboy> alocacaoMotoboy;
 
 	public int getIdMotoboy() {
 		return idMotoboy;
@@ -118,10 +114,6 @@ public class Motoboy {
 
 	public void setIdMotoboy(int idMotoboy) {
 		this.idMotoboy = idMotoboy;
-	}
-
-	public List<Alocacao> getAlocacao() {
-		return alocacao;
 	}
 
 	public String getCnh() {
@@ -140,8 +132,20 @@ public class Motoboy {
 		this.categoriaCNH = categoriaCNH;
 	}
 
-	public void setAlocacao(List<Alocacao> alocacao) {
-		this.alocacao = alocacao;
+	public String getValidadeCNH() {
+		return validadeCNH;
+	}
+
+	public void setValidadeCNH(String validadeCNH) {
+		this.validadeCNH = validadeCNH;
+	}
+
+	public String getCriacao() {
+		return criacao;
+	}
+
+	public void setCriacao(String criacao) {
+		this.criacao = criacao;
 	}
 
 	public String getStatus_motoboy() {
@@ -166,6 +170,14 @@ public class Motoboy {
 
 	public void setMarcaMoto(String marcaMoto) {
 		this.marcaMoto = marcaMoto;
+	}
+
+	public String getAnoMoto() {
+		return anoMoto;
+	}
+
+	public void setAnoMoto(String anoMoto) {
+		this.anoMoto = anoMoto;
 	}
 
 	public String getModeloMoto() {
@@ -204,8 +216,8 @@ public class Motoboy {
 		return regiaoAlocacao;
 	}
 
-	public void setRegiaoAlocacao(String regiao_alocacao) {
-		this.regiaoAlocacao = regiao_alocacao;
+	public void setRegiaoAlocacao(String regiaoAlocacao) {
+		this.regiaoAlocacao = regiaoAlocacao;
 	}
 
 	public Funcionario getFuncionario() {
@@ -216,36 +228,12 @@ public class Motoboy {
 		this.funcionario = funcionario;
 	}
 
-	public List<Escalas> getEscala() {
-		return escala;
+	public List<AlocacaoMotoboy> getAlocacaoMotoboy() {
+		return alocacaoMotoboy;
 	}
 
-	public String getValidadeCNH() {
-		return validadeCNH;
-	}
-
-	public void setValidadeCNH(String validadeCNH) {
-		this.validadeCNH = validadeCNH;
-	}
-
-	public String getAnoMoto() {
-		return anoMoto;
-	}
-
-	public void setAnoMoto(String anoMoto) {
-		this.anoMoto = anoMoto;
-	}
-
-	public void setEscala(List<Escalas> escala) {
-		this.escala = escala;
-	}
-
-	public String getCriacao() {
-		return criacao;
-	}
-
-	public void setCriacao(String criacao) {
-		this.criacao = criacao;
+	public void setAlocacaoMotoboy(List<AlocacaoMotoboy> alocacaoMotoboy) {
+		this.alocacaoMotoboy = alocacaoMotoboy;
 	}
 
 }

@@ -1,6 +1,5 @@
 package centinyx.model;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +9,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -19,18 +17,19 @@ import centinyx.enums.TipoPeriodoEnum;
 @Entity
 @Table(name = "periodo_alocacao")
 public class PeriodoAlocacao {
-	
-	public PeriodoAlocacao(){}
 
-	public PeriodoAlocacao(int idPeriodoAlocacao, String criacao, TipoPeriodoEnum tipo_periodo, Date periodoInicio,
-			Date periodoFim, List<Escalas> escala) {
+	public PeriodoAlocacao() {
+	}
+
+	public PeriodoAlocacao(int idPeriodoAlocacao, String criacao, TipoPeriodoEnum tipo_periodo, String periodoInicio,
+			String periodoFim, List<Alocacao> alocacao) {
 		super();
 		this.idPeriodoAlocacao = idPeriodoAlocacao;
 		this.criacao = criacao;
 		this.tipo_periodo = tipo_periodo;
 		this.periodoInicio = periodoInicio;
 		this.periodoFim = periodoFim;
-		this.escala = escala;
+		this.alocacao = alocacao;
 	}
 
 	@Id
@@ -46,14 +45,14 @@ public class PeriodoAlocacao {
 	private TipoPeriodoEnum tipo_periodo;
 
 	@Column(name = "periodo_inicio", length = 4, nullable = false)
-	private Date periodoInicio;
+	private String periodoInicio;
 
 	@Column(name = "periodo_fim", length = 4, nullable = false)
-	private Date periodoFim;
+	private String periodoFim;
 
-	@ManyToMany
-	@JoinColumn(name = "id_escala")
-	private List<Escalas> escala;
+	@ManyToMany(mappedBy = "periodoAlocacao")
+	//@JoinColumn(name = "id_alocacao")
+	private List<Alocacao> alocacao;
 
 	public int getIdPeriodoAlocacao() {
 		return idPeriodoAlocacao;
@@ -61,6 +60,14 @@ public class PeriodoAlocacao {
 
 	public void setIdPeriodoAlocacao(int idPeriodoAlocacao) {
 		this.idPeriodoAlocacao = idPeriodoAlocacao;
+	}
+
+	public String getCriacao() {
+		return criacao;
+	}
+
+	public void setCriacao(String criacao) {
+		this.criacao = criacao;
 	}
 
 	public TipoPeriodoEnum getTipo_periodo() {
@@ -71,36 +78,28 @@ public class PeriodoAlocacao {
 		this.tipo_periodo = tipo_periodo;
 	}
 
-	public Date getPeriodoInicio() {
+	public String getPeriodoInicio() {
 		return periodoInicio;
 	}
 
-	public void setPeriodoInicio(Date periodoInicio) {
+	public void setPeriodoInicio(String periodoInicio) {
 		this.periodoInicio = periodoInicio;
 	}
 
-	public Date getPeriodoFim() {
+	public String getPeriodoFim() {
 		return periodoFim;
 	}
 
-	public void setPeriodoFim(Date periodoFim) {
+	public void setPeriodoFim(String periodoFim) {
 		this.periodoFim = periodoFim;
 	}
 
-	public List<Escalas> getEscala() {
-		return escala;
+	public List<Alocacao> getAlocacao() {
+		return alocacao;
 	}
 
-	public void setEscala(List<Escalas> escala) {
-		this.escala = escala;
-	}
-
-	public String getCriacao() {
-		return criacao;
-	}
-
-	public void setCriacao(String criacao) {
-		this.criacao = criacao;
+	public void setAlocacao(List<Alocacao> alocacao) {
+		this.alocacao = alocacao;
 	}
 
 }

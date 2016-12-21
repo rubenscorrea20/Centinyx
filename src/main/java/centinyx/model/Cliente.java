@@ -1,31 +1,36 @@
 package centinyx.model;
 
 import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+
 import br.com.caelum.stella.bean.validation.CNPJ;
 
 @Entity
 @Table(name = "cliente")
 public class Cliente {
 
-	public Cliente(int idCliente, ContatoCliente contatoCliente, List<Escalas> escala, String criacao,
-			String nomeFantasia, String razaoSocial, String cnpj, String bairro, String logradouro, int numero,
-			String complemento, String cep, String cidade, String ufEndereco, String telefone, String email,
-			String pdd) {
+	public Cliente() {
+	}
+
+	public Cliente(int idCliente, ContatoCliente contatoCliente, String criacao, String nomeFantasia,
+			String razaoSocial, String cnpj, String bairro, String logradouro, int numero, String complemento,
+			String cep, String cidade, String ufEndereco, String telefone, String email, String pdd,
+			List<Pedido> pedido) {
 		super();
 		this.idCliente = idCliente;
 		this.contatoCliente = contatoCliente;
-		this.escala = escala;
 		this.criacao = criacao;
 		this.nomeFantasia = nomeFantasia;
 		this.razaoSocial = razaoSocial;
@@ -40,22 +45,17 @@ public class Cliente {
 		this.telefone = telefone;
 		this.email = email;
 		this.pdd = pdd;
-	}
-
-	public Cliente() {
+		this.pedido = pedido;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private int idCliente;
-	
+
 	@OneToOne(optional = true)
 	@JoinColumn(name = "id_contato_cliente")
 	private ContatoCliente contatoCliente;
-
-	@ManyToMany(mappedBy = "cliente")
-	private List<Escalas> escala;
 
 	@Column(name = "data_criacao", length = 20)
 	private String criacao;
@@ -111,6 +111,10 @@ public class Cliente {
 	@Column(name = "pdd", length = 3)
 	private String pdd;
 
+	@OneToMany(mappedBy = "cliente")
+	// @JoinColumn(name = "id_escala")
+	private List<Pedido> pedido;
+
 	public int getIdCliente() {
 		return idCliente;
 	}
@@ -127,28 +131,28 @@ public class Cliente {
 		this.contatoCliente = contatoCliente;
 	}
 
-	public List<Escalas> getEscala() {
-		return escala;
+	public String getCriacao() {
+		return criacao;
 	}
 
-	public void setEscala(List<Escalas> escala) {
-		this.escala = escala;
+	public void setCriacao(String criacao) {
+		this.criacao = criacao;
 	}
 
 	public String getNomeFantasia() {
 		return nomeFantasia;
 	}
 
-	public void setNomeFantasia(String nome_fantasia) {
-		this.nomeFantasia = nome_fantasia;
+	public void setNomeFantasia(String nomeFantasia) {
+		this.nomeFantasia = nomeFantasia;
 	}
 
 	public String getRazaoSocial() {
 		return razaoSocial;
 	}
 
-	public void setRazaoSocial(String razao_social) {
-		this.razaoSocial = razao_social;
+	public void setRazaoSocial(String razaoSocial) {
+		this.razaoSocial = razaoSocial;
 	}
 
 	public String getCnpj() {
@@ -157,6 +161,14 @@ public class Cliente {
 
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
 	}
 
 	public String getLogradouro() {
@@ -191,6 +203,22 @@ public class Cliente {
 		this.cep = cep;
 	}
 
+	public String getCidade() {
+		return cidade;
+	}
+
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getUfEndereco() {
+		return ufEndereco;
+	}
+
+	public void setUfEndereco(String ufEndereco) {
+		this.ufEndereco = ufEndereco;
+	}
+
 	public String getTelefone() {
 		return telefone;
 	}
@@ -215,36 +243,12 @@ public class Cliente {
 		this.pdd = pdd;
 	}
 
-	public String getCriacao() {
-		return criacao;
+	public List<Pedido> getPedido() {
+		return pedido;
 	}
 
-	public void setCriacao(String criacao) {
-		this.criacao = criacao;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getUfEndereco() {
-		return ufEndereco;
-	}
-
-	public void setUfEndereco(String ufEndereco) {
-		this.ufEndereco = ufEndereco;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
+	public void setPedido(List<Pedido> pedido) {
+		this.pedido = pedido;
 	}
 
 }
