@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -90,6 +92,7 @@ public class Funcionario {
 	private int idFuncionario;
 
 	@OneToOne(optional = false, mappedBy = "funcionario")
+	@Cascade(CascadeType.DELETE)
 	private Motoboy motoboy;
 
 	@OneToMany(mappedBy = "funcionario")

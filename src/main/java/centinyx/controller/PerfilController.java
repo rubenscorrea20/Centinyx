@@ -1,6 +1,7 @@
 package centinyx.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -17,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import centinyx.logic.DataCriacao;
 import centinyx.model.Perfil;
 import centinyx.repository.PerfilRepository;
+import centinyx.repository.UsuarioRepository;
 
 @Controller
 @RequestMapping(value = "/perfil")
@@ -24,6 +26,9 @@ public class PerfilController {
 
 	@Autowired
 	private PerfilRepository perfis;
+	
+	@Autowired
+	private UsuarioRepository usuarios;
 
 	private static final String FORM = "formPerfil";
 
@@ -61,9 +66,15 @@ public class PerfilController {
 		return mv;
 	}
 	
-	// Metodo para deletar os dados do perfil.
+	// Metodo para deletar os dados do perfil e os perfis dos usuarios.
 	@RequestMapping("perfil/deleta/{idPerfil}")
 	public ModelAndView deletar(@PathVariable int idPerfil) {
+		Perfil perfil = perfis.findOne(idPerfil);
+		List<Integer> usuarioLogin = perfil.getUsuario().stream().map(u -> u.getIdUsuario()).collect(Collectors.toList());
+		for (Integer i : usuarioLogin) {
+			usuarios.atualizaPerfilUsuario(i);
+		}
+		perfil.setUsuario(null);
 		perfis.deleteByIdPerfil(idPerfil);
 		return new ModelAndView("redirect:/perfil/lista");
 	}

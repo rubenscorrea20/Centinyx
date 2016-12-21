@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Detalhes do Motoboy</title>
+</head>
+
+<body>
+    <section layout:fragment="conteudo">
+        <div class="container">
+            <div class="panel panel-danger" style="margin-top: 0cm; margin-bottom: 1cm">
+                <div class="panel panel-heading">
+                    <h2 class="panel-title" style="text-align: center"><strong>Dados do Motoboy</strong></h2>
+                </div>
+                <div class="panel-body">
+                    <div class="col-sm-5">
+                        <h5>ID: <label th:text="${motoboy.Idmotoboy}"></label></h5>
+
+                        <h5>Data de criação: <label th:text="${motoboy.criacao}"></label></h5>
+
+                        <h5>Nome do motoboy: <label th:text="${motoboy.funcionario.nome}"></label></h5>
+
+                        <h5>Numero da CNH: <label th:text="${motoboy.cnh}"></label></h5>
+
+                        <h5>Data de validade da CNH: <label th:text="${motoboy.validadeCNH}"></label></h5>
+
+                        <h5>CPF do proprietário da moto: <label th:text="${motoboy.cpfProprietarioMoto}"></label></h5>
+
+                        <h5>Renavam: <label th:text="${motoboy.renavam}"></label></h5>
+
+                        <h5>Placa da moto: <label th:text="${motoboy.placaMoto}"></label></h5>
+                        
+                        <h5>Marca: <label th:text="${motoboy.marcaMoto}"></label></h5>
+                        
+                        <h5>Modelo: <label th:text="${motoboy.modeloMoto}"></label></h5>
+                        
+                        <h5>Cor: <label th:text="${motoboy.cor}"></label></h5>
+
+                        <h5>Ano de fabricação: <label th:text="${motoboy.anoMoto}"></label></h5>
+
+                    </div>
+                </div>
+                <br></br> <a th:href="@{/funcionario/motoboy/lista}" style="float: right; margin-top: 1cm; margin-bottom: 1cm">Voltar para lista de motoboys</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

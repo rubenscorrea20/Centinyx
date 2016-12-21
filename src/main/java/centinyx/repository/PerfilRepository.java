@@ -18,4 +18,5 @@ public interface PerfilRepository extends JpaRepository<Perfil, Integer> {
 	
 	@Transactional
 	int deleteByIdPerfil (int idPerfil);
+	
 }

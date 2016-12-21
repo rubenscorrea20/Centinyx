@@ -79,4 +79,13 @@ public class MotoboyController {
 		mv.addObject("motoboys", motoboy);
 		return mv;
 	}
+
+	// Metodo para editar os dados do Funcionário
+	@RequestMapping("{idMotoboy}")
+	public ModelAndView editar(@PathVariable int idMotoboy) {
+		ModelAndView mv = new ModelAndView(FORM);
+		Motoboy motoboy = motoboys.findOne(idMotoboy);
+		mv.addObject(motoboy);
+		return mv;
+	}
 }
