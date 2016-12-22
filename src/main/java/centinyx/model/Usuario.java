@@ -59,7 +59,7 @@ public class Usuario {
 	private String emailLogin;
 
 	@ManyToOne
-	@JoinColumn(name = "id_perfil", nullable = true, updatable = true, insertable = true)
+	@JoinColumn(name = "id_perfil")
 	private Perfil perfil;
 
 	public String getEmailLogin() {

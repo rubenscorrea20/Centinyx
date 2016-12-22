@@ -71,9 +71,10 @@ public class PerfilController {
 	public ModelAndView deletar(@PathVariable int idPerfil) {
 		Perfil perfil = perfis.findOne(idPerfil);
 		List<Integer> usuarioLogin = perfil.getUsuario().stream().map(u -> u.getIdUsuario()).collect(Collectors.toList());
-		for (Integer i : usuarioLogin) {
+		for(int i = 0; i < usuarioLogin.size()-1; i++){
 			usuarios.atualizaPerfilUsuario(i);
 		}
+		//perfil.setUsuario(usuarios.atualizaPerfilUsuario(usuarioLogin));
 		perfil.setUsuario(null);
 		perfis.deleteByIdPerfil(idPerfil);
 		return new ModelAndView("redirect:/perfil/lista");
