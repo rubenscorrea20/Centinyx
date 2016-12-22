@@ -76,7 +76,7 @@ public class MotoboyController {
 	public ModelAndView visualizar(@PathVariable int idMotoboy) {
 		ModelAndView mv = new ModelAndView("detalhesMotoboy");
 		Motoboy motoboy = motoboys.findOne(idMotoboy);
-		mv.addObject("motoboys", motoboy);
+		mv.addObject("motoboy", motoboy);
 		return mv;
 	}
 

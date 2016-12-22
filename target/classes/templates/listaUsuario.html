@@ -39,7 +39,7 @@
                                 <td th:text="${usuario.criacao}"></td>
                                 <td th:text="${usuario.login}" id="loginUsuario" th:id="loginUsuario"></td>
                                 <td th:text="${usuario.emailLogin}"></td>
-                                <td th:text="${usuario.perfil.tipoAcesso}"></td>
+                                <td th:text="${usuario.perfil != null ? usuario.perfil.tipoAcesso : ''}"></td>
                                 <td><a th:href="@{#}" id="selecionado" th:onclick="'javascript:criaLocalStorageLogin()'">Selecionar</a></td>
                                 <td><a th:href="@{/usuario/{idUsuario}(idUsuario=${usuario.idUsuario})}">Editar</a></td>
                                 <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>

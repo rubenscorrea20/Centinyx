@@ -45,7 +45,7 @@
                                     <div class="form-group">
                                         <label for="sexo">Tipo de Telefone:</label>
                                             <select class="custom-select form-control" name="tipoTelefone" th:field="*{tipoTelefone}" style="width: 210px">
-                                                <option th:each="tipoTelefone : ${T(centinyx.enums.TipoTelefone).values()}"
+                                                <option th:each="tipoTelefone : ${T(centinyx.enums.TipoTelefoneEnum).values()}"
                                                 	th:value="${tipoTelefone}" th:text="${tipoTelefone}">
                                                 </option>
                                             </select>

@@ -1,7 +1,6 @@
 package centinyx.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -17,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import centinyx.logic.DataCriacao;
 import centinyx.model.Perfil;
+import centinyx.model.Usuario;
 import centinyx.repository.PerfilRepository;
 import centinyx.repository.UsuarioRepository;
 
@@ -26,7 +26,7 @@ public class PerfilController {
 
 	@Autowired
 	private PerfilRepository perfis;
-	
+
 	@Autowired
 	private UsuarioRepository usuarios;
 
@@ -38,7 +38,7 @@ public class PerfilController {
 		mv.addObject("perfil", perfil);
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
 	public ModelAndView salva(@Valid Perfil perfil, BindingResult resultado) {
 		if (resultado.hasErrors()) {
@@ -48,7 +48,7 @@ public class PerfilController {
 		perfis.save(perfil);
 		return new ModelAndView("redirect:/perfil/lista");
 	}
-	
+
 	@RequestMapping(value = "/lista")
 	public ModelAndView listar() {
 		List<Perfil> listaperfis = perfis.findAll();
@@ -56,7 +56,7 @@ public class PerfilController {
 		mv.addObject("perfis", listaperfis);
 		return mv;
 	}
-	
+
 	// Metodo para editar os dados do perfil.
 	@RequestMapping("{idPerfil}")
 	public ModelAndView editar(@PathVariable int idPerfil) {
@@ -65,21 +65,25 @@ public class PerfilController {
 		mv.addObject(perfil);
 		return mv;
 	}
-	
+
 	// Metodo para deletar os dados do perfil e os perfis dos usuarios.
 	@RequestMapping("perfil/deleta/{idPerfil}")
 	public ModelAndView deletar(@PathVariable int idPerfil) {
 		Perfil perfil = perfis.findOne(idPerfil);
-		List<Integer> usuarioLogin = perfil.getUsuario().stream().map(u -> u.getIdUsuario()).collect(Collectors.toList());
-		for(int i = 0; i < usuarioLogin.size()-1; i++){
-			usuarios.atualizaPerfilUsuario(i);
+		if (perfil.getUsuario() == null) {
+			perfis.deleteByIdPerfil(idPerfil);
+			return new ModelAndView("redirect:/perfil/lista");
+		} else {
+			List<Usuario> usuario = perfil.getUsuario();
+			for (Usuario u : usuario) {
+				usuarios.atualizaPerfilUsuario(u.getLogin());
+			}
+			perfil.setUsuario(null);
+			perfis.deleteByIdPerfil(idPerfil);
+			return new ModelAndView("redirect:/perfil/lista");
 		}
-		//perfil.setUsuario(usuarios.atualizaPerfilUsuario(usuarioLogin));
-		perfil.setUsuario(null);
-		perfis.deleteByIdPerfil(idPerfil);
-		return new ModelAndView("redirect:/perfil/lista");
 	}
-	
+
 	@RequestMapping(value = "/busca")
 	public ModelAndView buscaPorTipoAcesso(@RequestParam("tipoAcesso") String tipoAcesso, Model model) {
 		if (tipoAcesso.isEmpty()) {

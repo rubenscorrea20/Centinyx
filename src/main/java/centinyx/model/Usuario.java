@@ -1,6 +1,5 @@
 package centinyx.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -41,7 +41,7 @@ public class Usuario {
 	@Column(name = "data_criacao", length = 20)
 	private String criacao;
 
-	@OneToOne(mappedBy = "usuario", cascade = {CascadeType.REMOVE, CascadeType.MERGE})
+	@OneToOne(mappedBy = "usuario")
 	@JoinColumn(name = "id_funcionario")
 	private Funcionario funcionario;
 
@@ -58,7 +58,7 @@ public class Usuario {
 	@Column(name = "email_login", length = 60)
 	private String emailLogin;
 
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "id_perfil")
 	private Perfil perfil;
 

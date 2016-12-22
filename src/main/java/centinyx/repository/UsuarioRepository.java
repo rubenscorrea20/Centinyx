@@ -20,9 +20,9 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 	@Transactional
 	int deleteByIdUsuario (int idUsuario);
 	
-	@Modifying(clearAutomatically = true)
-	@Query(value = "UPDATE Usuario u SET u.perfil = null WHERE u.idUsuario = ?1", nativeQuery = true)
 	@Transactional
-	public List<Usuario> atualizaPerfilUsuario(int idUsuario);
+	@Modifying(clearAutomatically = true)
+	@Query(value = "UPDATE Usuario u SET u.perfil = null WHERE u.login = ?1")
+	public void atualizaPerfilUsuario(String login);
 	
 }

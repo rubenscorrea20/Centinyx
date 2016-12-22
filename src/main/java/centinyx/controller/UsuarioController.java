@@ -1,7 +1,9 @@
 package centinyx.controller;
 
 import java.util.List;
+
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import centinyx.logic.DataCriacao;
+import centinyx.model.Funcionario;
 import centinyx.model.Usuario;
+import centinyx.repository.FuncionarioRepository;
 import centinyx.repository.PerfilRepository;
 import centinyx.repository.UsuarioRepository;
 
@@ -25,6 +30,9 @@ public class UsuarioController {
 
 	@Autowired
 	private PerfilRepository perfis;
+
+	@Autowired
+	private FuncionarioRepository funcionarios;
 
 	private static final String FORM = "formUsuario";
 
@@ -63,12 +71,21 @@ public class UsuarioController {
 		mv.addObject(usuario);
 		return mv;
 	}
-	
-	// Metodo para deletar os dados do usuario
+
+	// Metodo para deletar os dados do usuario e o usuario do funcionario.
 	@RequestMapping("usuario/deleta/{idUsuario}")
 	public ModelAndView deletar(@PathVariable int idUsuario) {
-		usuarios.deleteByIdUsuario(idUsuario);
-		return new ModelAndView("redirect:/usuario/lista");
+		Usuario usuario = usuarios.findOne(idUsuario);
+		if (usuario.getFuncionario() == null) {
+			usuarios.deleteByIdUsuario(idUsuario);
+			return new ModelAndView("redirect:/usuario/lista");
+		} else {
+			Funcionario funcionario = usuario.getFuncionario();
+			funcionarios.atualizaUsuarioFuncionario(funcionario.getNome());
+			usuario.setFuncionario(null);
+			usuarios.deleteByIdUsuario(idUsuario);
+			return new ModelAndView("redirect:/usuario/lista");
+		}
 	}
 
 	@RequestMapping(value = "/busca")

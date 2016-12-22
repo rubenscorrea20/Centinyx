@@ -20,5 +20,19 @@ $(document).ready(function(){
 	});
 })
 
+$(document).ready(function(){
+	$('#deletaContato').on('click', function(){
+		var idContatoCliente = document.getElementById("idContatoCliente").innerHTML;
+		location.replace("contatocliente/deleta/" + idContatoCliente);
+	});
+})
+
+$(document).ready(function(){
+	$('#deletaCliente').on('click', function(){
+		var idCliente = document.getElementById("idCliente").innerHTML;
+		location.replace("cliente/deleta/" + idCliente);
+	});
+})
+
 
 

@@ -100,4 +100,20 @@ public class ClienteController {
 		}
 	}
 
+	// Metodo para editar os dados do cliente
+	@RequestMapping("{idCliente}")
+	public ModelAndView editar(@PathVariable int idCliente) {
+		ModelAndView mv = new ModelAndView(FORM);
+		Cliente cliente = clientes.findOne(idCliente);
+		mv.addObject(cliente);
+		return mv;
+	}
+
+	// Metodo para deletar os dados do cliente
+	@RequestMapping("funcionario/deleta/{idCliente}")
+	public ModelAndView deletar(@PathVariable int idCliente) {
+		clientes.deleteByIdCliente(idCliente);
+		return new ModelAndView("redirect:/cliente/lista");
+	}
+
 }
