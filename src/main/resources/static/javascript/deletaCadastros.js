@@ -2,6 +2,7 @@ $(document).ready(function(){
 	$('#deletaFuncionario').on('click', function(){
 		var idFuncionario = document.getElementById("idFuncionario").innerHTML;
 		location.replace("funcionario/deleta/" + idFuncionario);
+		delete window.localStorage["nome"]
 	});
 })
 
@@ -17,6 +18,7 @@ $(document).ready(function(){
 	$('#deletaPerfil').on('click', function(){
 		var idPerfil = document.getElementById("idPerfil").innerHTML;
 		location.replace("perfil/deleta/" + idPerfil);
+		delete window.localStorage["tipoAcesso"]
 	});
 })
 

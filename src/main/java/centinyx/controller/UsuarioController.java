@@ -43,7 +43,7 @@ public class UsuarioController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("tipoAcesso") String tipoAcesso, @Valid Usuario usuario,
 			BindingResult resultado) {
 		if (resultado.hasErrors()) {
@@ -53,6 +53,13 @@ public class UsuarioController {
 		usuario.setCriacao(DataCriacao.geraDataHorario());
 		usuarios.save(usuario);
 		return new ModelAndView("redirect:/usuario/lista");
+	}
+	
+	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
+	public ModelAndView cadastraPerfil(Usuario usuario) {
+		ModelAndView mv = new ModelAndView(FORM);
+		mv.addObject("usuario", usuario);
+		return mv;
 	}
 
 	@RequestMapping(value = "/lista")

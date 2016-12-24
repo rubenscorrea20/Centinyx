@@ -39,7 +39,7 @@ public class ClienteController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("nomeContato") String nomeContato, @Valid Cliente cliente,
 			BindingResult resultado) {
 		if (resultado.hasErrors()) {
@@ -49,6 +49,13 @@ public class ClienteController {
 		cliente.setContatoCliente(contatos.encontraContatoCliente(nomeContato));
 		clientes.save(cliente);
 		return new ModelAndView("redirect:/cliente/lista");
+	}
+	
+	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
+	public ModelAndView cadastraContato(Cliente cliente) {
+		ModelAndView mv = new ModelAndView(FORM);
+		mv.addObject("cliente", cliente);
+		return mv;
 	}
 
 	@RequestMapping(value = "/buscacontato")

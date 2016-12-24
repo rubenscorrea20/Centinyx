@@ -38,7 +38,7 @@ public class FuncionarioController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
+	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("login") String login, @Valid Funcionario funcionario,
 			BindingResult resultado) {
 		if (resultado.hasErrors()) {
@@ -54,6 +54,13 @@ public class FuncionarioController {
 		funcionario.setCriacao(DataCriacao.geraDataHorario());
 		funcionarios.save(funcionario);
 		return new ModelAndView("redirect:/funcionario/lista");
+	}
+	
+	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
+	public ModelAndView cadastraUsuario(Funcionario funcionario) {
+		ModelAndView mv = new ModelAndView(FORM);
+		mv.addObject("funcionario", funcionario);
+		return mv;
 	}
 
 	@RequestMapping(value = "/lista")

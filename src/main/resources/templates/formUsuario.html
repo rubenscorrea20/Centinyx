@@ -6,7 +6,7 @@
     <title>Cadastro de Usuarios:</title>
 </head>
 
-<body onload="setaPerfil();">
+<body onstorage="setaPerfil()">
     <section layout:fragment="conteudo">
         <div class="container">
             <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
@@ -14,7 +14,7 @@
                     <h2 class="panel-title" style="text-align: center"><strong>Cadastro de Usuários</strong></h2>
                 </div>
                 <div class="panel-body">
-                    <form id="formusuario" th:object="${usuario}" th:action="@{/usuario/cadastra}" method="POST" class="form-group">
+                    <form id="formusuario" th:object="${usuario}" th:action="@{/usuario/salva}" method="POST" class="form-group">
                         <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
                             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -31,6 +31,7 @@
                                 <legend>Dados de Acesso</legend>
                                 <div class="col-sm-5">
                                     <div class="form-group" th:classappend="${#fields.hasErrors('login')} ? has-error">
+                                    	<input type="hidden" th:field="*{idUsuario}" />
                                         <label for="login">Login do Usuário*:</label>
                                         <input id="login" type="text" class="form-control" th:field="*{login}" style="width: 250px"></input>
                                     </div>
