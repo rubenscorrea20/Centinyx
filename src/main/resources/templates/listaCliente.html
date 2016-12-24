@@ -72,6 +72,29 @@
                         </tbody>
                      </table>
                   </div>
+                  
+                                      <!-- Div da paginação -->
+                    <div class="col-sm-12 text-center">
+                    	<nav>
+                    		<ul class="pagination pagination-sm">
+                    			<li class="disabled">
+                    				<a href="#"><span>&laquo;</span></a>
+                    			</li>
+                    			
+                    			<th:block th:each="p : ${#numbers.sequence(1, totalPaginas)}">
+                    			
+                    			<li>
+                    				<a th:href="|?page=${p - 1}|" th:text="${p}"></a>
+                    			</li>
+                    			
+                    			</th:block>
+                    			<li class="disabled">
+                    				<a href="#"><span>&raquo;</span></a>
+                    			</li>
+                    		</ul>
+                    	</nav>
+                    </div>
+                    
                   <br></br> 
                   <a th:href="@{#}" id="exporta" style="float: right">Exportar resultados para Excel</a>
                   <a th:href="@{/cliente/cadastra}">Voltar para cadastro de clientes</a>

@@ -1,10 +1,11 @@
 package centinyx.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -63,11 +64,17 @@ public class FuncionarioController {
 		return mv;
 	}
 
+	// Pageable objeto para paginação, e @pageableDefault para delimitar quantidade de registros por pagina
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar() {
-		List<Funcionario> listaFuncionario = funcionarios.findAll();
+	public ModelAndView listar(@PageableDefault(size = 2)Pageable pageable) {
+		Page<Funcionario> listaFuncionario = funcionarios.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaFuncionario");
 		mv.addObject("funcionarios", listaFuncionario);
+		
+		int numeroPaginas = listaFuncionario.getTotalPages();
+		
+		mv.addObject("totalPaginas", numeroPaginas);
+		
 		return mv;
 	}
 
@@ -99,7 +106,7 @@ public class FuncionarioController {
 	@RequestMapping(value = "/busca")
 	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model) {
 		if (nome.isEmpty()) {
-			return listar();
+			return listar(null);
 		} else {
 			ModelAndView m = new ModelAndView("listaFuncionario");
 			model.addAttribute("funcionarios", funcionarios.findByNome(nome));
