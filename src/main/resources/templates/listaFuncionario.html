@@ -70,21 +70,17 @@
                             </tr>
                         </tbody>
                     </table>
-                    
-                                        <!-- Div da paginação -->
-                    <div class="col-sm-12 text-center">
+                    <!-- Div da paginação -->
+                    <div class="col-sm-12 text-center" th:if="${totalPaginas != 0}">
                     	<nav>
                     		<ul class="pagination pagination-sm">
-                    			<li class="disabled">
-                    				<a href="#"><span>&laquo;</span></a>
+                    			<li class="enabled">
+                    				<a th:href="|?page=${p}|"><span>&laquo;</span></a>
                     			</li>
-                    			
                     			<th:block th:each="p : ${#numbers.sequence(1, totalPaginas)}">
-                    			
                     			<li>
                     				<a th:href="|?page=${p - 1}|" th:text="${p}"></a>
                     			</li>
-                    			
                     			</th:block>
                     			<li class="disabled">
                     				<a href="#"><span>&raquo;</span></a>
@@ -92,7 +88,6 @@
                     		</ul>
                     	</nav>
                     </div>
- 
                     <br></br>
                     <a th:href="@{#}" id="exporta" style="float: right">Exportar resultados para Excel</a>
                     <a th:href="@{/funcionario/cadastra}" style="float: left">Voltar para cadastro de funcionarios</a>

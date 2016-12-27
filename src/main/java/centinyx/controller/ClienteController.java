@@ -33,7 +33,7 @@ public class ClienteController {
 	private ContatoClienteRepository contatos;
 
 	private static final String FORM = "formCliente";
-	
+
 	boolean cnpjDuplicado = false;
 
 	@RequestMapping(value = "/cadastra")
@@ -46,6 +46,8 @@ public class ClienteController {
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("nomeContato") String nomeContato, @Valid Cliente cliente,
 			BindingResult resultado) {
+		cliente.setCriacao(DataCriacao.geraDataHorario());
+		cliente.setContatoCliente(contatos.encontraContatoCliente(nomeContato));
 		try {
 			clientes.save(cliente);
 		} catch (Exception e) {
@@ -60,12 +62,9 @@ public class ClienteController {
 		if (resultado.hasErrors()) {
 			return cadastra(cliente);
 		}
-		cliente.setCriacao(DataCriacao.geraDataHorario());
-		cliente.setContatoCliente(contatos.encontraContatoCliente(nomeContato));
-		clientes.save(cliente);
 		return new ModelAndView("redirect:/cliente/lista");
 	}
-	
+
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
 	public ModelAndView cadastraContato(Cliente cliente) {
 		ModelAndView mv = new ModelAndView(FORM);
@@ -86,11 +85,11 @@ public class ClienteController {
 		Page<Cliente> listaCliente = clientes.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaCliente");
 		mv.addObject("clientes", listaCliente);
-		
+
 		int numeroPaginas = listaCliente.getTotalPages();
-		
+
 		mv.addObject("totalPaginas", numeroPaginas);
-		
+
 		return mv;
 	}
 

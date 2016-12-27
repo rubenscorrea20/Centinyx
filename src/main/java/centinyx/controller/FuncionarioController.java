@@ -44,6 +44,8 @@ public class FuncionarioController {
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("login") String login, @Valid Funcionario funcionario,
 			BindingResult resultado) {
+		funcionario.setUsuario(usuarios.encontraLoginUsuario(login));
+		funcionario.setCriacao(DataCriacao.geraDataHorario());
 		try {
 			funcionarios.save(funcionario);
 		} catch (Exception e) {
@@ -64,8 +66,6 @@ public class FuncionarioController {
 			funcionarios.save(funcionario);
 			return new ModelAndView("redirect:/funcionario/motoboy/cadastra");
 		}
-		funcionario.setUsuario(usuarios.encontraLoginUsuario(login));
-		funcionario.setCriacao(DataCriacao.geraDataHorario());
 		return new ModelAndView("redirect:/funcionario/lista");
 	}
 
@@ -83,11 +83,8 @@ public class FuncionarioController {
 		Page<Funcionario> listaFuncionario = funcionarios.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaFuncionario");
 		mv.addObject("funcionarios", listaFuncionario);
-
 		int numeroPaginas = listaFuncionario.getTotalPages();
-
 		mv.addObject("totalPaginas", numeroPaginas);
-
 		return mv;
 	}
 
