@@ -70,8 +70,10 @@ public class ContatoClienteController {
 			contatos.deleteByIdContatoCliente(idContatoCliente);
 			return new ModelAndView("redirect:/perfil/lista");
 		} else {
-			Cliente cliente = contato.getCliente();
-			clientes.atualizaContatoCliente(cliente.getNomeFantasia());
+			List<Cliente> cliente = contato.getCliente();
+			for (Cliente c : cliente) {
+				clientes.atualizaContatoCliente(c.getNomeFantasia());
+			}
 			contato.setCliente(null);
 			contatos.deleteByIdContatoCliente(idContatoCliente);
 			return new ModelAndView("redirect:/contatocliente/lista");

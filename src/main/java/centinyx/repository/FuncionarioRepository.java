@@ -18,6 +18,9 @@ public interface FuncionarioRepository extends JpaRepository<Funcionario, Intege
 	@Query("SELECT f FROM Funcionario f WHERE f.nome = :nome")
 	public Funcionario encontraNomeFuncionario(@Param("nome") String nome);
 	
+	@Query("SELECT f FROM Funcionario f WHERE f.cpf = :cpf")
+	public Funcionario encontraCPFexistente(@Param("cpf") String cpf);
+	
 	@Transactional
 	int deleteByIdFuncionario (int idFuncionario);
 	

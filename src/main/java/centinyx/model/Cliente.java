@@ -7,9 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
@@ -55,9 +54,9 @@ public class Cliente {
 	@Column(name = "id_cliente")
 	private int idCliente;
 
-	@OneToOne(optional = true)
+	@ManyToOne(optional = true)
 	@Cascade(CascadeType.DELETE)
-	@JoinColumn(name = "id_contato_cliente")
+	//@JoinColumn(name = "id_contato_cliente")
 	private ContatoCliente contatoCliente;
 
 	@Column(name = "data_criacao", length = 20)

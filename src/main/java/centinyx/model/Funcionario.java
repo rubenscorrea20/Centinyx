@@ -1,7 +1,6 @@
 package centinyx.model;
 
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +21,6 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.caelum.stella.bean.validation.CPF;
-import centinyx.logic.CPFDuplicated;
 
 @Entity
 @Table(name = "funcionario")
@@ -137,7 +135,6 @@ public class Funcionario {
 	@NotBlank(message = "O campo CPF precisa ser preenchido!")
 	@CPF(message = "O CPF digitado é inválido!")
 	@Column(name = "cpf", length = 14, unique = true)
-	@CPFDuplicated(message = "Este CPF já existe e portanto não pode ser duplicado!")
 	private String cpf;
 
 	@NotBlank(message = "O campo bairro precisa ser preenchido!")

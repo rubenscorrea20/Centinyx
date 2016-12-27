@@ -33,6 +33,8 @@ public class ClienteController {
 	private ContatoClienteRepository contatos;
 
 	private static final String FORM = "formCliente";
+	
+	boolean cnpjDuplicado = false;
 
 	@RequestMapping(value = "/cadastra")
 	public ModelAndView cadastra(Cliente cliente) {
@@ -44,6 +46,17 @@ public class ClienteController {
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("nomeContato") String nomeContato, @Valid Cliente cliente,
 			BindingResult resultado) {
+		try {
+			clientes.save(cliente);
+		} catch (Exception e) {
+			if (clientes.encontraCNPJexistente(cliente.getCnpj()) != null) {
+				String m = "Já há um cadastro com este CNPJ!";
+				System.out.println(m);
+				cnpjDuplicado = true;
+				ModelAndView mv = new ModelAndView("formCliente", "mensagem", m);
+				return mv;
+			}
+		}
 		if (resultado.hasErrors()) {
 			return cadastra(cliente);
 		}
@@ -124,7 +137,7 @@ public class ClienteController {
 	}
 
 	// Metodo para deletar os dados do cliente
-	@RequestMapping("funcionario/deleta/{idCliente}")
+	@RequestMapping("cliente/deleta/{idCliente}")
 	public ModelAndView deletar(@PathVariable int idCliente) {
 		clientes.deleteByIdCliente(idCliente);
 		return new ModelAndView("redirect:/cliente/lista");

@@ -33,7 +33,6 @@
                                 <th>Email</th>
                                 <th>Telefone</th>
                                 <th>Tipo de Telefone</th>
-                                <th>Cliente</th>
                                 <th colspan="3">Opções</th>
                             </tr>
                         </thead>
@@ -45,7 +44,6 @@
                                 <td th:text="${contatoCliente.email}"></td>
                                 <td th:text="${contatoCliente.telefone}"></td>
                                 <td th:text="${contatoCliente.tipoTelefone}"></td>
-                                <td th:text="${contatoCliente.cliente != null ?  contatoCliente.cliente.nomeFantasia : ''}"></td>
                                 <td><a th:href="@{#}" id="selecionadoContato" th:onclick="'javascript:criaLocalStorageContatoCliente()'">Selecionar</a></td>
                                 <td><a th:href="@{/contatocliente/{idContatoCliente}(idContatoCliente=${contatoCliente.idContatoCliente})}">Editar</a></td>
                                 <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>

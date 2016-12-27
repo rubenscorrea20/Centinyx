@@ -1,5 +1,7 @@
 package centinyx.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,8 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.Email;
@@ -22,7 +23,7 @@ public class ContatoCliente {
 	public ContatoCliente(){}
 
 	public ContatoCliente(int idContatoCliente, String criacao, String email, String nomeContato, String telefone,
-			TipoTelefoneEnum tipoTelefone, Cliente cliente) {
+			TipoTelefoneEnum tipoTelefone, List<Cliente> cliente) {
 		super();
 		this.idContatoCliente = idContatoCliente;
 		this.criacao = criacao;
@@ -55,9 +56,9 @@ public class ContatoCliente {
 	@Enumerated(EnumType.STRING)
 	private TipoTelefoneEnum tipoTelefone;
 
-	@OneToOne(mappedBy = "contatoCliente")
-	@JoinColumn(name = "id_cliente")
-	private Cliente cliente;
+	@OneToMany(mappedBy = "contatoCliente")
+	//@JoinColumn(name = "id_cliente")
+	private List<Cliente> cliente;
 
 	public int getIdContatoCliente() {
 		return idContatoCliente;
@@ -83,11 +84,11 @@ public class ContatoCliente {
 		this.email = email;
 	}
 
-	public Cliente getCliente() {
+	public List<Cliente> getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
+	public void setCliente(List<Cliente> cliente) {
 		this.cliente = cliente;
 	}
 

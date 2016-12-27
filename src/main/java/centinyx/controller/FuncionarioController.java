@@ -32,6 +32,8 @@ public class FuncionarioController {
 
 	private static final String FORM = "formFuncionario";
 
+	boolean cpfDuplicado = false;
+
 	@RequestMapping(value = "/cadastra")
 	public ModelAndView cadastra(Funcionario funcionario) {
 		ModelAndView mv = new ModelAndView(FORM);
@@ -42,6 +44,17 @@ public class FuncionarioController {
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
 	public ModelAndView salva(@RequestParam("login") String login, @Valid Funcionario funcionario,
 			BindingResult resultado) {
+		try {
+			funcionarios.save(funcionario);
+		} catch (Exception e) {
+			if (funcionarios.encontraCPFexistente(funcionario.getCpf()) != null) {
+				String m = "Já há um cadastro com este CPF!";
+				System.out.println(m);
+				cpfDuplicado = true;
+				ModelAndView mv = new ModelAndView("formFuncionario", "mensagem", m);
+				return mv;
+			}
+		}
 		if (resultado.hasErrors()) {
 			return cadastra(funcionario);
 		}
@@ -53,10 +66,9 @@ public class FuncionarioController {
 		}
 		funcionario.setUsuario(usuarios.encontraLoginUsuario(login));
 		funcionario.setCriacao(DataCriacao.geraDataHorario());
-		funcionarios.save(funcionario);
 		return new ModelAndView("redirect:/funcionario/lista");
 	}
-	
+
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
 	public ModelAndView cadastraUsuario(Funcionario funcionario) {
 		ModelAndView mv = new ModelAndView(FORM);
@@ -64,17 +76,18 @@ public class FuncionarioController {
 		return mv;
 	}
 
-	// Pageable objeto para paginação, e @pageableDefault para delimitar quantidade de registros por pagina
+	// Pageable objeto para paginação, e @pageableDefault para delimitar
+	// quantidade de registros por pagina
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar(@PageableDefault(size = 2)Pageable pageable) {
+	public ModelAndView listar(@PageableDefault(size = 2) Pageable pageable) {
 		Page<Funcionario> listaFuncionario = funcionarios.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaFuncionario");
 		mv.addObject("funcionarios", listaFuncionario);
-		
+
 		int numeroPaginas = listaFuncionario.getTotalPages();
-		
+
 		mv.addObject("totalPaginas", numeroPaginas);
-		
+
 		return mv;
 	}
 
@@ -95,7 +108,7 @@ public class FuncionarioController {
 		mv.addObject(funcionario);
 		return mv;
 	}
-	
+
 	// Metodo para deletar os dados do Funcionário
 	@RequestMapping("funcionario/deleta/{idFuncionario}")
 	public ModelAndView deletar(@PathVariable int idFuncionario) {
