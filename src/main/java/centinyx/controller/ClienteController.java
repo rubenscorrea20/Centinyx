@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -81,7 +82,7 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar(Pageable pageable) {
+	public ModelAndView listar(@PageableDefault(size = 1) Pageable pageable) {
 		Page<Cliente> listaCliente = clientes.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaCliente");
 		mv.addObject("clientes", listaCliente);
@@ -103,14 +104,17 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value = "/busca")
-	public ModelAndView buscaPorNomeFantasia(@RequestParam("nomeFantasia") String nomeFantasia, Model model) {
+	public ModelAndView buscaPorNomeFantasia(@RequestParam("nomeFantasia") String nomeFantasia, Model model, Pageable pageable) {
 		if (nomeFantasia.isEmpty()) {
-			return listar(null);
+			return new ModelAndView("redirect:/cliente/lista");
 		} else {
-			ModelAndView m = new ModelAndView("listaCliente");
-			model.addAttribute("clientes", clientes.findByNomeFantasia(nomeFantasia));
+			Page<Cliente> clientePorNome = clientes.findByNomeFantasiaContaining(nomeFantasia, pageable);
+			ModelAndView mv = new ModelAndView("listaCliente");
+			model.addAttribute("clientes", clientePorNome);
 			model.addAttribute("nomeFantasia", nomeFantasia);
-			return m;
+			int numeroPaginas = clientePorNome.getTotalPages();
+			mv.addObject("totalPaginas", numeroPaginas);
+			return mv;
 		}
 	}
 

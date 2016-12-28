@@ -116,9 +116,9 @@ public class FuncionarioController {
 	@RequestMapping(value = "/busca")
 	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model, Pageable pageable) {
 		if (nome.isEmpty()) {
-			return listar(null);
+			return new ModelAndView("redirect:/funcionario/lista");
 		} else {
-			Page<Funcionario> funcionarioPorNome = funcionarios.findByNome(nome, pageable);
+			Page<Funcionario> funcionarioPorNome = funcionarios.findByNomeContaining(nome, pageable);
 			ModelAndView m = new ModelAndView("listaFuncionario");
 			model.addAttribute("funcionarios", funcionarioPorNome);
 			model.addAttribute("nomeCompleto", nome);

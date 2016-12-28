@@ -14,7 +14,7 @@ import centinyx.model.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>  {
 	
-	Page<Funcionario> findByNome(String funcionario, Pageable page);
+	Page<Funcionario> findByNomeContaining(String funcionario, Pageable page);
 	
 	List<Funcionario> findByIdFuncionario(int id);
 	

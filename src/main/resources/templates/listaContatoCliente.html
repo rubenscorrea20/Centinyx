@@ -13,9 +13,9 @@
                 <div class="panel panel-heading">
                     <h2 class="panel-title" style="text-align: center"><strong>Contatos Cadastrados</strong></h2>
                 </div>
-                <form class="form-inline" style="text-align: center" th:action="@{/contatocliente/busca}" th:object="${contatoCliente}">
+                <form class="form-inline" style="text-align: center" th:action="@{/contatocliente/busca}" th:object="${contato}">
                     <div class="input-group">
-                        <input class="form-control" type="text" style="width: 350px" name="contatoCliente" placeholder="Pesquisar contato por cliente"></input>
+                        <input class="form-control" type="text" style="width: 350px" name="nomeContato" placeholder="Pesquisar contato por cliente"></input>
                         <span class="input-group-btn">
                         <button type="submit" class="btn btn-default">
                         <span class="glyphicon glyphicon-search"></span>
@@ -70,6 +70,26 @@
                             </tr>
                         </tbody>
                     </table>
+                    
+                    <!-- Div da paginação -->
+                    <div class="col-sm-12 text-center" th:if="${totalPaginas != 0}">
+                    	<nav>
+                    		<ul class="pagination pagination-sm">
+                    			<li class="enabled">
+                    				<a th:href="|lista?page=${0}|"><span>&laquo;</span></a>                			
+                    			</li>
+                    			<th:block th:each="p : ${#numbers.sequence(1, totalPaginas)}">
+                    			<li>
+                    				<a th:href="|lista?page=${p - 1}|" th:text="${p}"></a>
+                    			</li>
+                    			</th:block>
+                    			<li class="enabled">
+                    				<a th:href="|lista?page=${totalPaginas -1}|"><span>&raquo;</span></a>
+                    			</li>
+                    		</ul>
+                    	</nav>
+                    </div>
+                    
                     <br></br>
                     <a th:href="@{#}" id="exporta" style="float: right">Exportar resultados para Excel</a>
                     <a th:href="@{/contatocliente/cadastra}" style="float: left">Ir para cadastro de contatos</a>

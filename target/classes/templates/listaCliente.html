@@ -74,19 +74,19 @@
                   </div>
                   
                                       <!-- Div da paginação -->
-                    <div class="col-sm-12 text-center">
+                    <div class="col-sm-12 text-center" th:if="${totalPaginas != 0}">
                     	<nav>
                     		<ul class="pagination pagination-sm">
-                    			<li class="disabled">
-                    				<a href="#"><span>&laquo;</span></a>
+                    			<li class="enabled">
+                    				<a th:href="|lista?page=${0}|"><span>&laquo;</span></a>                			
                     			</li>
                     			<th:block th:each="p : ${#numbers.sequence(1, totalPaginas)}">
                     			<li>
                     				<a th:href="|?page=${p - 1}|" th:text="${p}"></a>
                     			</li>
                     			</th:block>
-                    			<li class="disabled">
-                    				<a href="#"><span>&raquo;</span></a>
+                    			<li class="enabled">
+                    				<a th:href="|lista?page=${totalPaginas -1}|"><span>&raquo;</span></a>
                     			</li>
                     		</ul>
                     	</nav>
