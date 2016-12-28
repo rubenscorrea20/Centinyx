@@ -79,7 +79,7 @@ public class FuncionarioController {
 	// Pageable objeto para paginação, e @pageableDefault para delimitar
 	// quantidade de registros por pagina
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar(@PageableDefault(size = 2) Pageable pageable) {
+	public ModelAndView listar(@PageableDefault(size = 1) Pageable pageable) {
 		Page<Funcionario> listaFuncionario = funcionarios.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaFuncionario");
 		mv.addObject("funcionarios", listaFuncionario);
@@ -114,13 +114,16 @@ public class FuncionarioController {
 	}
 
 	@RequestMapping(value = "/busca")
-	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model) {
+	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model, Pageable pageable) {
 		if (nome.isEmpty()) {
 			return listar(null);
 		} else {
+			Page<Funcionario> funcionarioPorNome = funcionarios.findByNome(nome, pageable);
 			ModelAndView m = new ModelAndView("listaFuncionario");
-			model.addAttribute("funcionarios", funcionarios.findByNome(nome));
+			model.addAttribute("funcionarios", funcionarioPorNome);
 			model.addAttribute("nomeCompleto", nome);
+			int numeroPaginas = funcionarioPorNome.getTotalPages();
+			m.addObject("totalPaginas", numeroPaginas);
 			return m;
 		}
 	}

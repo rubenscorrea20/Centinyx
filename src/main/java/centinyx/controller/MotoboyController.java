@@ -65,7 +65,7 @@ public class MotoboyController {
 			return listar();
 		} else {
 			ModelAndView m = new ModelAndView("listaFuncionario");
-			model.addAttribute("motoboys", funcionarios.findByNome(nome));
+			//model.addAttribute("motoboys", funcionarios.findByNome(nome));
 			model.addAttribute("nomeCompleto", nome);
 			return m;
 		}

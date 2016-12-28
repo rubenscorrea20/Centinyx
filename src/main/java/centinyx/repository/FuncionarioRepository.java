@@ -1,6 +1,9 @@
 package centinyx.repository;
 
 import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +14,7 @@ import centinyx.model.Funcionario;
 
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>  {
 	
-	List<Funcionario> findByNome(String funcionario);
+	Page<Funcionario> findByNome(String funcionario, Pageable page);
 	
 	List<Funcionario> findByIdFuncionario(int id);
 	

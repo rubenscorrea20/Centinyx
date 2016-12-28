@@ -75,15 +75,15 @@
                     	<nav>
                     		<ul class="pagination pagination-sm">
                     			<li class="enabled">
-                    				<a th:href="|?page=${p}|"><span>&laquo;</span></a>
+                    				<a th:href="|lista?page=${0}|"><span>&laquo;</span></a>                			
                     			</li>
                     			<th:block th:each="p : ${#numbers.sequence(1, totalPaginas)}">
                     			<li>
-                    				<a th:href="|?page=${p - 1}|" th:text="${p}"></a>
+                    				<a th:href="|lista?page=${p - 1}|" th:text="${p}"></a>
                     			</li>
                     			</th:block>
-                    			<li class="disabled">
-                    				<a href="#"><span>&raquo;</span></a>
+                    			<li class="enabled">
+                    				<a href="|lista?page=${totalPaginas}|"><span>&raquo;</span></a>
                     			</li>
                     		</ul>
                     	</nav>
