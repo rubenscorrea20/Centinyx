@@ -11,10 +11,10 @@ import centinyx.model.ContatoCliente;
 
 public interface ContatoClienteRepository extends JpaRepository<ContatoCliente, Integer> {
 	
-	Page<ContatoCliente> findByNomeContatoContaining(String nomeContato, Pageable page);
+	Page<ContatoCliente> findByNomeContaining(String nome, Pageable p);
 	
-	@Query("SELECT c FROM ContatoCliente c WHERE c.nomeContato = :nomeContato")
-	public ContatoCliente encontraContatoCliente(@Param("nomeContato") String nomeContato);
+	@Query("SELECT c FROM ContatoCliente c WHERE c.nome = :nome")
+	public ContatoCliente encontraContatoCliente(@Param("nome") String nome);
 	
 	@Transactional
 	int deleteByIdContatoCliente (int idContatoCliente);

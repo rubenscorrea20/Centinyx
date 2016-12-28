@@ -13,9 +13,9 @@
                 <div class="panel panel-heading">
                     <h2 class="panel-title" style="text-align: center"><strong>Contatos Cadastrados</strong></h2>
                 </div>
-                <form class="form-inline" style="text-align: center" th:action="@{/contatocliente/busca}" th:object="${contato}">
+                <form class="form-inline" style="text-align: center" th:action="@{/contatocliente/busca}" th:object="${contatoCliente}">
                     <div class="input-group">
-                        <input class="form-control" type="text" style="width: 350px" name="nomeContato" placeholder="Pesquisar contato por cliente"></input>
+                        <input class="form-control" type="text" style="width: 350px" name="nomeContato" placeholder="Pesquisar contato por nome"></input>
                         <span class="input-group-btn">
                         <button type="submit" class="btn btn-default">
                         <span class="glyphicon glyphicon-search"></span>
@@ -40,7 +40,7 @@
                             <tr th:each="contatoCliente : ${contatoClientes}">
                                 <td th:text="${contatoCliente.idContatoCliente}" id="idContatoCliente" th:id="idContatoCliente"></td>
                                 <td th:text="${contatoCliente.criacao}"></td>
-                                <td th:text="${contatoCliente.nomeContato}" id="nomeContato" th:id="nomeContato"></td>
+                                <td th:text="${contatoCliente.nome}" id="nome"></td>
                                 <td th:text="${contatoCliente.email}"></td>
                                 <td th:text="${contatoCliente.telefone}"></td>
                                 <td th:text="${contatoCliente.tipoTelefone}"></td>

@@ -38,7 +38,7 @@
                                 <td th:text="${perfil.criacao}"></td>
                                 <td th:text="${perfil.tipoAcesso}" id="tipoAcesso" th:id="tipoAcesso"></td>
                                 <td th:text="${perfil.descricao}"></td>
-                                <td><a th:href="@{#}" id="selecionadoPerfil" th:onclick="'javascript:criaLocalStorageTipoAcesso()'">Selecionar</a></td>
+                                <td><a th:href="@{#}" id="selecionadoPerfil" th:onclick="'javascript:criaLocalStoragePerfil()'">Selecionar</a></td>
                                 <td><a th:href="@{/perfil/{idPerfil}(idPerfil=${perfil.idPerfil})}">Editar</a></td>
                                 <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
                                     <!-- Modal -->

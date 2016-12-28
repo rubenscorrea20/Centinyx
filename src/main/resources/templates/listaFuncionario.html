@@ -22,7 +22,7 @@
                      </div>
                 </form>
                 <div class="panel-body">
-                    <table class="table table-striped table-bordered" id="tabela">
+                    <table class="table table-striped table-bordered" id="tabelaFuncionario">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -40,12 +40,12 @@
                                 <td th:text="${funcionario.idFuncionario}" id="idFuncionario"></td>
                                 <td th:text="${funcionario.nome}" id="nome"></td>
                                 <td th:text="${funcionario.codigoFuncional}"></td>
-                                <td th:text="${funcionario.usuario != null ?  funcionario.usuario.login : ''}"></td>
+                                <td th:text="${funcionario.usuario != null ?  funcionario.usuario.login : ''}" id="login" th:id="login"></td>
                                 <td th:text="${funcionario.email}"></td>
                                 <td th:text="${funcionario.telefone}"></td>
                                 <td th:text="${funcionario.celular}"></td>
                                 <td><a th:href="@{/funcionario/lista/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Detalhes</a></td>
-                                <td><a th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a></td>
+                                <td><a th:onclick="'javascript:editaLocalStorageUsuario()'" th:href="@{/funcionario/{idFuncionario}(idFuncionario=${funcionario.idFuncionario})}">Editar</a></td>
                                 <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
                                     <!-- Modal -->
                                     <div class="modal fade" id="myModal">
@@ -98,6 +98,7 @@
     <th:block layout:fragment="javascript-extra">
         <script src="/javascript/exportaExcel.js"></script>
         <script src="/javascript/deletaCadastros.js"></script>
+        <script src="/javascript/editaLocalStorage.js"></script>
     </th:block>
 </body>
 

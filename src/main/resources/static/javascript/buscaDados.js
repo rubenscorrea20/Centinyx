@@ -1,8 +1,8 @@
 /*<![CDATA[*/
 function criaLocalStorageLogin() {
-    var linhas = document.getElementById("tabela")
+    var linhas = document.getElementById("tabelaUsuario")
         .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-    var table = document.getElementById("tabela");
+    var table = document.getElementById("tabelaUsuario");
     for (i = 0; i < linhas.length; i++) {
         linhas[i].onclick = function() {
             var t = this.rowIndex + 1;
@@ -13,7 +13,7 @@ function criaLocalStorageLogin() {
     }
 };
 
-function criaLocalStorageTipoAcesso() {
+function criaLocalStoragePerfil() {
     var linhas = document.getElementById("tabela")
         .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
     var table = document.getElementById("tabela");
@@ -21,7 +21,7 @@ function criaLocalStorageTipoAcesso() {
         linhas[i].onclick = function() {
             var t = this.rowIndex + 1;
             var tabela = table.rows[t - 1].cells.namedItem("tipoAcesso").innerHTML;
-            localStorage.tipoAcesso = tabela;
+            localStorage.perfil = tabela;
             window.close();
         }
     }
@@ -58,59 +58,67 @@ function setaFuncionarioMotoboy() {
 };
 
 function setaPerfil() {
-    $.ajax({
-        url: "/usuario/cadastra",
-        type: 'POST',
-        data: localStorage.tipoAcesso,
-        success: function() {
-            document.getElementById("tipoAcesso").value = localStorage.tipoAcesso;
-        },
-        error: function() {
-            alert("Deu erro!");
-        }
-    });
+	document.getElementById("tipoAcesso").value = "";
+	if (localStorage.perfil) {
+		$.ajax({
+	        url: "/usuario/cadastra",
+	        type: 'POST',
+	        data: localStorage.perfil,
+	        success: function() {
+	            document.getElementById("tipoAcesso").value = localStorage.perfil;
+	        },
+	        error: function() {
+	            alert("Deu erro!");
+	        }
+	    });
+	};
 };
 
 function setaUsuario() {
-    $.ajax({
-        url: "/cliente/cadastra",
-        type: 'POST',
-        data: localStorage.login,
-        success: function() {
-            document.getElementById("login").value = localStorage.login;
-        },
-        error: function() {
-            alert("Deu erro!");
-        }
-    });
+	document.getElementById("login").value = "";
+	if(localStorage.login){
+		$.ajax({
+		    url: "/funcionario/cadastra",
+		    type: 'POST',
+		    data: localStorage.login,
+		    success: function() {
+		       document.getElementById("login").value = localStorage.login;
+		    },
+		    error: function() {
+		       alert("Deu erro!");
+		    }
+		});
+	};
 };
 
 function setaContatoCliente() {
-    $.ajax({
-        url: "/cliente/cadastra",
-        type: 'POST',
-        data: localStorage.login,
-        success: function() {
-            document.getElementById("nomeContato").value = localStorage.contato;
-        },
-        error: function() {
-            alert("Deu erro!");
-        }
-    });
+	document.getElementById("nomeContato").value = "";
+	if(localStorage.contato){
+		$.ajax({
+			url: "/cliente/cadastra",
+			type: 'POST',
+			data: localStorage.contato,
+			success: function() {
+				document.getElementById("nomeContato").value = localStorage.contato;
+			},
+			error: function() {
+				alert("Deu erro!");
+			}
+		});
+	};
 };
 
-function limpaLocalStorageUsuario() {
-    delete window.localStorage["tipoAcesso"];
-    delete window.localStorage["login"];
-}
-
-function limpaLocalStorageMotoboy() {
+function limpaLocalStorageFuncionarioMotoboy() {
     delete window.localStorage["nome"];
     delete window.localStorage["cpf"];
 }
 
 function limpaLocalStorageContato() {
     delete window.localStorage["contato"]
+}
+
+function limpaLocalStoragePerfil(){
+	delete window.localStorage["perfil"];
 }
 
 $(document).ready(function() {

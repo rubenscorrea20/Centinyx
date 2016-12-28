@@ -6,7 +6,7 @@
     <title>Cadastro de Usuarios:</title>
 </head>
 
-<body onstorage="setaPerfil()">
+<body onstorage="setaPerfil()" onload="setaPerfil()">
     <section layout:fragment="conteudo">
         <div class="container">
             <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
@@ -52,7 +52,7 @@
                         <br></br>
                         <div style="text-align:center;" class="col-sm-12">
                             <button type="reset" class="btn btn-warning">Limpar dados</button>
-                            <button type="submit" class="btn btn-primary" id="enviarUsuario" th:onclick="'javascript:limpaLocalStorageUsuario()'">Enviar dados</button>
+                            <button type="submit" class="btn btn-primary" id="enviarUsuario" th:onclick="'javascript:limpaLocalStoragePerfil()'">Enviar dados</button>
                         </div>
                     </form>
                 </div>

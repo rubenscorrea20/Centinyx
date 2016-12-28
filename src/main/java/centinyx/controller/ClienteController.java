@@ -86,11 +86,8 @@ public class ClienteController {
 		Page<Cliente> listaCliente = clientes.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaCliente");
 		mv.addObject("clientes", listaCliente);
-
 		int numeroPaginas = listaCliente.getTotalPages();
-
 		mv.addObject("totalPaginas", numeroPaginas);
-
 		return mv;
 	}
 

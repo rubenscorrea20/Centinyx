@@ -92,15 +92,15 @@ public class ContatoClienteController {
 	}
 	
 	@RequestMapping(value = "/busca")
-	public ModelAndView buscaPorNome(@RequestParam("nomeContato") String nomeContato, Model model, Pageable pageable) {
-		if (nomeContato.isEmpty()) {
+	public ModelAndView buscaPorNome(@RequestParam("nomeContato") String nome, Model model, Pageable pageable) {
+		if (nome.isEmpty()) {
 			return new ModelAndView("redirect:/contatocliente/lista");
 		} else {
-			Page<ContatoCliente> contatoCliente = contatos.findByNomeContatoContaining(nomeContato, pageable);
-			ModelAndView m = new ModelAndView("listaFuncionario");
-			model.addAttribute("contato", contatoCliente);
-			model.addAttribute("nomeContato", nomeContato);
-			int numeroPaginas = contatoCliente.getTotalPages();
+			Page<ContatoCliente> contatoPorNome = contatos.findByNomeContaining(nome, pageable);
+			ModelAndView m = new ModelAndView("listaContatoCliente");
+			model.addAttribute("contatoClientes", contatoPorNome);
+			model.addAttribute("nomeContato", nome);
+			int numeroPaginas = contatoPorNome.getTotalPages();
 			m.addObject("totalPaginas", numeroPaginas);
 			return m;
 		}

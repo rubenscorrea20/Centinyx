@@ -1,10 +1,11 @@
 package centinyx.controller;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,21 +53,26 @@ public class MotoboyController {
 	}
 
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar() {
-		List<Motoboy> listaMotoboy = motoboys.findAll();
+	public ModelAndView listar(@PageableDefault(size = 1) Pageable pageable) {
+		Page<Motoboy> listaMotoboy = motoboys.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaMotoboy");
 		mv.addObject("motoboys", listaMotoboy);
+		int numeroPaginas = listaMotoboy.getTotalPages();
+		mv.addObject("totalPaginas", numeroPaginas);
 		return mv;
 	}
 	
 	@RequestMapping(value = "/busca")
-	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model) {
+	public ModelAndView buscaPorNome(@RequestParam("nomeCompleto") String nome, Model model, Pageable pageable) {
 		if (nome.isEmpty()) {
-			return listar();
+			return new ModelAndView("redirect:/funcionario/motoboy/lista");
 		} else {
-			ModelAndView m = new ModelAndView("listaFuncionario");
-			//model.addAttribute("motoboys", funcionarios.findByNome(nome));
+			Page<Motoboy> motoboyPorNome = motoboys.findByFuncionarioNomeContaining(nome, pageable);
+			ModelAndView m = new ModelAndView("listaMotoboy");
+			model.addAttribute("motoboys", motoboyPorNome);
 			model.addAttribute("nomeCompleto", nome);
+			int numeroPaginas = motoboyPorNome.getTotalPages();
+			m.addObject("totalPaginas", numeroPaginas);
 			return m;
 		}
 	}

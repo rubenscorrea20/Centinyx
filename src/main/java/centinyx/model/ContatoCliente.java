@@ -22,13 +22,13 @@ public class ContatoCliente {
 	
 	public ContatoCliente(){}
 
-	public ContatoCliente(int idContatoCliente, String criacao, String email, String nomeContato, String telefone,
+	public ContatoCliente(int idContatoCliente, String criacao, String email, String nome, String telefone,
 			TipoTelefoneEnum tipoTelefone, List<Cliente> cliente) {
 		super();
 		this.idContatoCliente = idContatoCliente;
 		this.criacao = criacao;
 		this.email = email;
-		this.nomeContato = nomeContato;
+		this.nome = nome;
 		this.telefone = telefone;
 		this.tipoTelefone = tipoTelefone;
 		this.cliente = cliente;
@@ -47,7 +47,7 @@ public class ContatoCliente {
 	private String email;
 
 	@Column(name = "nome_contato", length = 50, nullable = false)
-	private String nomeContato;
+	private String nome;
 
 	@Column(name = "telefone", length = 14, nullable = false)
 	private String telefone;
@@ -68,12 +68,12 @@ public class ContatoCliente {
 		this.idContatoCliente = idContatoCliente;
 	}
 
-	public String getNomeContato() {
-		return nomeContato;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeContato(String nomeContato) {
-		this.nomeContato = nomeContato;
+	public void setNome(String nomeContato) {
+		this.nome = nomeContato;
 	}
 
 	public String getEmail() {

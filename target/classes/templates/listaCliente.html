@@ -23,7 +23,7 @@
                </form>
                <div class="panel-body">
                   <div class="table-responsive">
-                     <table class="table table-striped table-bordered" id="tabela">
+                     <table class="table table-striped table-bordered" id="tabelaCliente">
                         <thead>
                            <tr>
                               <th>Id</th>
@@ -44,9 +44,9 @@
                               <td th:text="${cliente.cnpj}"></td>
                               <td th:text="${cliente.telefone}"></td>
                               <td th:text="${cliente.email}"></td>
-                              <td th:text="${cliente.contatoCliente != null ?  cliente.contatoCliente.nomeContato : ''}"></td>
+                              <td th:text="${cliente.contatoCliente != null ?  cliente.contatoCliente.nomeContato : ''}" id="nomeContato" th:id="nomeContato"></td>
                               <td><a th:href="@{/cliente/lista/{idCliente}(idCliente=${cliente.idCliente})}">Detalhes</a></td>
-                              <td><a th:href="@{/cliente/{idCliente}(idCliente=${cliente.idCliente})}">Editar</a></td>
+                              <td><a th:onclick="'javascript:editaLocalStorageContatoCliente()'" th:href="@{/cliente/{idCliente}(idCliente=${cliente.idCliente})}">Editar</a></td>
                               <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
                                  <!-- Modal -->
                                  <div class="modal fade" id="myModal">
@@ -72,8 +72,7 @@
                         </tbody>
                      </table>
                   </div>
-                  
-                                      <!-- Div da paginação -->
+                    <!-- Div da paginação -->
                     <div class="col-sm-12 text-center" th:if="${totalPaginas != 0}">
                     	<nav>
                     		<ul class="pagination pagination-sm">
@@ -102,6 +101,7 @@
       <th:block layout:fragment="javascript-extra">
          <script src="/javascript/exportaexcel.js"></script>
          <script src="/javascript/deletaCadastros.js"></script>
+         <script src="/javascript/editaLocalStorage.js"></script>
       </th:block>
    </body>
 </html>
