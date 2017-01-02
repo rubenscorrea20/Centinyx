@@ -13,7 +13,8 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen"></link>
   <link rel="stylesheet" type="text/css" th:href="@{/css/CheckBoxEffect.css}"></link>
   <link rel="stylesheet" type="text/css" th:href="@{/css/AlinhaTabela.css}"></link>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.min.css"/>
+
 </head>
 
 <body>
@@ -36,7 +37,7 @@
           <li><a href="/funcionario/cadastra">Funcionários</a></li>
           <li><a href="">Relatórios</a></li>
           <li><a href="/funcionario/motoboy/lista">Motoboys</a></li>
-          <li><a href="">Escalas</a></li>
+          <li><a href="/pedido/cadastra">Pedidos/Escalas</a></li>
           <li><a href="">Contas a Pagar/Receber</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -73,9 +74,13 @@
 
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/fullcalendar.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.1.0/locale/pt-br.js"></script>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
 	<script src="https://rawgit.com/unconditional/jquery-table2excel/master/src/jquery.table2excel.js"></script>
+	
 	<th:block layout:fragment="javascript-extra"></th:block>
 </body>
 </html>

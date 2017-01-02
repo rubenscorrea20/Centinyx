@@ -5,3 +5,8 @@ th {
 tr {
 	text-align: center;
 }
+
+#calendar {
+	width: 1050px;
+	margin: 0 auto;
+}

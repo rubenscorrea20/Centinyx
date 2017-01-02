@@ -22,7 +22,7 @@ public class Pedido {
 	}
 
 	public Pedido(int idPedido, String criacao, Cliente cliente, Alocacao alocacao, TipoPedidoEnum tipoPedido,
-			PagamentoCliente pagamentoCliente) {
+			PagamentoCliente pagamentoCliente, int numeroPedido) {
 		super();
 		this.idPedido = idPedido;
 		this.criacao = criacao;
@@ -30,6 +30,7 @@ public class Pedido {
 		this.alocacao = alocacao;
 		this.tipoPedido = tipoPedido;
 		this.pagamentoCliente = pagamentoCliente;
+		this.numeroPedido = numeroPedido;
 	}
 
 	@Id
@@ -55,6 +56,9 @@ public class Pedido {
 	@OneToOne(optional = false, mappedBy = "pedido")
 	//@JoinColumn(name = "id_pagamento_cliente")
 	private PagamentoCliente pagamentoCliente;
+	
+	@Column(name = "numero_pedido")
+	private int numeroPedido;
 
 	public int getIdPedido() {
 		return idPedido;
@@ -102,6 +106,14 @@ public class Pedido {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public int getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(int numeroPedido) {
+		this.numeroPedido = numeroPedido;
 	}
 
 }

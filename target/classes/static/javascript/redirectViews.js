@@ -14,6 +14,11 @@ jQuery(document).ready(function() {
 		e.preventDefault();
 		buscaPerfil();
 	});
+	
+	$('#buscaCliente').on('click', function(e) {
+		e.preventDefault();
+		buscaCliente();
+	});
 
 	function buscaUsuario() {
 		window.open("/usuario/lista");
@@ -25,6 +30,10 @@ jQuery(document).ready(function() {
 	
 	function buscaContato() {
 		window.open("/contatocliente/lista");
+	};
+	
+	function buscaCliente() {
+		window.open("/cliente/lista");
 	};
 });
 /* ]]> */

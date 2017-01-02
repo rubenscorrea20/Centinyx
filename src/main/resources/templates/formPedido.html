@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorator="LayoutPadrao">
+   <head>
+      <meta charset="utf-8" />
+      <title>Cadastro de Pedido</title>
+   </head>
+   <body>
+      <section layout:fragment="conteudo">
+         <div class="container">
+            <div class="panel panel-primary" style="margin-top: 0cm; margin-bottom: 1cm">
+               <div class="panel panel-heading">
+                  <h2 class="panel-title" style="text-align: center"><strong>Cadastro do Pedido</strong>
+                  </h2>
+               </div>
+               <div class="panel-body">
+                  <form th:object="${pedido}" th:action="@{/pedido/salva}" method="POST" class="form-group">
+                     <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        <th:block th:each="erro : ${#fields.detailedErrors()}">
+                           <div>
+                              <i class="fa  fa-exclamation-circle"></i>
+                              <span th:text="${erro.message}"></span>
+                           </div>
+                        </th:block>
+                     </div>
+                     <div class="container">
+                        <fieldset style="max-width: 28.5cm">
+                           <legend>Dados do Pedido</legend>
+                           <div class="col-sm-5">
+                              <div class="form-group" th:classappend="${#fields.hasErrors('numeroPedido')} ? has-error">
+                                 <label for="numeroPedido">Numero do Pedido:</label>
+                                 <input id="numeroPedido" type="text" class="form-control" readonly="readonly" style="width: 250px"></input>
+                              </div>
+                              <div class="form-group">
+                                 <label for="nomeCliente">Cliente:</label>
+                                 <div class="input-group">
+                                    <input id="nomeCliente" type="text" class="form-control" name="login" style="width: 350px" readonly="readonly"></input>
+                                    <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" id="buscaCliente">Buscar cliente</button>
+                                    </span>
+                                 </div>
+                              </div>
+                              <div class="form-group">
+                                 <label for="sexo">Tipo do Pedido:</label>
+                                 <select class="custom-select form-control" name="tipoPedido" th:field="*{tipoPedido}" style="width: 210px">
+                                    <option th:each="tipoPedido : ${T(centinyx.enums.TipoPedidoEnum).values()}"
+                                       th:value="${tipoPedido}" th:text="${tipoPedido}">
+                                    </option>
+                                 </select>
+                              </div>
+                              <div class="form-group">
+                                 <label id="criaEscala">Criar ou acessar o calendário de escalas</label>
+                              </div>
+                              <p></p>
+                              <div class="form-group">
+                                 <div class="calendar" id="calendar"></div>
+                              </div>
+                           </div>
+                        </fieldset>
+                        <br></br>
+                        <div style="text-align:center;" class="col-sm-11">
+                           <button type="reset" class="btn btn-warning">Limpar dados</button>
+                           <button type="button" class="btn btn-primary" id="enviar">Enviar dados</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </section>
+      <th:block layout:fragment="javascript-extra">
+         <script src="/javascript/mathRandom.js"></script>
+         <script src="/javascript/calendarioEscalas.js"></script>
+         <script src="/javascript/redirectViews.js"></script>
+      </th:block>
+   </body>
+</html>

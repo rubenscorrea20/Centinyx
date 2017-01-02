@@ -33,7 +33,7 @@
                               <th>Telefone</th>
                               <th>Email</th>
                               <th>Contato</th>
-                              <th colspan="3">Opções</th>
+                              <th colspan="4">Opções</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -44,7 +44,8 @@
                               <td th:text="${cliente.cnpj}"></td>
                               <td th:text="${cliente.telefone}"></td>
                               <td th:text="${cliente.email}"></td>
-                              <td th:text="${cliente.contatoCliente != null ?  cliente.contatoCliente.nomeContato : ''}" id="nomeContato" th:id="nomeContato"></td>
+                              <td th:text="${cliente.contatoCliente != null ?  cliente.contatoCliente.nome : ''}" id="nomeContato" th:id="nomeContato"></td>
+                              <td><a href="#">Selecionar</a></td>
                               <td><a th:href="@{/cliente/lista/{idCliente}(idCliente=${cliente.idCliente})}">Detalhes</a></td>
                               <td><a th:onclick="'javascript:editaLocalStorageContatoCliente()'" th:href="@{/cliente/{idCliente}(idCliente=${cliente.idCliente})}">Editar</a></td>
                               <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
