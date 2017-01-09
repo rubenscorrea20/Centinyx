@@ -21,12 +21,12 @@ public class PeriodoAlocacao {
 	public PeriodoAlocacao() {
 	}
 
-	public PeriodoAlocacao(int idPeriodoAlocacao, String criacao, TipoPeriodoEnum tipo_periodo, String periodoInicio,
+	public PeriodoAlocacao(int idPeriodoAlocacao, String criacao, TipoPeriodoEnum tipoPeriodo, String periodoInicio,
 			String periodoFim, List<Alocacao> alocacao) {
 		super();
 		this.idPeriodoAlocacao = idPeriodoAlocacao;
 		this.criacao = criacao;
-		this.tipo_periodo = tipo_periodo;
+		this.tipoPeriodo = tipoPeriodo;
 		this.periodoInicio = periodoInicio;
 		this.periodoFim = periodoFim;
 		this.alocacao = alocacao;
@@ -42,7 +42,7 @@ public class PeriodoAlocacao {
 
 	@Column(name = "tipo_periodo", length = 10, nullable = false)
 	@Enumerated(EnumType.STRING)
-	private TipoPeriodoEnum tipo_periodo;
+	private TipoPeriodoEnum tipoPeriodo;
 
 	@Column(name = "periodo_inicio", length = 4, nullable = false)
 	private String periodoInicio;
@@ -70,12 +70,12 @@ public class PeriodoAlocacao {
 		this.criacao = criacao;
 	}
 
-	public TipoPeriodoEnum getTipo_periodo() {
-		return tipo_periodo;
+	public TipoPeriodoEnum getTipoPeriodo() {
+		return tipoPeriodo;
 	}
 
-	public void setTipo_periodo(TipoPeriodoEnum tipo_periodo) {
-		this.tipo_periodo = tipo_periodo;
+	public void setTipoPeriodo(TipoPeriodoEnum tipoPeriodo) {
+		this.tipoPeriodo = tipoPeriodo;
 	}
 
 	public String getPeriodoInicio() {

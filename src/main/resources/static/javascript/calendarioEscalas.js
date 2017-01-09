@@ -1,15 +1,13 @@
-	$(document).ready(function() {
-	
+$(document).ready(function() {
 		var date = new Date();
 		var d = date.getDate();
 		var m = date.getMonth();
 		var y = date.getFullYear();
-		
 		var calendar = $('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
-				right: 'month,agendaWeek,agendaDay'
+				//right: 'month,agendaWeek,agendaDay'
 			},
 			selectable: true,
 			selectHelper: true,
@@ -29,14 +27,22 @@
 				calendar.fullCalendar('unselect');
 			},*/
 			editable: true,
-			events: [
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'http://google.com/'
-				}
-			]
+			select: function(start, allDay, jsEvent, view) {
+				//start = $.fullCalendar.formatDate(date,'dd-MM-yyyy');
+				start = moment(start).format('DD/MM/YYYY');
+			    $("#modelCalendar").modal("show");
+			    $("#modelCalendar #inicio").val(start);
+			}
 		});
-		
+});
+
+$(document).ready(function(){
+	$('#cancelaAlocacao').on('click', function(){
+		$("#qtdeMotoboy").val("");
+		document.getElementById("container").innerHTML = "";
 	});
+	$('#fechaAlocacao').on('click', function(){
+		$("#qtdeMotoboy").val("");
+		document.getElementById("container").innerHTML = "";
+	});
+});
