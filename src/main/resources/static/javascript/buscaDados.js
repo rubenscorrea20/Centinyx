@@ -13,6 +13,20 @@ function criaLocalStorageLogin() {
     }
 };
 
+function criaLocalStorageMotoboy() {
+    var linhas = document.getElementById("tabelaMotoboy")
+        .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+    var table = document.getElementById("tabelaMotoboy");
+    for (i = 0; i < linhas.length; i++) {
+        linhas[i].onclick = function() {
+            var t = this.rowIndex + 1;
+            var tabela = table.rows[t - 1].cells.namedItem("nomeMotoboy").innerHTML;
+            localStorage.motoboy = tabela;
+            window.close();
+        }
+    }
+};
+
 function criaLocalStoragePerfil() {
     var linhas = document.getElementById("tabela")
         .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
@@ -44,15 +58,15 @@ function criaLocalStorageContatoCliente() {
 function criaLocalStorageFuncionario() {
     if (document.getElementById("funcao").value == "Motoboy") {
         var nome = document.getElementById("nome").value;
-        localStorage.nome = nome;
+        localStorage.funcionario = nome;
     } else {
-        delete window.localStorage["nome"];
+        delete window.localStorage["funcionario"];
     }
 };
 
 function setaFuncionarioMotoboy() {
-    if (localStorage.nome) {
-        document.getElementById("nome").value = localStorage.nome;
+    if (localStorage.funcionario) {
+        document.getElementById("nome").value = localStorage.funcionario;
         document.getElementById("cpfMotoboy").value = localStorage.cpf;
     }
 };
@@ -91,6 +105,25 @@ function setaUsuario() {
 	};
 };
 
+function setaMotoboy() {
+		var indice = document.getElementById("motoboy").name;
+		$.ajax({
+		    url: "/pedido/cadastra",
+		    type: 'POST',
+		    data: localStorage.motoboy,
+		    success: function() {
+		    	document.getElementById("motoboy").id = indice;
+		    	document.getElementById(indice).value = localStorage.motoboy;
+		    	//alert(document.getElementById(indice).id);
+		    },
+		    error: function() {
+		       alert("Deu erro!");
+		    }
+		});
+		document.getElementById("motoboy").setAttribute("name", "motoboy");
+		alert(document.getElementById("motoboy").name);
+};
+
 function setaContatoCliente() {
 	document.getElementById("nomeContato").value = "";
 	if(localStorage.contato){
@@ -109,7 +142,7 @@ function setaContatoCliente() {
 };
 
 function limpaLocalStorageFuncionarioMotoboy() {
-    delete window.localStorage["nome"];
+    delete window.localStorage["funcionario"];
     delete window.localStorage["cpf"];
 }
 

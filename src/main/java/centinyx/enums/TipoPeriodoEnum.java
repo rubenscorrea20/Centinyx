@@ -1,5 +1,5 @@
 package centinyx.enums;
 
 public enum TipoPeriodoEnum {
-		Noturno, Matutino, Diurno
+		Noturno, Matutino, Vespertino
 }

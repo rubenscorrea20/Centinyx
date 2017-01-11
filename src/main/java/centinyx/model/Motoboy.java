@@ -1,14 +1,11 @@
 package centinyx.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -25,8 +22,7 @@ public class Motoboy {
 
 	public Motoboy(int idMotoboy, String cnh, String categoriaCNH, String validadeCNH, String criacao,
 			String status_motoboy, String cpfProprietarioMoto, String marcaMoto, String anoMoto, String modeloMoto,
-			String placaMoto, String renavam, String cor, String regiaoAlocacao, Funcionario funcionario,
-			List<AlocacaoMotoboy> alocacaoMotoboy) {
+			String placaMoto, String renavam, String cor, String regiaoAlocacao, Funcionario funcionario) {
 		super();
 		this.idMotoboy = idMotoboy;
 		this.cnh = cnh;
@@ -43,7 +39,6 @@ public class Motoboy {
 		this.cor = cor;
 		this.regiaoAlocacao = regiaoAlocacao;
 		this.funcionario = funcionario;
-		this.alocacaoMotoboy = alocacaoMotoboy;
 	}
 
 	@Id
@@ -103,10 +98,6 @@ public class Motoboy {
 	@OneToOne
 	@JoinColumn(name = "id_funcionario")
 	private Funcionario funcionario;
-
-	@ManyToMany
-	@JoinColumn(name = "id_alocacao_motoboy")
-	private List<AlocacaoMotoboy> alocacaoMotoboy;
 
 	public int getIdMotoboy() {
 		return idMotoboy;
@@ -226,14 +217,6 @@ public class Motoboy {
 
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
-	}
-
-	public List<AlocacaoMotoboy> getAlocacaoMotoboy() {
-		return alocacaoMotoboy;
-	}
-
-	public void setAlocacaoMotoboy(List<AlocacaoMotoboy> alocacaoMotoboy) {
-		this.alocacaoMotoboy = alocacaoMotoboy;
 	}
 
 }

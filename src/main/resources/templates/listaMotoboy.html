@@ -22,7 +22,7 @@
                      </div>
                 </form>
                 <div class="panel-body">
-                    <table class="table table-striped table-bordered" id="tabela">
+                    <table class="table table-striped table-bordered" id="tabelaMotoboy">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -37,13 +37,13 @@
                         <tbody>
                             <tr th:each="motoboy : ${motoboys}">
                                 <td th:text="${motoboy.idMotoboy}" id="idMotoboy"></td>
-                                <td th:text="${motoboy.funcionario.nome}" id="nome"></td>
+                                <td th:text="${motoboy.funcionario.nome}" id="nomeMotoboy" th:id="nomeMotoboy"></td>
                                 <td th:text="${motoboy.cpfProprietarioMoto}"></td>
                                 <td th:text="${motoboy.cnh}"></td>
                                 <td th:text="${motoboy.categoriaCNH}"></td>
                                 <td th:text="${motoboy.validadeCNH}"></td>
                                 <td><a th:href="@{/funcionario/motoboy/lista/{idMotoboy}(idMotoboy=${motoboy.idMotoboy})}">Detalhes</a></td>
-                                <td><a th:href="'#'">Selecionar</a></td>
+                                <td><a th:href="@{#}" id="selecionadoMotoboy" th:onclick="'javascript:criaLocalStorageMotoboy()'">Selecionar</a></td>
                                 <td><a th:href="@{/funcionario/motoboy/{idMotoboy}(idMotoboy=${motoboy.idMotoboy})}">Editar</a></td>
                             </tr>
                         </tbody>
@@ -73,6 +73,7 @@
         </div>
     </section>
     <th:block layout:fragment="javascript-extra">
+    	<script src="/javascript/buscadados.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
         <script src="/javascript/exportaExcel.js"></script>

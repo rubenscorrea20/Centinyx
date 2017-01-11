@@ -35,5 +35,6 @@ jQuery(document).ready(function() {
 	function buscaCliente() {
 		window.open("/cliente/lista");
 	};
+	
 });
 /* ]]> */

@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -22,17 +23,17 @@ public class Alocacao {
 	public Alocacao() {
 	}
 
-	public Alocacao(int idAlocacao, String criacao, List<AlocacaoMotoboy> alocacaoMotoboy, String dataAlocacao,
-			int quantidadeMotoboy, Pedido pedido, List<PeriodoAlocacao> periodoAlocacao, Escala escala) {
+	public Alocacao(int idAlocacao, String criacao, String dataAlocacao, int quantidadeMotoboy, Pedido pedido,
+			List<PeriodoAlocacao> periodoAlocacao, Escala escala, List<Motoboy> motoboys) {
 		super();
 		this.idAlocacao = idAlocacao;
 		this.criacao = criacao;
-		this.alocacaoMotoboy = alocacaoMotoboy;
 		this.dataAlocacao = dataAlocacao;
 		this.quantidadeMotoboy = quantidadeMotoboy;
 		this.pedido = pedido;
 		this.periodoAlocacao = periodoAlocacao;
 		this.escala = escala;
+		this.motoboys = motoboys;
 	}
 
 	@Id
@@ -42,10 +43,6 @@ public class Alocacao {
 
 	@Column(name = "data_criacao", length = 20)
 	private String criacao;
-
-	@ManyToMany
-	@JoinColumn(name = "id_alocacao_motoboy")
-	private List<AlocacaoMotoboy> alocacaoMotoboy;
 
 	@NotBlank(message = "O campo data de alocação precisa ser preenchido!")
 	@Column(name = "data_alocacao", length = 20)
@@ -65,6 +62,11 @@ public class Alocacao {
 	@ManyToOne
 	@JoinColumn(name = "id_escala")
 	private Escala escala;
+	
+	@ManyToMany
+	@JoinTable(name="alocacao_motoboy", joinColumns = @JoinColumn(name="id_alocacao"), 
+	inverseJoinColumns = @JoinColumn(name="id_motoboy"))
+	private List<Motoboy> motoboys;
 
 	public int getIdAlocacao() {
 		return idAlocacao;
@@ -80,14 +82,6 @@ public class Alocacao {
 
 	public void setCriacao(String criacao) {
 		this.criacao = criacao;
-	}
-
-	public List<AlocacaoMotoboy> getAlocacaoMotoboy() {
-		return alocacaoMotoboy;
-	}
-
-	public void setAlocacaoMotoboy(List<AlocacaoMotoboy> alocacaoMotoboy) {
-		this.alocacaoMotoboy = alocacaoMotoboy;
 	}
 
 	public String getDataAlocacao() {
@@ -130,4 +124,12 @@ public class Alocacao {
 		this.escala = escala;
 	}
 
+	public List<Motoboy> getMotoboys() {
+		return motoboys;
+	}
+
+	public void setMotoboys(List<Motoboy> motoboys) {
+		this.motoboys = motoboys;
+	}
+	
 }
