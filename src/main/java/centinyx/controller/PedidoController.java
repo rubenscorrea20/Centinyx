@@ -60,7 +60,7 @@ public class PedidoController {
 	}
 
 	@RequestMapping(value = "/alocacao/salva", method = RequestMethod.POST)
-	public ModelAndView salvaAlocacao(@RequestParam("motoboy") List<String> motoboy, @Valid Alocacao alocacao,
+	public ModelAndView salvaAlocacao(@RequestParam("motoboy") List<String> motoboy, @Valid Alocacao alocacao, Pedido pedido,
 			BindingResult resultado) {
 		alocacao.setCriacao(DataCriacao.geraDataHorario());
 		try{
@@ -72,7 +72,7 @@ public class PedidoController {
 		catch (Exception e) {
 			System.out.println(e.getMessage());
 		  }
-		return new ModelAndView("redirect:/pedido/cadastra") ;
+		return new ModelAndView("redirect:/pedido/cadastra");
 	}
 
 	@RequestMapping(value = "/lista")

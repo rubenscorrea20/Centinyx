@@ -71,7 +71,7 @@
          </div>
          <!-- Modal -->
          <form id="formAlocacao" th:object="${alocacao}" th:action="@{/pedido/alocacao/salva}" method="POST" class="form-group">
-         <div class="modal fade" id="modelCalendar">
+         <div class="modal fade" id="modalCalendar">
             <div class="container">
                <div class="modal-dialog">
                   <!-- Modal content-->
@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-group">
                            <label for="periodo">Periodo:</label>
-                                 <select class="custom-select form-control" name="tipoPeriodo" style="width: 210px">
+                                 <select id="periodo" class="custom-select form-control" name="tipoPeriodo" style="width: 210px">
                                     <option th:each="tipoPeriodo : ${T(centinyx.enums.TipoPeriodoEnum).values()}"
                                        th:value="${tipoPeriodo}" th:text="${tipoPeriodo}">
                                     </option>
