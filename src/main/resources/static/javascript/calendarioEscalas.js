@@ -31,7 +31,7 @@ $(document).ready(function() {
 				//start = $.fullCalendar.formatDate(date,'dd-MM-yyyy');
 				start = moment(start).format('DD/MM/YYYY');
 			    $("#modelCalendar").modal("show");
-			    $("#modelCalendar #inicio").val(start);
+			    $("#modelCalendar #dataAlocacao").val(start);
 			}
 		});
 });

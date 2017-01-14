@@ -14,6 +14,6 @@ public interface MotoboyRepository extends JpaRepository<Motoboy, Integer>  {
 
 	Page<Motoboy> findByFuncionarioNomeContaining(String nome, Pageable p);
 	
-	@Query("SELECT m FROM Motoboy m WHERE m.idMotoboy = :idMotoboy")
-	public List<Motoboy> encontraMotoboysAlocados(@Param("idMotoboy") int idMotoboy);
+	@Query("SELECT m FROM Motoboy m, Funcionario f WHERE m.funcionario = f.idFuncionario and f.nome in :motoboy")
+	public List<Motoboy> encontraMotoboysAlocados(@Param("motoboy") String motoboy);
 }

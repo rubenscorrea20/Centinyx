@@ -1,5 +1,7 @@
 package centinyx.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +33,10 @@ public class PedidoController {
 	private static final String FORM = "formPedido";
 
 	@RequestMapping(value = "/cadastra")
-	public ModelAndView cadastra(Pedido pedido) {
+	public ModelAndView cadastra(Pedido pedido, Alocacao alocacao) {
 		ModelAndView mv = new ModelAndView(FORM);
 		mv.addObject("pedido", pedido);
+		mv.addObject("alocacao", alocacao);
 		return mv;
 	}
 
@@ -49,21 +52,25 @@ public class PedidoController {
 	}*/
 	
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
-	public ModelAndView cadastraPedido(Pedido pedido) {
+	public ModelAndView cadastraPedido(Pedido pedido, Alocacao alocacao) {
 		ModelAndView mv = new ModelAndView(FORM);
 		mv.addObject("pedido", pedido);
+		mv.addObject("alocacao", alocacao);
 		return mv;
 	}
 
-	@RequestMapping(value = "/salva/alocacao", method = RequestMethod.POST)
-	public ModelAndView salvaAlocacao(@RequestParam("motoboy") int idMotoboy, @Valid Alocacao alocacao,
+	@RequestMapping(value = "/alocacao/salva", method = RequestMethod.POST)
+	public ModelAndView salvaAlocacao(@RequestParam("motoboy") List<String> motoboy, @Valid Alocacao alocacao,
 			BindingResult resultado) {
 		alocacao.setCriacao(DataCriacao.geraDataHorario());
-		alocacao.setMotoboys(motoboys.encontraMotoboysAlocados(idMotoboy));
-		try {
-			alocacoes.save(alocacao);
-		} catch (Exception e) {
-			System.out.println(e.getStackTrace().toString());
+		try{
+			for (String string : motoboy) {
+				alocacao.setMotoboys(motoboys.encontraMotoboysAlocados(string));
+				alocacoes.save(alocacao);
+			}
+		}
+		catch (Exception e) {
+			System.out.println(e.getMessage());
 		  }
 		return new ModelAndView("redirect:/pedido/cadastra") ;
 	}

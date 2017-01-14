@@ -70,7 +70,7 @@
             </div>
          </div>
          <!-- Modal -->
-         <form id="formAlocacao" th:object="${alocacao}" th:action="@{/salva/alocacao}" method="POST" class="form-group">
+         <form id="formAlocacao" th:object="${alocacao}" th:action="@{/pedido/alocacao/salva}" method="POST" class="form-group">
          <div class="modal fade" id="modelCalendar">
             <div class="container">
                <div class="modal-dialog">
@@ -82,8 +82,8 @@
                      </div>
                      <div class="modal-body">
                         <div class="form-group">
-                           <label for="dataAlocacao">Data da Alocação: </label>
-                           <input type="text" readonly="readonly" style="width: 130px" id="inicio" class="form-control"></input>
+                           <label for="dataAlocacao">Data da Alocação:</label>
+                           <input type="text" th:field="*{dataAlocacao}" id="dataAlocacao" readonly="readonly" style="width: 130px" class="form-control"></input>
                         </div>
                         <div class="form-group">
                            <label for="periodo">Periodo:</label>
@@ -94,14 +94,14 @@
                                  </select>
                         </div>
                         <div class="form-group">
-                           <label for="dataAlocacao">Quantidade de Motoboys: </label>
-                           <input type="text" id="qtdeMotoboy" style="width: 80px" th:onchange="'javascript:acrescentaMotoboy();'" class="form-control"></input>
+                           <label for="qtdeMotoboy">Quantidade de Motoboys: </label>
+                           <input type="text" id="qtdeMotoboy" th:field="*{quantidadeMotoboy}" style="width: 80px" th:onchange="'javascript:acrescentaMotoboy();'" class="form-control"></input>
                         </div>
                         <div class="form-inline" id="container"></div>   
                      </div>
                      <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancelaAlocacao">Cancelar</button>
-                        <button type="submit" class="btn btn-primary" data-dismiss="modal" id="confirmaAlocacao">Confirmar</button>
+                        <button type="submit" class="btn btn-primary" id="confirmaAlocacao">Confirmar</button>
                      </div>
                   </div>
                </div>
