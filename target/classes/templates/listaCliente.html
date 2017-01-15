@@ -39,13 +39,13 @@
                         <tbody>
                            <tr th:each="cliente : ${clientes}">
                               <td th:text="${cliente.idCliente}" id="idCliente"></td>
-                              <td th:text="${cliente.nomeFantasia}"></td>
+                              <td th:text="${cliente.nomeFantasia}" id="nomeCliente"></td>
                               <td th:text="${cliente.razaoSocial}"></td>
                               <td th:text="${cliente.cnpj}"></td>
                               <td th:text="${cliente.telefone}"></td>
                               <td th:text="${cliente.email}"></td>
                               <td th:text="${cliente.contatoCliente != null ?  cliente.contatoCliente.nome : ''}" id="nomeContato" th:id="nomeContato"></td>
-                              <td><a href="#">Selecionar</a></td>
+                              <td><a th:href="@{#}" id="selecionadoCliente" th:onclick="'javascript:criaLocalStorageCliente()'">Selecionar</a></td>
                               <td><a th:href="@{/cliente/lista/{idCliente}(idCliente=${cliente.idCliente})}">Detalhes</a></td>
                               <td><a th:onclick="'javascript:editaLocalStorageContatoCliente()'" th:href="@{/cliente/{idCliente}(idCliente=${cliente.idCliente})}">Editar</a></td>
                               <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
@@ -100,6 +100,7 @@
          </div>
       </section>
       <th:block layout:fragment="javascript-extra">
+      	 <script src="/javascript/buscadados.js"></script>
          <script src="/javascript/exportaexcel.js"></script>
          <script src="/javascript/deletaCadastros.js"></script>
          <script src="/javascript/editaLocalStorage.js"></script>

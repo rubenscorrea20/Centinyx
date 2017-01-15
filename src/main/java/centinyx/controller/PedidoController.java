@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import centinyx.logic.DataCriacao;
 import centinyx.model.Alocacao;
 import centinyx.model.Pedido;
+import centinyx.repository.AlocacaoMotoboyRepository;
 import centinyx.repository.AlocacaoRepository;
 import centinyx.repository.MotoboyRepository;
 
@@ -29,6 +30,9 @@ public class PedidoController {
 	
 	@Autowired
 	private AlocacaoRepository alocacoes;
+	
+	@Autowired
+	private AlocacaoMotoboyRepository alocacoesMotoboys;
 
 	private static final String FORM = "formPedido";
 
@@ -64,9 +68,10 @@ public class PedidoController {
 			BindingResult resultado) {
 		alocacao.setCriacao(DataCriacao.geraDataHorario());
 		try{
-			for (String string : motoboy) {
-				alocacao.setMotoboys(motoboys.encontraMotoboysAlocados(string));
-				alocacoes.save(alocacao);
+			alocacao.setMotoboys(motoboys.encontraMotoboysAlocados(motoboy));
+			alocacoes.save(alocacao);
+			if(motoboy.size() > 1){
+				alocacoesMotoboys.gravaTodosMotoboysAlocados(alocacao.getIdAlocacao(), alocacao.getMotoboys());
 			}
 		}
 		catch (Exception e) {

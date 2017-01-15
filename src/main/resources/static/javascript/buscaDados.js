@@ -55,6 +55,20 @@ function criaLocalStorageContatoCliente() {
     }
 };
 
+function criaLocalStorageCliente() {
+    var linhas = document.getElementById("tabelaCliente")
+        .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+    var table = document.getElementById("tabelaCliente");
+    for (i = 0; i < linhas.length; i++) {
+        linhas[i].onclick = function() {
+            var t = this.rowIndex + 1;
+            var tabela = table.rows[t - 1].cells.namedItem("nomeCliente").innerHTML;
+            localStorage.cliente = tabela;
+            window.close();
+        }
+    }
+};
+
 function criaLocalStorageFuncionario() {
     if (document.getElementById("funcao").value == "Motoboy") {
         var nome = document.getElementById("nome").value;
@@ -106,22 +120,23 @@ function setaUsuario() {
 };
 
 function setaMotoboy() {
+	if(document.getElementById("motoboy") != null){
 		var indice = document.getElementById("motoboy").name;
-		$.ajax({
-		    url: "/pedido/cadastra",
-		    type: 'POST',
-		    data: localStorage.motoboy,
-		    success: function() {
-		    	document.getElementById("motoboy").id = indice;
-		    	document.getElementById(indice).value = localStorage.motoboy;
-		    	//alert(document.getElementById(indice).id);
-		    },
-		    error: function() {
-		       alert("Deu erro!");
-		    }
-		});
-		document.getElementById("motoboy").setAttribute("name", "motoboy");
-		alert(document.getElementById("motoboy").name);
+	}
+	$.ajax({
+	    url: "/pedido/cadastra",
+	    type: 'POST',
+	    data: localStorage.motoboy,
+	    success: function() {
+	    	document.getElementById("motoboy").id = indice;
+	    	document.getElementById(indice).value = localStorage.motoboy;
+	    	document.getElementById(indice).name = "motoboy";
+	    	//alert(document.getElementById(indice).name);
+	    },
+	    error: function() {
+	       alert("Deu erro!");
+	    }
+	});
 };
 
 function setaContatoCliente() {
@@ -133,6 +148,23 @@ function setaContatoCliente() {
 			data: localStorage.contato,
 			success: function() {
 				document.getElementById("nomeContato").value = localStorage.contato;
+			},
+			error: function() {
+				alert("Deu erro!");
+			}
+		});
+	};
+};
+
+function setaCliente() {
+	document.getElementById("nomeCliente").value = "";
+	if(localStorage.cliente){
+		$.ajax({
+			url: "/pedido/cadastra",
+			type: 'POST',
+			data: localStorage.contato,
+			success: function() {
+				document.getElementById("nomeCliente").value = localStorage.cliente;
 			},
 			error: function() {
 				alert("Deu erro!");
