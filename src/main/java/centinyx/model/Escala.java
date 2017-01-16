@@ -33,7 +33,6 @@ public class Escala {
 	private String criacao;
 	
 	@OneToMany(mappedBy = "escala")
-	//@JoinColumn(name = "idAlocacao")
 	private List<Alocacao> alocacao;
 
 	public int getIdEscala() {

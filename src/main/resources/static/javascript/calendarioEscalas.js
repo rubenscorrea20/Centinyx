@@ -33,20 +33,17 @@ $(document).ready(function() {
             start = moment(start).format('DD/MM/YYYY');
             $("#modalCalendar").modal("show");
             $("#modalCalendar #dataAlocacao").val(start);
+            document.getElementById("nomeFantasia").value = document.getElementById("nomeCliente").value;
             var title = document.getElementById("periodo").value;
             var eventData;
-			if (title) {
+			$("#confirmaAlocacao").on('click', function(){
 				eventData = {
-					title: title,
-					start: start,
-					end: end
-				};
-				$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-			}
+						title: title,
+						start: start
+					};
+					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+			});
 			$('#calendar').fullCalendar('unselect');
-            var eventData = {
-                    
-            };
             //$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
             //$('#calendar').fullCalendar('unselect');
         }

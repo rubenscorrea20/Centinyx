@@ -28,7 +28,7 @@ public class Cliente {
 	public Cliente(int idCliente, ContatoCliente contatoCliente, String criacao, String nomeFantasia,
 			String razaoSocial, String cnpj, String bairro, String logradouro, int numero, String complemento,
 			String cep, String cidade, String ufEndereco, String telefone, String email, String pdd,
-			List<Pedido> pedido) {
+			List<Pedido> pedido, List<PeriodoAlocacao> periodoAlocacao) {
 		super();
 		this.idCliente = idCliente;
 		this.contatoCliente = contatoCliente;
@@ -47,6 +47,7 @@ public class Cliente {
 		this.email = email;
 		this.pdd = pdd;
 		this.pedido = pedido;
+		this.periodoAlocacao = periodoAlocacao;
 	}
 
 	@Id
@@ -56,7 +57,6 @@ public class Cliente {
 
 	@ManyToOne(optional = true)
 	@Cascade(CascadeType.DELETE)
-	//@JoinColumn(name = "id_contato_cliente")
 	private ContatoCliente contatoCliente;
 
 	@Column(name = "data_criacao", length = 20)
@@ -114,8 +114,10 @@ public class Cliente {
 	private String pdd;
 
 	@OneToMany(mappedBy = "cliente")
-	// @JoinColumn(name = "id_escala")
 	private List<Pedido> pedido;
+	
+	@OneToMany(mappedBy = "cliente")
+	private List<PeriodoAlocacao> periodoAlocacao;
 
 	public int getIdCliente() {
 		return idCliente;
@@ -251,6 +253,14 @@ public class Cliente {
 
 	public void setPedido(List<Pedido> pedido) {
 		this.pedido = pedido;
+	}
+
+	public List<PeriodoAlocacao> getPeriodoAlocacao() {
+		return periodoAlocacao;
+	}
+
+	public void setPeriodoAlocacao(List<PeriodoAlocacao> periodoAlocacao) {
+		this.periodoAlocacao = periodoAlocacao;
 	}
 
 }

@@ -1,18 +1,17 @@
 package centinyx.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import centinyx.enums.TipoPedidoEnum;
 
 @Entity
 @Table(name = "pedido")
@@ -21,14 +20,13 @@ public class Pedido {
 	public Pedido() {
 	}
 
-	public Pedido(int idPedido, String criacao, Cliente cliente, Alocacao alocacao, TipoPedidoEnum tipoPedido,
+	public Pedido(int idPedido, String criacao, Cliente cliente, List<Alocacao> alocacao,
 			PagamentoCliente pagamentoCliente, int numeroPedido) {
 		super();
 		this.idPedido = idPedido;
 		this.criacao = criacao;
 		this.cliente = cliente;
 		this.alocacao = alocacao;
-		this.tipoPedido = tipoPedido;
 		this.pagamentoCliente = pagamentoCliente;
 		this.numeroPedido = numeroPedido;
 	}
@@ -45,13 +43,8 @@ public class Pedido {
 	@JoinColumn(name = "id_cliente")
 	private Cliente cliente;
 
-	@OneToOne
-	@JoinColumn(name = "id_alocacao")
-	private Alocacao alocacao;
-	
-	@Column(nullable = false, name = "tipo_pedido")
-	@Enumerated(EnumType.STRING)
-	private TipoPedidoEnum tipoPedido;
+	@OneToMany(mappedBy = "pedido")
+	private List<Alocacao> alocacao;
 
 	@OneToOne(optional = false, mappedBy = "pedido")
 	//@JoinColumn(name = "id_pagamento_cliente")
@@ -75,21 +68,13 @@ public class Pedido {
 	public void setCriacao(String criacao) {
 		this.criacao = criacao;
 	}
-
-	public Alocacao getAlocacao() {
+	
+	public List<Alocacao> getAlocacao() {
 		return alocacao;
 	}
 
-	public void setAlocacao(Alocacao alocacao) {
+	public void setAlocacao(List<Alocacao> alocacao) {
 		this.alocacao = alocacao;
-	}
-
-	public TipoPedidoEnum getTipoPedido() {
-		return tipoPedido;
-	}
-
-	public void setTipoPedido(TipoPedidoEnum tipoPedido) {
-		this.tipoPedido = tipoPedido;
 	}
 
 	public PagamentoCliente getPagamentoCliente() {

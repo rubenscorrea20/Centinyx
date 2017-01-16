@@ -57,7 +57,6 @@ public class ContatoCliente {
 	private TipoTelefoneEnum tipoTelefone;
 
 	@OneToMany(mappedBy = "contatoCliente")
-	//@JoinColumn(name = "id_cliente")
 	private List<Cliente> cliente;
 
 	public int getIdContatoCliente() {

@@ -1,7 +1,5 @@
 package centinyx.model;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,7 +7,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import centinyx.enums.TipoPeriodoEnum;
@@ -22,7 +22,7 @@ public class PeriodoAlocacao {
 	}
 
 	public PeriodoAlocacao(int idPeriodoAlocacao, String criacao, TipoPeriodoEnum tipoPeriodo, String periodoInicio,
-			String periodoFim, List<Alocacao> alocacao) {
+			String periodoFim, Alocacao alocacao, Cliente cliente) {
 		super();
 		this.idPeriodoAlocacao = idPeriodoAlocacao;
 		this.criacao = criacao;
@@ -30,6 +30,7 @@ public class PeriodoAlocacao {
 		this.periodoInicio = periodoInicio;
 		this.periodoFim = periodoFim;
 		this.alocacao = alocacao;
+		this.cliente = cliente;
 	}
 
 	@Id
@@ -50,9 +51,13 @@ public class PeriodoAlocacao {
 	@Column(name = "periodo_fim", length = 4, nullable = false)
 	private String periodoFim;
 
-	@ManyToMany(mappedBy = "periodoAlocacao")
-	//@JoinColumn(name = "id_alocacao")
-	private List<Alocacao> alocacao;
+	@OneToOne(mappedBy = "periodoAlocacao")
+	@JoinColumn(name = "id_alocacao")
+	private Alocacao alocacao;
+
+	@ManyToOne
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
 
 	public int getIdPeriodoAlocacao() {
 		return idPeriodoAlocacao;
@@ -94,12 +99,20 @@ public class PeriodoAlocacao {
 		this.periodoFim = periodoFim;
 	}
 
-	public List<Alocacao> getAlocacao() {
+	public Alocacao getAlocacao() {
 		return alocacao;
 	}
 
-	public void setAlocacao(List<Alocacao> alocacao) {
+	public void setAlocacao(Alocacao alocacao) {
 		this.alocacao = alocacao;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 }

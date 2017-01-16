@@ -24,7 +24,7 @@ public class Alocacao {
 	}
 
 	public Alocacao(int idAlocacao, String criacao, String dataAlocacao, int quantidadeMotoboy, Pedido pedido,
-			List<PeriodoAlocacao> periodoAlocacao, Escala escala, List<Motoboy> motoboys) {
+			PeriodoAlocacao periodoAlocacao, Escala escala, List<Motoboy> motoboys) {
 		super();
 		this.idAlocacao = idAlocacao;
 		this.criacao = criacao;
@@ -51,13 +51,13 @@ public class Alocacao {
 	@Column(name = "quantidade_motoboy", length = 2)
 	private int quantidadeMotoboy;
 
-	@OneToOne(optional = false, mappedBy = "alocacao")
-	//@JoinColumn(name = "id_pedido")
+	@ManyToOne
+	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
-
-	@ManyToMany
+	
+	@OneToOne(optional = true)
 	@JoinColumn(name = "id_periodo_alocacao")
-	private List<PeriodoAlocacao> periodoAlocacao;
+	private PeriodoAlocacao periodoAlocacao;
 
 	@ManyToOne
 	@JoinColumn(name = "id_escala")
@@ -108,11 +108,11 @@ public class Alocacao {
 		this.pedido = pedido;
 	}
 
-	public List<PeriodoAlocacao> getPeriodoAlocacao() {
+	public PeriodoAlocacao getPeriodoAlocacao() {
 		return periodoAlocacao;
 	}
 
-	public void setPeriodoAlocacao(List<PeriodoAlocacao> periodoAlocacao) {
+	public void setPeriodoAlocacao(PeriodoAlocacao periodoAlocacao) {
 		this.periodoAlocacao = periodoAlocacao;
 	}
 
