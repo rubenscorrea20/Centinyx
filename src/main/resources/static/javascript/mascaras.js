@@ -22,6 +22,9 @@ $(document).ready(function(){
 	$("#operacaoBancaria").mask("999");
 	$("#codigoCliente").mask("999");
 	
+	
+	
+	
 });
 
 
