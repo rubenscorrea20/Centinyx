@@ -120,8 +120,9 @@ function setaUsuario() {
 };
 
 function setaMotoboy() {
-	if(document.getElementById("motoboy") != null){
-		var indice = document.getElementById("motoboy").name;
+	var indice;
+	if(document.getElementById("motoboy").name != null){
+		indice = document.getElementById("motoboy").name;
 	}
 	$.ajax({
 	    url: "/pedido/cadastra",
@@ -131,13 +132,33 @@ function setaMotoboy() {
 	    	document.getElementById("motoboy").id = indice;
 	    	document.getElementById(indice).value = localStorage.motoboy;
 	    	document.getElementById(indice).name = "motoboy";
-	    	//alert(document.getElementById(indice).name);
 	    },
 	    error: function() {
 	       alert("Deu erro!");
 	    }
-	});
+	})
 };
+
+function mostraValores(){
+	alert($('#container').find('input[type=text]').val());
+}
+
+function salvaAloacaoAjax() {
+	var $form = $('#formPedido');
+	var motoboys = $('#container').find('input[type=text]').val();
+	alert(motoboys);
+		$.ajax({
+			url: "/pedido/salva/alocacao?motoboy="+motoboys+"&tipoperiodo="+$('#tipoPeriodo').val()+
+				 "&nomefantasia="+$('#nomeFantasia').val() +"&dataAlocacao="+$('#dataAlocacao').val()+
+				 "&qtdeMotoboy="+JSON.stringify(parseInt($('#qtdeMotoboy').val())),
+			type: 'post',
+			//processData: true,
+			data: $form.serialize(),
+			sucess: function(){
+				$('#modalCalendar').modal().hide();
+			}
+		});
+}
 
 function setaContatoCliente() {
 	document.getElementById("nomeContato").value = "";

@@ -16,16 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import centinyx.enums.TipoPeriodoEnum;
 import centinyx.logic.DataCriacao;
 import centinyx.model.Alocacao;
-import centinyx.model.Escala;
+import centinyx.model.AlocacaoMotoboy;
 import centinyx.model.Pedido;
 import centinyx.repository.AlocacaoMotoboyRepository;
 import centinyx.repository.AlocacaoRepository;
 import centinyx.repository.MotoboyRepository;
 import centinyx.repository.PedidoRepository;
-import centinyx.repository.PeriodoAlocacaoRepository;
 
 @Controller
 @RequestMapping(value = "/pedido")
@@ -43,17 +41,17 @@ public class PedidoController {
 	@Autowired
 	private PedidoRepository pedidos;
 
-	@Autowired
-	private PeriodoAlocacaoRepository periodos;
+	//@Autowired
+	//private PeriodoAlocacaoRepository periodos;
 
 	private static final String FORM = "formPedido";
 
 	@RequestMapping(value = "/cadastra")
-	public ModelAndView cadastra(Pedido pedido, Alocacao alocacao, Escala escala) {
+	public ModelAndView cadastra(Pedido pedido, Alocacao alocacao) {
 		ModelAndView mv = new ModelAndView(FORM);
 		mv.addObject("pedido", pedido);
 		mv.addObject("alocacao", alocacao);
-		mv.addObject("escala", escala);
+		//mv.addObject("escala", escala);
 		return mv;
 	}
 
@@ -63,7 +61,7 @@ public class PedidoController {
 
 		List<Integer> idAlocacao = alocacao.stream().map(Alocacao::getIdAlocacao).collect(Collectors.toList());
 		if (resultado.hasErrors()) {
-			return cadastra(pedido, new Alocacao(), new Escala());
+			return cadastra(pedido, new Alocacao());
 		}
 
 		pedido.setCriacao(DataCriacao.geraDataHorario());
@@ -78,7 +76,7 @@ public class PedidoController {
 		}
 		return new ModelAndView("redirect:/pedido/lista");
 	}
-
+	
 	@RequestMapping(value = "/cadastra", method = RequestMethod.POST)
 	public ModelAndView cadastraPedido(Pedido pedido, Alocacao alocacao) {
 		ModelAndView mv = new ModelAndView(FORM);
@@ -87,24 +85,37 @@ public class PedidoController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/alocacao/salva", method = RequestMethod.POST)
-	public ModelAndView salvaAlocacao(@RequestParam("motoboy") List<String> motoboy,
-			@RequestParam("tipoPeriodo") TipoPeriodoEnum periodoAlocacao, @RequestParam("nomeFantasia") String cliente,
+	@RequestMapping(value = "/salva/alocacao", method = RequestMethod.POST)
+	public ModelAndView salvaAlocacao(@RequestParam("motoboy") List<String> motoboy, 
+			@RequestParam("tipoperiodo") String periodoAlocacao, @RequestParam("nomefantasia") String cliente,
+			@RequestParam("dataAlocacao") String dataAlocacao, @RequestParam("qtdeMotoboy") int qtdeMotoboy, 
 			@Valid Alocacao alocacao, Pedido pedido, BindingResult resultado) {
+		
 		alocacao.setCriacao(DataCriacao.geraDataHorario());
+		alocacao.setDataAlocacao(dataAlocacao);
+		alocacao.setQuantidadeMotoboy(qtdeMotoboy);
+		
 		try {
 			alocacao.setMotoboys(motoboys.encontraMotoboysAlocados(motoboy));
-			alocacao.setPeriodoAlocacao(periodos.encontraPeriodoAlocacao(periodoAlocacao, cliente));
+			//alocacao.setPeriodoAlocacao(periodos.encontraPeriodoAlocacao(periodoAlocacao, cliente));
 			alocacoes.save(alocacao);
-			if (motoboy.size() > 1) {
+			if(motoboy.size() > 1){
 				alocacoesMotoboys.gravaTodosMotoboysAlocados(alocacao.getIdAlocacao(), alocacao.getMotoboys());
+				List<AlocacaoMotoboy> lista = alocacoesMotoboys.gravaTodosMotoboysAlocados(alocacao.getIdAlocacao(), alocacao.getMotoboys());
+				System.out.println(lista);
 			}
+			System.out.println(alocacao.getMotoboys());
+			System.out.println(motoboy.get(0));
+			System.out.println(motoboy.get(1));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return new ModelAndView("redirect:/pedido/cadastra");
+		ModelAndView mv = new ModelAndView(FORM);
+		mv.addObject("pedido", pedido);
+		mv.addObject("alocacao", alocacao);
+		return mv;
 	}
-
+	
 	@RequestMapping(value = "/lista")
 	public ModelAndView listar(Pageable pageable) {
 		Page<Pedido> listaPedido = pedidos.findAll(pageable);
