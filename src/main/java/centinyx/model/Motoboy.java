@@ -81,7 +81,7 @@ public class Motoboy {
 	private String modeloMoto;
 
 	@NotBlank(message = "O campo placa da moto precisa ser preenchido!")
-	@Column(name = "placa_moto", length = 7)
+	@Column(name = "placa_moto", length = 10)
 	private String placaMoto;
 
 	@NotBlank(message = "O campo renavam precisa ser preenchido!")

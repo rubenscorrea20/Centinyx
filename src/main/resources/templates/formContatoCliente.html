@@ -29,28 +29,39 @@
                         <div class="container">
                             <fieldset style="max-width: 26cm">
                                 <legend>Dados do Contato</legend>
-                                <div class="col-sm-5">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
+                                
+                                
+                                <div class="row">
+                                	<div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('nome')} ? has-error">
                                         <label for="nome">Nome do Contato*:</label>
-                                        <input id="nome" type="text" class="form-control" th:field="*{nome}" style="width: 400px"></input>
+                                        <input id="nome" type="text" class="form-control" th:field="*{nome}"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('email')} ? has-error">
+                                
+                               		 <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('email')} ? has-error">
                                         <label for="email">Email*:</label>
-                                        <input id="email" type="text" class="form-control" th:field="*{email}" style="width: 350px"></input>
+                                        <input id="email" type="text" class="form-control" th:field="*{email}"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
+                                    
+                                </div>
+                                
+                                    
+                                <div class="row">
+                                	<div class="form-group col-sm-2" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
                                         <label for="telefone">Telefone*:</label>
-                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}" style="width: 250px"></input>
+                                        <input id="telefone" type="text" class="form-control" th:field="*{telefone}"></input>
                                     </div>
-                                    <div class="form-group">
+                                
+                                	<div class="form-group col-sm-2">
                                         <label for="sexo">Tipo de Telefone:</label>
-                                            <select class="custom-select form-control" name="tipoTelefone" th:field="*{tipoTelefone}" style="width: 210px">
+                                            <select class="custom-select form-control" name="tipoTelefone" th:field="*{tipoTelefone}">
                                                 <option th:each="tipoTelefone : ${T(centinyx.enums.TipoTelefoneEnum).values()}"
                                                 	th:value="${tipoTelefone}" th:text="${tipoTelefone}">
                                                 </option>
                                             </select>
                                     </div>
-                                </div>
+                                </div>    
+                                    
+                                    
                             </fieldset>
                         </div>
                         <br></br>

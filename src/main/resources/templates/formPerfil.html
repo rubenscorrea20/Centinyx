@@ -29,16 +29,23 @@
                         <div class="container">
                             <fieldset style="max-width: 26cm">
                                 <legend>Dados de Permissão</legend>
-                                <div class="col-sm-5">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('tipoAcesso')} ? has-error">
+                                
+                                <div class="row">
+                                	<div class="form-group col-sm-2" 
+                                		th:classappend="${#fields.hasErrors('tipoAcesso')} ? has-error">
                                         <label for="tipoAcesso">Tipo de Acesso*:</label>
-                                        <input id="tipoAcesso" type="text" class="form-control" th:field="*{tipoAcesso}" style="width: 200px"></input>
-                                    </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
-                                        <label for="descricao">Descricão*:</label>
-                                        <textarea class="form-control" rows="3" id="descricao" style="width: 400px" th:field="*{descricao}"></textarea>
+                                        <input id="tipoAcesso" type="text" class="form-control" th:field="*{tipoAcesso}"></input>
                                     </div>
                                 </div>
+                                    
+                                <div class="row">
+                                    <div class="form-group col-sm-6"
+                                    	th:classappend="${#fields.hasErrors('descricao')} ? has-error">
+                              	 		<label for="descricao">Descrição*:</label>
+                              	 		<textarea class="form-control" rows="5" id="descricao" th:field="*{descricao}"></textarea>
+                              	 	</div>
+                                </div>    
+                                    
                             </fieldset>
                         </div>
                         <br></br>

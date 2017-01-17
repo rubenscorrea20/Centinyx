@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -28,7 +29,7 @@ public class Cliente {
 	public Cliente(int idCliente, ContatoCliente contatoCliente, String criacao, String nomeFantasia,
 			String razaoSocial, String cnpj, String bairro, String logradouro, int numero, String complemento,
 			String cep, String cidade, String ufEndereco, String telefone, String email, String pdd,
-			List<Pedido> pedido, List<PeriodoAlocacao> periodoAlocacao) {
+			List<Pedido> pedido, List<PeriodoAlocacao> periodoAlocacao, Long codigoCliente, String obsCliente) {
 		super();
 		this.idCliente = idCliente;
 		this.contatoCliente = contatoCliente;
@@ -48,12 +49,18 @@ public class Cliente {
 		this.pdd = pdd;
 		this.pedido = pedido;
 		this.periodoAlocacao = periodoAlocacao;
+		this.codigoCliente = codigoCliente;
+		this.obsCliente = obsCliente;
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_cliente")
 	private int idCliente;
+	
+	@NotNull(message = "O campo código cliente precisa ser preenchido!")
+	@Column(name = "codigo_cliente", length = 20)
+	private Long codigoCliente;
 
 	@ManyToOne(optional = true)
 	@Cascade(CascadeType.DELETE)
@@ -118,6 +125,9 @@ public class Cliente {
 	
 	@OneToMany(mappedBy = "cliente")
 	private List<PeriodoAlocacao> periodoAlocacao;
+	
+	@Column(name = "observacao_cliente")
+	private String obsCliente;
 
 	public int getIdCliente() {
 		return idCliente;
@@ -263,4 +273,21 @@ public class Cliente {
 		this.periodoAlocacao = periodoAlocacao;
 	}
 
+	public Long getCodigoCliente() {
+		return codigoCliente;
+	}
+
+	public void setCodigoCliente(Long codigoCliente) {
+		this.codigoCliente = codigoCliente;
+	}
+
+	public String getObsCliente() {
+		return obsCliente;
+	}
+
+	public void setObsCliente(String obsCliente) {
+		this.obsCliente = obsCliente;
+	}
+
+	
 }

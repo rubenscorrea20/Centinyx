@@ -37,7 +37,7 @@ public class Funcionario {
 			String contaBancaria, String agencia, String tipoConta, String cpfFavorecido, String nomeFavorecido,
 			String dataAdmissao, int reservista, int tituloEleitor, int zonaEleitoral, int secaoEleitoral,
 			int carteiraTrabalho, String serieCarteira, int pis, String escolaridade, String nomeMae, String nomePai,
-			Usuario usuario) {
+			Usuario usuario, int operacaoBancaria, String celular2, String celular3) {
 		super();
 		this.idFuncionario = idFuncionario;
 		this.motoboy = motoboy;
@@ -82,6 +82,10 @@ public class Funcionario {
 		this.nomeMae = nomeMae;
 		this.nomePai = nomePai;
 		this.usuario = usuario;
+		this.operacaoBancaria = operacaoBancaria;
+		this.celular2 = celular2;
+		this.celular3 = celular3;
+
 	}
 
 	@Id
@@ -163,12 +167,18 @@ public class Funcionario {
 	@Column(name = "uf_endereco", length = 15)
 	private String ufEndereco;
 
-	@NotBlank(message = "O campo telefone precisa ser preenchido!")
 	@Column(name = "telefone", length = 14)
 	private String telefone;
 
+	@NotBlank(message = "O campo celular precisa ser preenchido!")
 	@Column(name = "celular", length = 15)
 	private String celular;
+	
+	@Column(name = "celular_2", length = 15)
+	private String celular2;
+	
+	@Column(name = "celular_3", length = 15)
+	private String celular3;
 
 	@NotBlank(message = "O campo email precisa ser preenchido!")
 	@Email(message = "Por favor, entre com um endereço de e-mail válido!")
@@ -236,6 +246,9 @@ public class Funcionario {
 
 	@Column(name = "nome_pai", length = 100)
 	private String nomePai;
+	
+	@Column(name = "operacao_bancaria", length = 5)
+	private int operacaoBancaria;
 
 	@OneToOne(optional = true)
 	@JoinColumn(name = "id_usuario")
@@ -584,5 +597,33 @@ public class Funcionario {
 	public void setNomePai(String nomePai) {
 		this.nomePai = nomePai;
 	}
+
+	public int getOperacaoBancaria() {
+		return operacaoBancaria;
+	}
+
+	public void setOperacaoBancaria(int operacaoBancaria) {
+		this.operacaoBancaria = operacaoBancaria;
+	}
+
+	public String getCelular2() {
+		return celular2;
+	}
+
+	public void setCelular2(String celular2) {
+		this.celular2 = celular2;
+	}
+
+	public String getCelular3() {
+		return celular3;
+	}
+
+	public void setCelular3(String celular3) {
+		this.celular3 = celular3;
+	}
+	
+	
+	
+	
 
 }

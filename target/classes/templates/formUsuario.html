@@ -29,16 +29,21 @@
                         <div class="container">
                             <fieldset style="max-width: 26cm">
                                 <legend>Dados de Acesso</legend>
-                                <div class="col-sm-5">
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('login')} ? has-error">
+                                
+                                <div class="row">
+                                	<div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('login')} ? has-error">
                                     	<input type="hidden" th:field="*{idUsuario}" />
                                         <label for="login">Login do Usuário*:</label>
-                                        <input id="login" type="text" class="form-control" th:field="*{login}" style="width: 250px"></input>
+                                        <input id="login" type="text" class="form-control" th:field="*{login}"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('emailLogin')} ? has-error">
+                                
+                                	<div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('emailLogin')} ? has-error">
                                         <label for="emailLogin">Email do Usuário*:</label>
-                                        <input id="emailLogin" type="text" class="form-control" th:field="*{emailLogin}" style="width: 400px"></input>
+                                        <input id="emailLogin" type="text" class="form-control" th:field="*{emailLogin}"></input>
                                     </div>
+                                </div>
+                                    
+                                    
                                     <div class="form-group">
                                         <label for="perfil">Perfil de Acesso*:</label>
                                         <div class="input-group">
@@ -46,7 +51,6 @@
                                             <button type="button" class="btn btn-default" id="buscaPerfil">Buscar perfil</button>
                                         </div>
                                     </div>
-                                </div>
                             </fieldset>
                         </div>
                         <br></br>

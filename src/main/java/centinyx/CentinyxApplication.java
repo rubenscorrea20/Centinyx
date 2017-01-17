@@ -2,6 +2,7 @@ package centinyx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.test.context.TestPropertySource;
 
 @SpringBootApplication
 public class CentinyxApplication {

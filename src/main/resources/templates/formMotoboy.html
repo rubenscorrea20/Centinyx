@@ -29,61 +29,84 @@
                         <div class="container">
                             <fieldset style="max-width: 28.5cm">
                                 <legend>Documentos do Motoboy</legend>
-                                <div class="col-sm-5">
                                 <input type="hidden" th:field="*{idMotoboy}" />
-                                	<div class="form-group">
+                                <div class="form-group">
                                     	<input id="nome" type="hidden" class="form-control" name="nome" style="width: 150px" readonly="readonly"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('cnh')} ? has-error">
+                                <div class="row">
+                                	<div class="form-group col-sm-2"
+                                		th:classappend="${#fields.hasErrors('cnh')} ? has-error">
                                         <label for="cnh">Numero da CNH*:</label>
-                                        <input id="cnh" type="text" class="form-control" th:field="*{cnh}" style="width: 250px"></input>
+                                        <input id="cnh" type="text" class="form-control" th:field="*{cnh}" ></input>
                                     </div>
-                                    <div class="form-group">
+                                
+                                	<div class="form-group col-sm-2">
                                         <label for="categoriaCNH">Categoria da CNH*:</label>
-                                        <select class="custom-select form-control" name="categoriaCNH" style="width: 80px">
+                                        <select class="custom-select form-control" name="categoriaCNH">
                                             <option>A</option>
                                             <option>AB</option>
                                         </select>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('validadeCNH')} ? has-error">
+                                
+                                	<div class="form-group col-sm-2" th:classappend="${#fields.hasErrors('validadeCNH')} ? has-error">
                                         <label for="validadeCNH">Data de Validade*:</label>
                                         <input id="validadeCNH" type="text" class="form-control" th:field="*{validadeCNH}" th:classappend="${#fields.hasErrors('validadeCNH')}" style="width: 130px"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('cpfProprietarioMoto')} ? has-error">
+                                    
+                                    <div class="form-group col-sm-4" 
+                                    	th:classappend="${#fields.hasErrors('cpfProprietarioMoto')} ? has-error">
                                         <label for="cpfMotoboy">CPF do Proprietário da Moto*:</label>
-                                        <input id="cpfMotoboy" type="text" class="form-control" th:field="*{cpfProprietarioMoto}" th:classappend="${#fields.hasErrors('cpfProprietarioMoto')}" style="width: 300px"></input>
+                                        <input id="cpfMotoboy" type="text" class="form-control" th:field="*{cpfProprietarioMoto}" th:classappend="${#fields.hasErrors('cpfProprietarioMoto')}"></input>
                                     </div>
                                 </div>
+                                	
+                                    
+
+                                   
                             </fieldset>
                             <br></br>
                             <fieldset style="max-width: 28.5cm">
                                 <legend>Dados da Moto</legend>
-                                <div class="col-sm-5">
-                                    <div class="form-group">
+                                
+                                
+                                <div class="row">
+                                	<div class="form-group col-sm-2">
                                         <label for="renavam">Renavam*:</label>
-                                        <input id="renavam" type="text" class="form-control" th:field="*{renavam}" style="width: 300px"></input>
+                                        <input id="renavam" type="text" class="form-control" th:field="*{renavam}"></input>
                                     </div>
-                                    <div class="form-group">
+                                
+                                	<div class="form-group col-sm-2">
                                         <label for="placaMoto">Placa da Moto::</label>
-                                        <input id="placaMoto" type="text" class="form-control" th:field="*{placaMoto}" style="width: 120px"></input>
+                                        <input id="placaMoto" type="text" class="form-control" th:field="*{placaMoto}"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('marcaMoto')} ? has-error">
+                                    
+                                    <div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('marcaMoto')} ? has-error">
                                         <label for="marcaMoto">Marca*:</label>
-                                        <input id="marcaMoto" type="text" class="form-control" th:field="*{marcaMoto}" style="width: 220px"></input>
+                                        <input id="marcaMoto" type="text" class="form-control" th:field="*{marcaMoto}"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('modeloMoto')} ? has-error">
+                                
+                                
+                                	<div class="form-group col-sm-4" th:classappend="${#fields.hasErrors('modeloMoto')} ? has-error">
                                         <label for="modeloMoto">Modelo*:</label>
                                         <input id="modeloMoto" type="text" class="form-control" th:field="*{modeloMoto}" style="width: 200px"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('cor')} ? has-error">
+                                </div>
+                                    
+                                <div class="row">
+                                	<div class="form-group col-sm-2" th:classappend="${#fields.hasErrors('cor')} ? has-error">
                                         <label for="cor">Cor*:</label>
                                         <input id="cor" type="text" class="form-control" th:field="*{cor}" style="width: 150px"></input>
                                     </div>
-                                    <div class="form-group" th:classappend="${#fields.hasErrors('anoMoto')} ? has-error">
+                                
+                                	<div class="form-group col-sm-2" th:classappend="${#fields.hasErrors('anoMoto')} ? has-error">
                                         <label for="anoMoto">Ano de Fabricação*:</label>
                                         <input id="anoMoto" type="text" class="form-control" th:field="*{anoMoto}" style="width: 85px"></input>
                                     </div>
-                                </div>
+                                </div>    
+                                    
+                                    
+                                    
+                                    
                             </fieldset>
                             <br></br>
                             <div style="text-align:center;" class="col-sm-11">
