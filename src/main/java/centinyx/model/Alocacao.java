@@ -24,7 +24,7 @@ public class Alocacao {
 	}
 
 	public Alocacao(int idAlocacao, String criacao, String dataAlocacao, int quantidadeMotoboy, Pedido pedido,
-			PeriodoAlocacao periodoAlocacao, Escala escala, List<Motoboy> motoboys) {
+			PeriodoAlocacao periodoAlocacao, List<Motoboy> motoboys, int numeroPedido) {
 		super();
 		this.idAlocacao = idAlocacao;
 		this.criacao = criacao;
@@ -32,8 +32,8 @@ public class Alocacao {
 		this.quantidadeMotoboy = quantidadeMotoboy;
 		this.pedido = pedido;
 		this.periodoAlocacao = periodoAlocacao;
-		this.escala = escala;
 		this.motoboys = motoboys;
+		this.numeroPedido = numeroPedido;
 	}
 
 	@Id
@@ -55,13 +55,12 @@ public class Alocacao {
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 	
+	@Column(name = "numero_pedido")
+	private int numeroPedido;
+	
 	@OneToOne(optional = true)
 	@JoinColumn(name = "id_periodo_alocacao")
 	private PeriodoAlocacao periodoAlocacao;
-
-	@ManyToOne
-	@JoinColumn(name = "id_escala")
-	private Escala escala;
 	
 	@ManyToMany
 	@JoinTable(name="alocacao_motoboy", joinColumns = @JoinColumn(name="id_alocacao"), 
@@ -116,20 +115,20 @@ public class Alocacao {
 		this.periodoAlocacao = periodoAlocacao;
 	}
 
-	public Escala getEscala() {
-		return escala;
-	}
-
-	public void setEscala(Escala escala) {
-		this.escala = escala;
-	}
-
 	public List<Motoboy> getMotoboys() {
 		return motoboys;
 	}
 
 	public void setMotoboys(List<Motoboy> motoboys) {
 		this.motoboys = motoboys;
+	}
+
+	public int getNumeroPedido() {
+		return numeroPedido;
+	}
+
+	public void setNumeroPedido(int numeroPedido) {
+		this.numeroPedido = numeroPedido;
 	}
 	
 }

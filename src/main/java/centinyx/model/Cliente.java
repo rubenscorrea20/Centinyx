@@ -26,12 +26,13 @@ public class Cliente {
 	public Cliente() {
 	}
 
-	public Cliente(int idCliente, ContatoCliente contatoCliente, String criacao, String nomeFantasia,
-			String razaoSocial, String cnpj, String bairro, String logradouro, int numero, String complemento,
-			String cep, String cidade, String ufEndereco, String telefone, String email, String pdd,
-			List<Pedido> pedido, List<PeriodoAlocacao> periodoAlocacao, Long codigoCliente, String obsCliente) {
+	public Cliente(int idCliente, Long codigoCliente, ContatoCliente contatoCliente, String criacao,
+			String nomeFantasia, String razaoSocial, String cnpj, String bairro, String logradouro, int numero,
+			String complemento, String cep, String cidade, String ufEndereco, String telefone, String email, String pdd,
+			List<Pedido> pedido, List<PeriodoAlocacao> periodoAlocacao, String obsCliente) {
 		super();
 		this.idCliente = idCliente;
+		this.codigoCliente = codigoCliente;
 		this.contatoCliente = contatoCliente;
 		this.criacao = criacao;
 		this.nomeFantasia = nomeFantasia;
@@ -49,7 +50,6 @@ public class Cliente {
 		this.pdd = pdd;
 		this.pedido = pedido;
 		this.periodoAlocacao = periodoAlocacao;
-		this.codigoCliente = codigoCliente;
 		this.obsCliente = obsCliente;
 	}
 

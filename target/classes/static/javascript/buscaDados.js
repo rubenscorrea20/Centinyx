@@ -119,6 +119,8 @@ function setaUsuario() {
 	};
 };
 
+var array = [];
+
 function setaMotoboy() {
 	var indice;
 	if(document.getElementById("motoboy").name != null){
@@ -132,49 +134,12 @@ function setaMotoboy() {
 	    	document.getElementById("motoboy").id = indice;
 	    	document.getElementById(indice).value = localStorage.motoboy;
 	    	document.getElementById(indice).name = "motoboy";
+	    	array.push(document.getElementById(indice).value);
 	    },
 	    error: function() {
 	       alert("Deu erro!");
 	    }
 	})
-};
-
-function mostraValores(){
-	alert($('#container').find('input[type=text]').val());
-}
-
-function salvaAloacaoAjax() {
-	var $form = $('#formPedido');
-	var motoboys = $('#container').find('input[type=text]').val();
-	alert(motoboys);
-		$.ajax({
-			url: "/pedido/salva/alocacao?motoboy="+motoboys+"&tipoperiodo="+$('#tipoPeriodo').val()+
-				 "&nomefantasia="+$('#nomeFantasia').val() +"&dataAlocacao="+$('#dataAlocacao').val()+
-				 "&qtdeMotoboy="+JSON.stringify(parseInt($('#qtdeMotoboy').val())),
-			type: 'post',
-			//processData: true,
-			data: $form.serialize(),
-			sucess: function(){
-				$('#modalCalendar').modal().hide();
-			}
-		});
-}
-
-function setaContatoCliente() {
-	document.getElementById("nomeContato").value = "";
-	if(localStorage.contato){
-		$.ajax({
-			url: "/cliente/cadastra",
-			type: 'POST',
-			data: localStorage.contato,
-			success: function() {
-				document.getElementById("nomeContato").value = localStorage.contato;
-			},
-			error: function() {
-				alert("Deu erro!");
-			}
-		});
-	};
 };
 
 function setaCliente() {
@@ -186,6 +151,53 @@ function setaCliente() {
 			data: localStorage.contato,
 			success: function() {
 				document.getElementById("nomeCliente").value = localStorage.cliente;
+			},
+			error: function() {
+				alert("Deu erro!");
+			}
+		});
+	};
+};
+
+function limpaLocalStorageCliente(){
+	delete window.localStorage["cliente"];
+}
+
+function salvaAloacaoAjax() {
+	var $form = $('#formPedido');
+		$.ajax({
+			url: "/pedido/salva/alocacao?motoboy="+array+"&tipoperiodo="+$('#tipoPeriodo').val()+
+				 "&numeroPedidoAlocacao="+JSON.stringify(parseInt($('#numeroPedidoAlocacao').val()))+ 
+				 "&dataAlocacao="+$('#dataAlocacao').val()+
+				 "&qtdeMotoboy="+JSON.stringify(parseInt($('#qtdeMotoboy').val())),
+			type: 'post',
+			data: $form.serialize()
+		});
+}
+
+$(document).ready(function(){
+	$("#confirmaAlocacao").click(function(){
+	       $('#modalCalendar').modal('hide');
+	       delete window.localStorage["motoboy"];
+	});
+	$("#cancelaAlocacao").click(function(){
+		   array = [];
+		   delete window.localStorage["motoboy"];
+	});
+	$("#enviarPedido").click(function(){
+		delete window.localStorage["cliente"];
+	})
+});
+
+function setaContatoCliente() {
+	document.getElementById("nomeContato").value = "";
+	if(localStorage.contato){
+		$.ajax({
+			url: "/cliente/cadastra",
+			type: 'POST',
+			data: localStorage.contato,
+			success: function() {
+				document.getElementById("nomeContato").value = localStorage.contato;
 			},
 			error: function() {
 				alert("Deu erro!");

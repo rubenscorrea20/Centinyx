@@ -1,7 +1,7 @@
 package centinyx.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -18,7 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import centinyx.logic.DataCriacao;
 import centinyx.model.Alocacao;
-import centinyx.model.AlocacaoMotoboy;
 import centinyx.model.Pedido;
 import centinyx.repository.AlocacaoMotoboyRepository;
 import centinyx.repository.AlocacaoRepository;
@@ -51,29 +50,29 @@ public class PedidoController {
 		ModelAndView mv = new ModelAndView(FORM);
 		mv.addObject("pedido", pedido);
 		mv.addObject("alocacao", alocacao);
-		//mv.addObject("escala", escala);
 		return mv;
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ModelAndView salva(@RequestParam("nomeCliente") String nomeCliente, @Valid Pedido pedido,
-			BindingResult resultado, List<Alocacao> alocacao) {
-
-		List<Integer> idAlocacao = alocacao.stream().map(Alocacao::getIdAlocacao).collect(Collectors.toList());
+	public ModelAndView salva(@RequestParam("nomeCliente") String nomeCliente, @RequestParam("numeroPedido") int numeroPedido,
+			@Valid Pedido pedido, BindingResult resultado) {
+		
 		if (resultado.hasErrors()) {
 			return cadastra(pedido, new Alocacao());
 		}
-
+		
 		pedido.setCriacao(DataCriacao.geraDataHorario());
-		pedido.setAlocacao(alocacao);
-		alocacoes.atualizaAlocacaoPedido(pedido.getIdPedido(), idAlocacao);
-
 		try {
 			pedido.setCliente(pedidos.encontraCliente(nomeCliente));
 			pedidos.save(pedido);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+			ArrayList<Integer> idAlocacao = alocacoes.buscaAlocacoes(numeroPedido);
+			int idPedido = pedido.getIdPedido();
+			alocacoes.atualizaAlocacaoPedido(idPedido, idAlocacao);
+			System.out.println(idAlocacao.size());
+		
 		return new ModelAndView("redirect:/pedido/lista");
 	}
 	
@@ -87,26 +86,24 @@ public class PedidoController {
 
 	@RequestMapping(value = "/salva/alocacao", method = RequestMethod.POST)
 	public ModelAndView salvaAlocacao(@RequestParam("motoboy") List<String> motoboy, 
-			@RequestParam("tipoperiodo") String periodoAlocacao, @RequestParam("nomefantasia") String cliente,
+			@RequestParam("tipoperiodo") String periodoAlocacao, @RequestParam("numeroPedidoAlocacao") int numeroPedidoAlocacao,
 			@RequestParam("dataAlocacao") String dataAlocacao, @RequestParam("qtdeMotoboy") int qtdeMotoboy, 
 			@Valid Alocacao alocacao, Pedido pedido, BindingResult resultado) {
 		
 		alocacao.setCriacao(DataCriacao.geraDataHorario());
 		alocacao.setDataAlocacao(dataAlocacao);
 		alocacao.setQuantidadeMotoboy(qtdeMotoboy);
+		alocacao.setNumeroPedido(numeroPedidoAlocacao);
 		
 		try {
 			alocacao.setMotoboys(motoboys.encontraMotoboysAlocados(motoboy));
 			//alocacao.setPeriodoAlocacao(periodos.encontraPeriodoAlocacao(periodoAlocacao, cliente));
 			alocacoes.save(alocacao);
+			
 			if(motoboy.size() > 1){
 				alocacoesMotoboys.gravaTodosMotoboysAlocados(alocacao.getIdAlocacao(), alocacao.getMotoboys());
-				List<AlocacaoMotoboy> lista = alocacoesMotoboys.gravaTodosMotoboysAlocados(alocacao.getIdAlocacao(), alocacao.getMotoboys());
-				System.out.println(lista);
 			}
-			System.out.println(alocacao.getMotoboys());
-			System.out.println(motoboy.get(0));
-			System.out.println(motoboy.get(1));
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -117,7 +114,7 @@ public class PedidoController {
 	}
 	
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar(Pageable pageable) {
+	public ModelAndView listaPedido(Pageable pageable) {
 		Page<Pedido> listaPedido = pedidos.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaPedido");
 		mv.addObject("pedidos", listaPedido);
@@ -125,8 +122,19 @@ public class PedidoController {
 		mv.addObject("totalPaginas", numeroPaginas);
 		return mv;
 	}
+	
+	// Lista os detalhes da Alocação clicada
+		@RequestMapping("alocacao/lista/{idAlocacao}")
+		public ModelAndView visualizarAlocacao(@PathVariable int idAlocacao) {
+			ModelAndView mv = new ModelAndView("detalhesAlocacao");
+			Alocacao alocacao = alocacoes.findOne(idAlocacao);
+			mv.addObject("alocacao", alocacao);
+			return mv;
+	}
+		
+	//FALTA CRIAR DETALHES PEDIDO
 
-	// Metodo para editar os dados do pedido
+	/* Metodo para editar os dados do pedido
 	@RequestMapping("{idpedido}")
 	public ModelAndView editar(@PathVariable int idpedido) {
 		ModelAndView mv = new ModelAndView(FORM);
@@ -140,6 +148,6 @@ public class PedidoController {
 	public ModelAndView deletar(@PathVariable int idpedido) {
 		pedidos.deleteByIdPedido(idpedido);
 		return new ModelAndView("redirect:/pedido/lista");
-	}
+	}*/
 
 }

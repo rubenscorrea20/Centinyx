@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var date = new Date();
+	var date = new Date();
     var d = date.getDate();
     var m = date.getMonth();
     var y = date.getFullYear();
@@ -7,45 +7,29 @@ $(document).ready(function() {
         header: {
             left: 'prev,next today',
             center: 'title',
-            //right: 'month,agendaWeek,agendaDay'
         },
         selectable: true,
-        selectHelper: true,
-        /*select: function(start, end, allDay) {
-        	var title = prompt('Event Title:');
-        	if (title) {
-        		calendar.fullCalendar('renderEvent',
-        			{
-        				title: title,
-        				start: start,
-        				end: end,
-        				allDay: allDay
-        			},
-        			true // make the event "stick"
-        		);
-        	}
-        	calendar.fullCalendar('unselect');
-        },*/
         editable: true,
+        eventLimit: true,
+        displayEventTime: false,
         select: function(start, allDay, jsEvent, view) {
-            //start = $.fullCalendar.formatDate(date,'dd-MM-yyyy');
-            //$('#calendar').fullCalendar('renderEvent', eventData, true);
-            start = moment(start).format('DD/MM/YYYY');
+            document.getElementById("numeroPedidoAlocacao").value = document.getElementById("numeroPedido").value;
+            var start = moment(start).format('DD/MM/YYYY');
+            var title = document.getElementById("tipoPeriodo").value;
             $("#modalCalendar").modal("show");
             $("#modalCalendar #dataAlocacao").val(start);
-            document.getElementById("nomeFantasia").value = document.getElementById("nomeCliente").value;
-            var title = document.getElementById("periodo").value;
             var eventData;
 			$("#confirmaAlocacao").on('click', function(){
 				eventData = {
 						title: title,
 						start: start
-					};
+					},
 					$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
 			});
 			$('#calendar').fullCalendar('unselect');
-            //$('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
-            //$('#calendar').fullCalendar('unselect');
+        },
+        eventClick: function(){
+        	$("#modalDetalhes").modal('show');
         }
     });
 });
