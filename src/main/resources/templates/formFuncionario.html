@@ -319,13 +319,16 @@
 											type="text" class="form-control" th:field="*{agencia}"
 											th:classappend="${#fields.hasErrors('agencia')}"></input>
 									</div>
-								
-									<div class="form-group col-sm-2"
-										th:classappend="${#fields.hasErrors('contaBancaria')} ? has-error">
-										<label for="contaBancaria">Conta Bancaria:*</label> <input
-											id="contaBancaria" type="text" class="form-control"
-											th:field="*{contaBancaria}"
-											th:classappend="${#fields.hasErrors('contaBancaria')}"></input>
+									
+									<div class="form-group col-sm-4">
+									<label for="contaBancaria">Conta Bancária*:</label>
+									<div class="input-group">
+										<input id="contaBancaria" type="text" class="form-control"
+											th:field="*{contaBancaria}" th:classappend="${#fields.hasErrors('contaBancaria')}"
+											style="width: 200px"></input>
+										<button type="button" class="btn btn-default" style="width: 35px;" disabled="disabled">-</button>
+										<input class="form-control" style="width: 35px"></input>
+									</div>
 									</div>
 									
 									<div class="form-group col-sm-1"
