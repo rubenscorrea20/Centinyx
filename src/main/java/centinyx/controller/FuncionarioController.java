@@ -42,8 +42,13 @@ public class FuncionarioController {
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ModelAndView salva(@RequestParam("login") String login, @Valid Funcionario funcionario,
+	public ModelAndView salva(@RequestParam("login") String login, @RequestParam("contaBancaria") String contaBancaria,
+			@RequestParam("digitoConta") String digitoConta, @Valid Funcionario funcionario,
 			BindingResult resultado) {
+		
+		StringBuilder sb = new StringBuilder();
+		String contaFuncionario = sb.append(contaBancaria).append("-").append(digitoConta).toString();
+		funcionario.setContaBancaria(contaFuncionario);
 		funcionario.setUsuario(usuarios.encontraLoginUsuario(login));
 		funcionario.setCriacao(DataCriacao.geraDataHorario());
 		try {

@@ -324,10 +324,10 @@
 									<label for="contaBancaria">Conta Bancária*:</label>
 									<div class="input-group">
 										<input id="contaBancaria" type="text" class="form-control"
-											th:field="*{contaBancaria}" th:classappend="${#fields.hasErrors('contaBancaria')}"
+											th:field="*{contaBancaria}" name="contaBancaria" th:classappend="${#fields.hasErrors('contaBancaria')}"
 											style="width: 200px"></input>
 										<button type="button" class="btn btn-default" style="width: 35px;" disabled="disabled">-</button>
-										<input class="form-control" style="width: 35px"></input>
+										<input class="form-control" name="digitoConta" style="width: 35px"></input>
 									</div>
 									</div>
 									
