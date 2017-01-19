@@ -31,7 +31,10 @@
                            <div class="col-sm-5">
                               <div class="form-group" th:classappend="${#fields.hasErrors('numeroPedido')} ? has-error">
                                  <label for="numeroPedido">Numero do Pedido:</label>
+                                 <span>
                                  <input id="numeroPedido" type="text" class="form-control" th:field="*{numeroPedido}" name="numeroPedido" readonly="readonly" style="width: 250px"></input>
+                              	 <label hidden="hidden" th:text="${numeroPedido}" id="numeroPedidoRandom"></label>
+                              	 </span>
                               </div>
                               <div class="form-group">
                                  <label for="nomeCliente">Cliente:</label>
@@ -129,7 +132,7 @@
       </section>
       <th:block layout:fragment="javascript-extra">
          <script src="/javascript/buscadados.js"></script>
-         <script src="/javascript/mathRandom.js"></script>
+         <script src="/javascript/apresentaCalendario.js"></script>
          <script src="/javascript/calendarioEscalas.js"></script>
          <script src="/javascript/redirectViews.js"></script>
          <script src="/javascript/acrescentaMotoboys.js"></script>

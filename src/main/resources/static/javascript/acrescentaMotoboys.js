@@ -29,7 +29,7 @@ function acrescentaMotoboy(){
 			container.appendChild(button);
 				
 			button.onclick = function(){
-				window.open("/funcionario/motoboy/lista");
+				window.open("/motoboy/lista");
 			}
 		}
 };

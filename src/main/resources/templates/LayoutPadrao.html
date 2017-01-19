@@ -20,25 +20,63 @@
 <body>
 
   <nav class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
+    <!--<div class="container">-->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a href="index.html" class="navbar-brand logotipo">
+        <a href="http://proattitude.com.br/" class="navbar-brand logotipo">
           <img src="/images/logo.png" alt="Pro Attitude"></img>
         </a>
       </div>
-      <div class="collapse navbar-collapse" id="menu">
+      <div class="navbar-collapse collapse" id="menu">
         <ul class="nav navbar-nav">
-          <li><a href="/cliente/cadastra">Clientes</a></li>
-          <li><a href="/funcionario/cadastra">Funcionários</a></li>
-          <li><a href="">Relatórios</a></li>
-          <li><a href="/funcionario/motoboy/lista">Motoboys</a></li>
-          <li><a href="/pedido/cadastra">Pedidos/Escalas</a></li>
-          <li><a href="">Contas a Pagar/Receber</a></li>
+          <li class="dropdown">
+          	<a class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">Clientes <span class="caret"></span></a>
+          	<ul class="dropdown-menu">
+          		<li><a href="/cliente/cadastra">Cadastrar clientes</a></li>
+          		<li><a href="/cliente/lista">Consultar clientes cadastrados</a></li>
+          	</ul>
+          </li>
+          
+          <li class="dropdown">
+          	<a class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">Funcionários <span class="caret"></span></a>
+          	<ul class="dropdown-menu">
+          		<li><a href="/funcionario/cadastra">Cadastrar funcionários</a></li>
+          		<li><a href="/funcionario/lista">Consultar funcionários cadastrados</a></li>
+          	</ul>
+          </li>
+          
+          <li class="dropdown">
+          	<a class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">Motoboys <span class="caret"></span></a>
+          	<ul class="dropdown-menu">
+          		<li><a href="/motoboy/lista">Consultar motoboys cadastrados</a></li>
+          	</ul>
+          </li>
+          
+          <li class="dropdown">
+          	<a class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">Pedidos/Alocações<span class="caret"></span></a>
+          	<ul class="dropdown-menu">
+          		<li><a href="/pedido/cadastra">Cadastrar pedidos</a></li>
+          		<li><a href="/pedido/lista">Consultar pedidos cadastrados</a></li>
+          		<li role="separator" class="divider"></li>
+          		<li><a href="/alocacao/lista">Consultar alocações cadastradas</a></li>
+          	</ul>
+          </li>
+          
+          <li><a href="/cliente/cadastra">Contas a Pagar/Receber</a></li>
+          
+          <li class="dropdown">
+          	<a class="dropdown-toogle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" href="#">Administração do Sistema<span class="caret"></span></a>
+          	<ul class="dropdown-menu">
+          		<li><a href="/usuario/lista">Usuários</a></li>
+          		<li role="separator" class="divider"></li>
+          		<li><a href="/perfil/lista">Perfis</a></li>
+          	</ul>
+          </li>
+      	
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
@@ -59,15 +97,15 @@
           </li>
         </ul>
       </div>
-    </div>
+    <!--</div>-->
   </nav>
 
-  <div class="container">
-    <ol class="breadcrumb">
-      <li><a href="">Início</a></li>
+  <div class="container" id="breadcrumb">
+    <ul class="breadcrumb" id="navigation_links">
+      <li><a href="">Inicio</a></li>
       <li><a href="">Funcionários</a></li>
       <li class="active">Lista de Funcionários</li>
-    </ol>  
+    </ul>  
   </div>
    
     <section class="content" layout:fragment="conteudo"></section> 

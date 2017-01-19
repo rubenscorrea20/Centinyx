@@ -21,7 +21,7 @@ import centinyx.repository.FuncionarioRepository;
 import centinyx.repository.MotoboyRepository;
 
 @Controller
-@RequestMapping(value = "/funcionario/motoboy")
+@RequestMapping(value = "/motoboy")
 public class MotoboyController {
 
 	@Autowired
@@ -47,6 +47,7 @@ public class MotoboyController {
 			return cadastra(motoboy);
 		}
 		motoboy.setCriacao(DataCriacao.geraDataHorario());
+		motoboy.setStatus_motoboy("DISPONÍVEL");
 		motoboy.setFuncionario(funcionarios.encontraNomeFuncionario(nome));
 		motoboys.save(motoboy);
 		return new ModelAndView("redirect:/funcionario/motoboy/lista");

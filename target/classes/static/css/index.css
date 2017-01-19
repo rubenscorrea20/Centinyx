@@ -29,7 +29,7 @@
 
 .cabecalho h1 {
 	margin: 0;
-	font-size: 3em;
+	font-size: 3cm;
 }
 
 .busca {
@@ -61,7 +61,7 @@
 	}
 
 	.paginacao {
-		text-align: center;
+		text-align: left;
 	}
 
 	.paginacao .pagination {

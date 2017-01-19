@@ -70,6 +70,7 @@ function criaLocalStorageCliente() {
 };
 
 function criaLocalStorageFuncionario() {
+	delete window.localStorage["usuario"];
     if (document.getElementById("funcao").value == "Motoboy") {
         var nome = document.getElementById("nome").value;
         localStorage.funcionario = nome;
@@ -166,7 +167,7 @@ function limpaLocalStorageCliente(){
 function salvaAloacaoAjax() {
 	var $form = $('#formPedido');
 		$.ajax({
-			url: "/pedido/salva/alocacao?motoboy="+array+"&tipoperiodo="+$('#tipoPeriodo').val()+
+			url: "/alocacao/salva?motoboy="+array+"&tipoperiodo="+$('#tipoPeriodo').val()+
 				 "&numeroPedidoAlocacao="+JSON.stringify(parseInt($('#numeroPedidoAlocacao').val()))+ 
 				 "&dataAlocacao="+$('#dataAlocacao').val()+
 				 "&qtdeMotoboy="+JSON.stringify(parseInt($('#qtdeMotoboy').val())),

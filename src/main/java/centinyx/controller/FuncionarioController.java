@@ -69,7 +69,7 @@ public class FuncionarioController {
 			funcionario.setUsuario(usuarios.encontraLoginUsuario(login));
 			funcionario.setCriacao(DataCriacao.geraDataHorario());
 			funcionarios.save(funcionario);
-			return new ModelAndView("redirect:/funcionario/motoboy/cadastra");
+			return new ModelAndView("redirect:/motoboy/cadastra");
 		}
 		return new ModelAndView("redirect:/funcionario/lista");
 	}

@@ -37,7 +37,7 @@ jQuery(document).ready(function() {
 		listaMotoboy();
 	});
 	function listaMotoboy(){
-		window.location.href="/funcionario/motoboy/lista";
+		window.location.href="/motoboy/lista";
 	}
 
 });

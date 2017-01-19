@@ -21,10 +21,6 @@ $(document).ready(function(){
 	$("#placaMoto").mask("aaa-9999");
 	$("#operacaoBancaria").mask("999");
 	$("#codigoCliente").mask("999");
-	
-	
-	
-	
 });
 
 
