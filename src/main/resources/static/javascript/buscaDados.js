@@ -136,6 +136,7 @@ function setaMotoboy() {
 	    	document.getElementById(indice).value = localStorage.motoboy;
 	    	document.getElementById(indice).name = "motoboy";
 	    	array.push(document.getElementById(indice).value);
+	    	$("#modalDetalhes #motoboyslbl").append("<br>" + array[array.length-1] + ", ");
 	    },
 	    error: function() {
 	       alert("Deu erro!");
