@@ -1,9 +1,7 @@
 $(document).ready(function() {
-    var date = new Date();
-    var d = date.getDate();
-    var m = date.getMonth();
-    var y = date.getFullYear();
-    var periodo = $("#tipoPeriodo").prop('value');
+	var tipoPeriodo;
+    var dataAlocacao;
+    var eventData;
     var calendar = $('#calendar').fullCalendar({
     	header: {
             left: 'prev,next today',
@@ -13,34 +11,41 @@ $(document).ready(function() {
         editable: false,
         eventLimit: true,
         displayEventTime: false,
-        select: function(start, end) {
+        dayClick: function(start, end, allDay) {
             document.getElementById("numeroPedidoAlocacao").value = document.getElementById("numeroPedido").value;
-            var dataAlocacao = moment(start).format('DD/MM/YYYY');
+            dataAlocacao = moment(start).format('DD/MM/YYYY');
             $("#modalCalendar").modal("show");
             $("#modalCalendar #dataAlocacao").val(dataAlocacao);
+            tipoPeriodo = document.getElementById("tipoPeriodo");
             $("#confirmaAlocacao").on('click', function(){
-            	var eventData;
-                eventData = {
-                		   title: periodo,
-                           start: start,
-                           end: end
-                };
-                $('#calendar').fullCalendar('renderEvent', eventData, start, end, true);
-            })
-            //$("#confirmaAlocacao").on('click', function() {
-            //    $('#calendar').fullCalendar('renderEvent', eventData, start, end, true);
-            //})
-            $('#calendar').fullCalendar('unselect');
+            	var periodo = tipoPeriodo.options[tipoPeriodo.selectedIndex].text;
+            	eventData = {
+            		title: periodo,
+					start: start,
+					end: start,
+					allDay: allDay
+            	},
+            	calendar.fullCalendar('renderEvent', eventData, true);
+        	    });
+        },
+        eventAfterRender: function(event, element, view){
+        	if(event.title == "Noturno"){
+        		element.css('background-color', '#8A1C8E');
+        	} else if (event.title == "Matutino"){
+        		element.css('background-color', '#B20B16');
+        	}else if (event.title == "Vespertino"){
+        		element.css('background-color', '#129812');
+        	}
         },
         eventClick: function() {
-        	var dataAlocacao = $("#modalCalendar #dataAlocacao").prop("value");
-        	var periodo = $("#modalCalendar #tipoPeriodo").prop("value");
+        	dataAlocacao = $("#modalCalendar #dataAlocacao").prop("value");
+        	periodo = $("#modalCalendar #tipoPeriodo").prop("value");
             $("#modalDetalhes").modal('show');
             $("#modalDetalhes #dataAlocacaolbl").text(dataAlocacao);
             $("#modalDetalhes #periodolbl").text(periodo);    
         }
     });
-});
+})
 
 $(document).ready(function() {
     $('#cancelaAlocacao').on('click', function() {
