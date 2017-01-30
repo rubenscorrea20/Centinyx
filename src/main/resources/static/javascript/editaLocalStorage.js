@@ -36,3 +36,16 @@ function editaLocalStoragePerfil() {
         }
     }
 };
+
+function editaLocalStoragePedido() {
+    var linhas = document.getElementById("tabelaPedido")
+        .getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+    var table = document.getElementById("tabelaPedido");
+    for (i = 0; i < linhas.length; i++) {
+        linhas[i].onclick = function() {
+            var t = this.rowIndex + 1;
+            var tabela = table.rows[t - 1].cells.namedItem("nomeClientePedido").innerHTML;
+            localStorage.perfil = tabela;
+        }
+    }
+};

@@ -13,6 +13,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "pedido")
 public class Pedido {
@@ -44,6 +47,7 @@ public class Pedido {
 	private Cliente cliente;
 
 	@OneToMany(mappedBy = "pedido")
+	@Cascade(CascadeType.DELETE)
 	private List<Alocacao> alocacao;
 
 	@OneToOne(optional = false, mappedBy = "pedido")

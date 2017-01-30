@@ -20,23 +20,14 @@ public interface AlocacaoRepository extends JpaRepository<Alocacao, Integer> {
 	@Query(value = "UPDATE Alocacao SET id_pedido = ?1 WHERE id_alocacao in ?2", nativeQuery = true)
 	public void atualizaAlocacaoPedido(int idPedido, List<Integer> idAlocacao);
 	
-	//@Transactional
-	//@Modifying(clearAutomatically = true)
-	//@Query(value = "UPDATE Alocacao a SET a.id_pedido = :idPedido WHERE a.id_alocacao = :idAlocacao", nativeQuery = true)
-	//public void atualizaAlocacaoPedido(int idPedido, int idAlocacao);
-	
 	@Query("SELECT m FROM Motoboy m, Funcionario f WHERE m.funcionario = f.idFuncionario and f.nome in :motoboy")
 	public List<Motoboy> encontraMotoboysAlocados(@Param("motoboy") List<String> motoboy);
 	
 	
-	//@Query(value = "SELECT a.idAlocacao FROM Alocacao a, Pedido p WHERE a.numeroPedido = p.numeroPedido and a.numeroPedido = :numeroPedido")
-	//public ArrayList<Integer> buscaAlocacoes(@Param("numeroPedido") int numeroPedido);
-	
 	@Query(value = "SELECT a.id_alocacao FROM Alocacao a, Pedido p WHERE a.numero_pedido = p.numero_pedido and a.numero_pedido = ?1", nativeQuery = true)
 	public ArrayList<Integer> buscaAlocacoes(int numeroPedido);
 	
+	List<Alocacao> findByNumeroPedido(int numeroPedido);
 	
-	//@Query(value = "SELECT a FROM Alocacao a, Pedido p WHERE a.numeroPedido = p.numeroPedido and a.numeroPedido = :numeroPedido")
-	//public List<Alocacao> buscaAlocacoes(@Param("numeroPedido") int numeroPedido);
 
 }

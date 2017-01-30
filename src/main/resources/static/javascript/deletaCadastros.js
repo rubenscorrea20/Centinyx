@@ -36,5 +36,12 @@ $(document).ready(function(){
 	});
 })
 
+$(document).ready(function(){
+	$('#deletaPedido').on('click', function(){
+		var idPedido = document.getElementById("idPedido").innerHTML;
+		location.replace("pedido/deleta/" + idPedido);
+	});
+})
+
 
 

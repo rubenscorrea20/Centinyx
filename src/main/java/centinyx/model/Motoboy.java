@@ -21,7 +21,7 @@ public class Motoboy {
 	}
 
 	public Motoboy(int idMotoboy, String cnh, String categoriaCNH, String validadeCNH, String criacao,
-			String status_motoboy, String cpfProprietarioMoto, String marcaMoto, String anoMoto, String modeloMoto,
+			String statusMotoboy, String cpfProprietarioMoto, String marcaMoto, String anoMoto, String modeloMoto,
 			String placaMoto, String renavam, String cor, String regiaoAlocacao, Funcionario funcionario) {
 		super();
 		this.idMotoboy = idMotoboy;
@@ -29,7 +29,7 @@ public class Motoboy {
 		this.categoriaCNH = categoriaCNH;
 		this.validadeCNH = validadeCNH;
 		this.criacao = criacao;
-		this.status_motoboy = status_motoboy;
+		this.statusMotoboy = statusMotoboy;
 		this.cpfProprietarioMoto = cpfProprietarioMoto;
 		this.marcaMoto = marcaMoto;
 		this.anoMoto = anoMoto;
@@ -62,7 +62,7 @@ public class Motoboy {
 	private String criacao;
 
 	@Column(name = "status_motoboy", length = 30)
-	private String status_motoboy;
+	private String statusMotoboy;
 
 	@NotBlank(message = "O campo CPF do proprietário precisa ser preenchido!")
 	@Column(name = "cpf_proprietario", length = 14)
@@ -139,12 +139,12 @@ public class Motoboy {
 		this.criacao = criacao;
 	}
 
-	public String getStatus_motoboy() {
-		return status_motoboy;
+	public String getStatusMotoboy() {
+		return statusMotoboy;
 	}
 
-	public void setStatus_motoboy(String status_motoboy) {
-		this.status_motoboy = status_motoboy;
+	public void setStatusMotoboy(String statusMotoboy) {
+		this.statusMotoboy = statusMotoboy;
 	}
 
 	public String getCpfProprietarioMoto() {

@@ -39,7 +39,7 @@
                               <div class="form-group">
                                  <label for="nomeCliente">Cliente:</label>
                                  <div class="input-group">
-                                    <input id="nomeCliente" type="text" class="form-control" name="nomeCliente" style="width: 350px" readonly="readonly"></input>
+                                    <input id="nomeClientePedido" type="text" class="form-control" name="nomeClientePedido" style="width: 350px" readonly="readonly"></input>
                                     <span class="input-group-btn">
                                     <button type="button" class="btn btn-default" id="buscaCliente">Buscar cliente</button>
                                     </span>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="modal-footer">
                            <button type="button" class="btn btn-danger" data-dismiss="modal" id="cancelaAlocacao">Cancelar</button>
-                           <button type="button" class="btn btn-primary" id="confirmaAlocacao" th:onclick="'javascript:salvaAloacaoAjax()'">Salvar</button>
+                           <button type="button" class="btn btn-primary" id="confirmaAlocacao" th:onclick="'javascript:salvaAlocacaoAjax()'">Salvar</button>
                         </div>
                      </div>
                   </div>

@@ -22,14 +22,14 @@
                      </div>
                 </form>-->
                 <div class="panel-body">
-                    <table class="table table-striped table-bordered" id="tabelaMotoboy">
+                    <table class="table table-striped table-bordered" id="tabelaPedido">
                         <thead>
                             <tr>
                                 <th>Id</th>
                                 <th>Data de Criação</th>
                                 <th>Numero do Pedido</th>
                                 <th>Nome do Cliente</th>
-                                <th colspan="3">Opções</th>
+                                <th colspan="2">Opções</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,9 +38,28 @@
                                 <td th:text="${pedido.criacao}"></td>
                                 <td th:text="${pedido.numeroPedido}" id="numeroPedido"></td>
                                 <td th:text="${pedido.cliente != null ?  pedido.cliente.nomeFantasia : ''}" id="nomeClientePedido"></td>
-                                <td><a th:href="@{#}">Detalhes</a></td>
-                                <td><a th:href="@{#}">Selecionar</a></td>
-                                <td><a th:href="@{#}">Editar</a></td>
+                                <td><a th:onclick="'javascript:editaLocalStoragePedido()'" th:href="@{/pedido/{idPedido}(idPedido=${pedido.idPedido})}">Editar</a></td>
+                                <td><a th:href="'#'" href="#" data-toggle="modal" data-target="#myModal" id="deleta">Deletar</a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Aviso!</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Confirmar exclusão do cadastro do pedido?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="deletaPedido">Confirmar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </td>
                             </tr>
                         </tbody>
                     </table>

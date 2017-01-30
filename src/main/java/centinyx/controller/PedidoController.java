@@ -1,6 +1,7 @@
 package centinyx.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.validation.Valid;
@@ -8,8 +9,10 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,9 +34,6 @@ public class PedidoController {
 	@Autowired
 	private PedidoRepository pedidos;
 
-	//@Autowired
-	//private PeriodoAlocacaoRepository periodos;
-
 	private static final String FORM = "formPedido";
 
 	@RequestMapping(value = "/cadastra")
@@ -51,7 +51,7 @@ public class PedidoController {
 	}
 
 	@RequestMapping(value = "/salva", method = RequestMethod.POST)
-	public ModelAndView salva(@RequestParam("nomeCliente") String nomeCliente, @RequestParam("numeroPedido") int numeroPedido,
+	public ModelAndView salva(@RequestParam("nomeClientePedido") String nomeCliente, @RequestParam("numeroPedido") int numeroPedido,
 			@Valid Pedido pedido, BindingResult resultado) {
 		
 		if (resultado.hasErrors()) {
@@ -82,7 +82,7 @@ public class PedidoController {
 	}
 	
 	@RequestMapping(value = "/lista")
-	public ModelAndView listaPedido(Pageable pageable) {
+	public ModelAndView listaPedido(@PageableDefault(size = 3) Pageable pageable) {
 		Page<Pedido> listaPedido = pedidos.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaPedido");
 		mv.addObject("pedidos", listaPedido);
@@ -93,20 +93,22 @@ public class PedidoController {
 		
 	//FALTA CRIAR DETALHES PEDIDO
 
-	/* Metodo para editar os dados do pedido
-	@RequestMapping("{idpedido}")
-	public ModelAndView editar(@PathVariable int idpedido) {
+	// Metodo para editar os dados do pedido
+	@RequestMapping("{idPedido}/{numeroPedido}")
+	public ModelAndView editar(@PathVariable int idPedido, @PathVariable int numeroPedido) {
 		ModelAndView mv = new ModelAndView(FORM);
-		Pedido pedido = pedidos.findOne(idpedido);
+		Pedido pedido = pedidos.findOne(idPedido);
+		List<Alocacao> alocacao = alocacoes.findByNumeroPedido(numeroPedido);
 		mv.addObject(pedido);
+		mv.addObject(alocacao);
 		return mv;
 	}
 
 	// Metodo para deletar os dados do pedido
 	@RequestMapping("pedido/deleta/{idPedido}")
-	public ModelAndView deletar(@PathVariable int idpedido) {
-		pedidos.deleteByIdPedido(idpedido);
+	public ModelAndView deletar(@PathVariable int idPedido) {
+		pedidos.deleteByIdPedido(idPedido);
 		return new ModelAndView("redirect:/pedido/lista");
-	}*/
+	}
 
 }

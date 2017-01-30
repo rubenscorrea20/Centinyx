@@ -14,8 +14,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Table(name = "alocacao")
 public class Alocacao {
@@ -44,7 +42,6 @@ public class Alocacao {
 	@Column(name = "data_criacao", length = 20)
 	private String criacao;
 
-	@NotBlank(message = "O campo data de alocação precisa ser preenchido!")
 	@Column(name = "data_alocacao", length = 20)
 	private String dataAlocacao;
 

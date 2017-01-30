@@ -39,7 +39,7 @@ public class AlocacaoController {
 	private static final String FORM = "formPedido";
 	
 	@RequestMapping(value = "/lista")
-	public ModelAndView listaAlocacao(@PageableDefault(size = 1) Pageable pageable) {
+	public ModelAndView listaAlocacao(@PageableDefault(size = 3) Pageable pageable) {
 		Page<Alocacao> listaAlocacao = alocacoes.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaAlocacao");
 		mv.addObject("alocacoes", listaAlocacao);

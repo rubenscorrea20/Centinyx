@@ -145,14 +145,14 @@ function setaMotoboy() {
 };
 
 function setaCliente() {
-	document.getElementById("nomeCliente").value = "";
+	document.getElementById("nomeClientePedido").value = "";
 	if(localStorage.cliente){
 		$.ajax({
 			url: "/pedido/cadastra",
 			type: 'POST',
 			data: localStorage.contato,
 			success: function() {
-				document.getElementById("nomeCliente").value = localStorage.cliente;
+				document.getElementById("nomeClientePedido").value = localStorage.cliente;
 			},
 			error: function() {
 				alert("Deu erro!");
@@ -165,7 +165,7 @@ function limpaLocalStorageCliente(){
 	delete window.localStorage["cliente"];
 }
 
-function salvaAloacaoAjax() {
+function salvaAlocacaoAjax() {
 	var $form = $('#formPedido');
 		$.ajax({
 			url: "/alocacao/salva?motoboy="+array+"&tipoperiodo="+$('#tipoPeriodo').val()+

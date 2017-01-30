@@ -47,14 +47,14 @@ public class MotoboyController {
 			return cadastra(motoboy);
 		}
 		motoboy.setCriacao(DataCriacao.geraDataHorario());
-		motoboy.setStatus_motoboy("DISPONÍVEL");
+		motoboy.setStatusMotoboy("DISPONÍVEL");
 		motoboy.setFuncionario(funcionarios.encontraNomeFuncionario(nome));
 		motoboys.save(motoboy);
-		return new ModelAndView("redirect:/funcionario/motoboy/lista");
+		return new ModelAndView("redirect:/motoboy/lista");
 	}
 
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar(@PageableDefault(size = 1) Pageable pageable) {
+	public ModelAndView listar(@PageableDefault(size = 3) Pageable pageable) {
 		Page<Motoboy> listaMotoboy = motoboys.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaMotoboy");
 		mv.addObject("motoboys", listaMotoboy);

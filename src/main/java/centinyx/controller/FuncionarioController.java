@@ -84,7 +84,7 @@ public class FuncionarioController {
 	// Pageable objeto para paginação, e @pageableDefault para delimitar
 	// quantidade de registros por pagina
 	@RequestMapping(value = "/lista")
-	public ModelAndView listar(@PageableDefault(size = 1) Pageable pageable) {
+	public ModelAndView listar(@PageableDefault(size = 3) Pageable pageable) {
 		Page<Funcionario> listaFuncionario = funcionarios.findAll(pageable);
 		ModelAndView mv = new ModelAndView("listaFuncionario");
 		mv.addObject("funcionarios", listaFuncionario);
